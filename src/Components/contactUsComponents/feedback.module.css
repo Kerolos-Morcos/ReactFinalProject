@@ -1,0 +1,135 @@
+.ContactPage{
+    padding-top: 6.775rem !important;
+}
+
+.main_img {
+    background-image: url(../../assets/images/devices_imgs/us.jpg);
+    background-size: cover;
+    border-top-right-radius: 45% 50%;
+    border-bottom-right-radius: 45% 50%;
+    box-shadow: 0px 1px 20px 0px rgba(112, 112, 112, 0.3);
+}
+
+@media (max-width: 576px) {
+    .main_img {
+        height: 330px;
+    }
+}
+
+@media (min-width: 576px) {
+    .main_img {
+        height: 450px;
+    }
+}
+
+@media (min-width: 768px) {
+    .main_img {
+        height: 550px;
+    }
+}
+
+@media (min-width: 992px) {
+    .main_img {
+        height: 620px;
+    }
+}
+
+.contact__us{
+    direction: rtl;
+}
+
+.contact__us input:not([type=submit]):not([type=checkbox]),
+.contact__us textarea {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 10px;
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.submit {
+    color: white;
+    background-color: #00A02B;
+    padding: 14px 0;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    border: none;
+    background-size: 130% 100% ;
+    moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+.submit:hover{
+    background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+    box-shadow: 0 4px 15px 0 rgba(3, 106, 55, 0.75);
+    background-position: 100% 0;
+    moz-transition: all 0.3s ease-in-out;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+}
+
+.terms {
+    color: #041858;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: underline !important;
+    padding-right: 8px;
+}
+
+.contact__us div p {
+    color: black;
+    opacity: 1;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 576px) {
+    .contact__us {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+/* 
+.contact__ways .container .box__p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.contact__ways .container .box {
+    color: white;
+    background-color: #478AC9;
+    border-radius: 10px;
+}
+
+@media (max-width: 576px) {
+    .contact__ways .container .box {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 576px) {
+    .contact__ways .container .box {
+        width: 42%;
+    }
+}
+
+@media (min-width: 768px) {
+    .contact__ways .container .box {
+        width: 30%;
+    }
+}
+
+@media (min-width: 992px) {
+    .contact__ways .container .box {
+        width: 30%;
+    }
+}
+
+.contact__ways .container .d-flex img {
+    width: 25px;
+    height: 25px;
+} */

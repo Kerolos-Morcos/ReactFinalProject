@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri&family=Inter:wght@300&family=Nunito:wght@200&family=Rubik:wght@300&family=Work+Sans:wght@700&display=swap');
+/* *{
+  margin: 0;
+  padding: 0;
+  font-family: 'El Messiri', sans-serif;
+} */
+.main_css{
+  /* height: 100vh; */
+  /* background: url('https://images.pexels.com/photos/8670435/pexels-photo-8670435.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') fixed no-repeat; */
+  background-size: cover;
+
+
+}
+.container_form{
+  width: 350px;
+  height: 500px;
+  background: inherit;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  margin-left: -175px;
+  margin-top: -250px;
+  border-radius: 8px;
+}
+.container_form:before{
+  width: 400px;
+  height: 550px;
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  bottom: 0;
+  right: 0;
+  background: inherit;
+  box-shadow: inset 0 0 0 200px #9e9e9e78;
+  filter: blur(10px);
+
+}
+.form_css img{
+  width: 120px;
+  height: 120px;
+  /* border-radius: 100%; */
+}
+.form_css{
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.form_css input{
+  background: 0;
+  width: 200px;
+  outline: 0;
+  border: 0;
+  border-bottom: 2px solid rgba(255,255,255, 0.3);
+  margin: 20px 0;
+  padding-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(255,255,255, 0.8);
+}
+.form_css input::placeholder {
+  color: rgba(255,255,255, 0.8);
+  
+}
+.form_css input[type="submit"]{
+  border: 0;
+  border-radius: 8px;
+  padding-bottom: 0;
+  height: 60px;
+  background: #041858;
+  color: white;
+  cursor: pointer;
+  transition: all 600ms ease-in-out;
+}
+.form_css input[type="submit"]:hover{
+  background: #283b79;
+}
+.form_css .txt2 a{
+  color: rgba(255,255,255, 0.8);
+  text-decoration: none;
+}
+
+
+/* Toastify */
+
+/* Toastify */

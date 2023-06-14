@@ -1,0 +1,91 @@
+.MainImg{
+    width: 35%;
+    /* height: 100% !important; */
+}
+.MainImg img{
+    width: 100%;
+    height: 100%;
+}
+.DetailsData{
+    width: 100% !important;
+    margin-top: 50px ;
+}
+.DetailsData .badgeNew{
+    background-color: red !important;
+}
+.DetailsData .badgeBest{
+    background-color: #00A02B !important;
+}
+.DetailsData h1{
+    color: #041858;
+    font-size: 28px;
+}
+.DetailsData h1::after{
+    content: '';
+    display: block;
+    width: 90px;
+    height: 0px;
+    margin: 10px 0px;
+    border: 1px solid #00A02B;
+}
+.prdPrice span{
+    color: #041858;
+    font-size: 20px;
+    font-weight: 400;
+}
+.DescriptionTitle{
+    color: #00A02B;
+    font-size: 25px;
+    margin-top: 50px;
+    margin-bottom: -10px !important;
+    padding-bottom: 0 !important;
+}
+.DescriptionTitle+p{
+    color: #041858;
+    font-size: 18px;
+    font-weight: 300;
+    width: 80%;
+}
+.AddToCartBTN{
+    margin-top: 20px;
+    padding: 0.5rem 1.125rem !important;
+    color: #fff !important;
+    background-color: #00A02B !important;
+    border: 1px solid #00A02B;
+    border-radius: 0.25rem;
+    background-size: 300% 100% ;
+    moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+.AddToCartBTN:hover{
+    background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+    box-shadow: 0 4px 15px 0 rgba(3, 106, 55, 0.75);
+    background-position: 100% 0;
+    moz-transition: all 0.3s ease-in-out;
+    border: 1px solid #00A02B !important;
+    border-radius: 0.25rem !important;
+    transition: all 0.3s ease-in-out;
+}
+.AdditionalDetails h4{
+    color: #041858;
+    font-size: 28px;
+}
+.AdditionalDetails h4::after{
+    content: '';
+    display: block;
+    width: 100px;
+    height: 0px;
+    margin: 10px auto;
+
+    border: 1px solid #00A02B;
+}
+.DetailsIMG{
+    width: 55%;
+    margin: 20px auto;
+    /* height: 100%; */
+    padding-bottom: 30px;
+}
+.DetailsIMG img{
+    width: 100%;
+    height: 100%;
+}

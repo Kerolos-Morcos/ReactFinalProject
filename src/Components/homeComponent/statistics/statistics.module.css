@@ -1,0 +1,55 @@
+.counters {
+    background: url("../../../assets/images/bg-3.jpg") center center no-repeat;
+    background-position: 50% -91.2px;
+    background-attachment: fixed;
+    /* New */
+    margin: 150px 0;
+    /* End New */
+  }
+  
+  .counters .overlay {
+    padding: 5rem 0;
+  }
+  
+  .overlay {
+    background: rgba(4, 24, 88, 0.5);
+  }
+  
+  .counters ul {
+    text-align: center;
+  }
+  
+  .counters ul li i {
+    color: #fff;
+    font-size: 39px;
+    margin-bottom: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    line-height: 100px;
+  }
+  
+  .fa_smile_o:before {
+    content: "\f118";
+  }
+  
+  .counters ul li span {
+    font-size: 31px;
+    color: #fff;
+    width: 100%;
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  .counters ul li p {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 0px;
+    display: inline-block;
+  }
+  @media (max-width: 575.5px) {
+    .counters ul li p{
+      margin-bottom: 30px;
+    }
+  }

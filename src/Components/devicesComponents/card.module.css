@@ -1,0 +1,223 @@
+
+.all__devices .card {
+    border: none;
+    background: #fff;
+    box-shadow: 0px 1px 20px 0px rgba(112, 112, 112, 0.3);
+    border-radius: 5px;
+}
+
+@media (max-width: 576px) {
+    .all__devices .image_flip {
+        min-width: 200px;
+        max-width: 220px;
+        margin: 0 auto;
+    }
+
+    .all__devices .image_flip .card {
+        height: 250px;
+    }
+}
+
+@media (min-width: 576px) {
+    .all__devices .image_flip {
+        min-width: 200px;
+        max-width: 220px;
+    }
+
+    .all__devices .image_flip .card {
+        height: 280px;
+    }
+}
+
+@media (min-width: 768px) {
+    .all__devices .image_flip {
+        min-width: 230px;
+        max-width: 250px;
+    }
+
+    .all__devices .image_flip .card {
+        height: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+    .all__devices .image_flip {
+        min-width: 250px;
+        max-width: 280px;
+    }
+
+    .all__devices .image_flip .card {
+        height: 320px;
+    }
+}
+
+.all__devices .image_flip:hover .backside {
+    transform: rotateY(0deg);
+    border-radius: 0.25rem;
+}
+
+.all__devices .image_flip:hover .frontside {
+    transform: rotateY(-180deg);
+}
+
+.all__devices .mainflip {
+    transition: 1s;
+    transform: perspective(1000px);
+    transform-style: preserve-3d;
+    position: relative;
+    direction: rtl;
+}
+
+.devices .all__devices .mainflip .frontside {
+    position: relative;
+    transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+    width: 10px;
+}
+
+.all__devices .mainflip .frontside .card .card_body .devimg {
+    width: auto;
+    max-width: auto;
+    height: 150px;
+    max-height: 150px;
+}
+.all__devices .mainflip .frontside .card .card_body .devimg img{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.all__devices .mainflip .backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    transform: rotateY(180deg);
+}
+
+.all__devices .mainflip .backside .card .zr {
+    margin-top: 20px;
+    padding: 0.5rem 1.125rem 0.2rem 1.125rem !important;
+    color: #fff !important;
+    background-color: #00A02B !important;
+    border: 1px solid #00A02B;
+    border-radius: 0.25rem;
+    background-size: 300% 100% ;
+    moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+.all__devices .mainflip .backside .card .zr:hover{
+    background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+    box-shadow: 0 4px 15px 0 rgba(3, 106, 55, 0.75);
+    background-position: 100% 0;
+    moz-transition: all 0.3s ease-in-out;
+    border: 1px solid #00A02B !important;
+    border-radius: 0.25rem !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.all__devices .mainflip .backside .card .zrr {
+    width: 29px;
+    height: 30px;
+    border: transparent;
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    background: #00A02B;
+    transition: all 0.3s ease-in-out ;
+    color: white;
+    border: 1px solid #00A02B;
+    position: absolute;
+}
+.all__devices .mainflip .backside .card .zrr:hover{
+    background-color: transparent;
+    color: #00A02B;
+    border: 1px solid #00A02B;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 576px) {
+    .zrr {
+        transform: translate(-55px, 5px);
+        left: 60px;
+        top: 2px;
+    }
+}
+
+@media (min-width: 576px) {
+    .zrr {
+        transform: translate(-55px, 8px);
+        left: 60px;
+        top: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .zrr {
+        transform: translate(-57px, 9px);
+        left: 63px;
+        top: 0;
+    }
+
+}
+
+@media (min-width: 992px) {
+    .zrr {
+        transform: translate(-75px, 10px);
+        left: 82px;
+        top: 0;
+    }
+}
+
+.zrr i {
+    font-size: 20px;
+    padding-top: 5px;
+}
+
+.all__devices .mainflip .backside .card a:hover {
+    background: linear-gradient(90deg, #00A02B 0%, #02cb38 100%);
+}
+
+.all__devices .mainflip .backside .card a:active {
+    transform: translate(0em, 0.2em);
+}
+
+.all__devices .mainflip .frontside,
+.all__devices .mainflip .backside {
+    backface-visibility: hidden;
+    transition: all 0.6s ease-in-out;
+    transform-style: preserve-3d;
+    max-height: 320px;
+}
+
+.card_title,
+.card_title {
+    color: #00A02B;
+    font-size: 22px;
+}
+
+.frontside .card_title {
+    margin-top: 3px;
+    font-size: 22px;
+}
+
+.rates i{
+    color: #041858 !important;
+}
+
+.all__devices .mainflip .backside .fa-plus {
+    font-size: .8rem;
+   
+}
+
+
+.all__devices .mainflip .backside .fa-cart-shopping {
+    font-size: 1.2rem;
+}
+
+/* Toastify */
+.custom_toast {
+    text-align: right !important;
+  }
+
+/* End Toastify */

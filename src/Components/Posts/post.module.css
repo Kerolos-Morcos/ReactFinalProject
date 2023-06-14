@@ -1,0 +1,359 @@
+
+.PostsBG{
+    background-color: #eee;
+    /* height: 100vh; */
+    padding-top: 8.575rem;
+    padding-bottom: 80px;
+}
+
+
+/* VIP */
+.Post_Content {
+    width: 100%;
+    border-radius: 4px;
+}
+/* VIP */
+
+
+
+/* ISSUE */
+.timeline {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+/* ISSUE */
+
+
+/* VIP */
+.timeline_body {
+    margin-left: 23%;
+    margin-right: 17%;
+    background: #fff;
+    position: relative;
+    padding: 20px 25px 0px 25px;
+    margin-bottom: 50px;
+    border-radius: 6px;
+}
+.timeline_body>div+div {
+    margin-top: 15px;
+}
+.timeline_body>div+div:last-child {
+    margin-bottom: -20px;
+    padding-bottom: 20px;
+    border-radius: 0 0 6px 6px;
+}
+/* VIP */
+
+/* First Border */
+.timeline_header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e7eb;
+    line-height: 30px;
+}
+/* First Border */
+
+/* Post Time */
+.PostTime{
+    font-size: 14px;
+    color: #4c4d4ebc;
+}
+
+
+/* Post Time */
+.userimage {
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    overflow: hidden;
+    /* margin: -2px 10px -2px 0; */
+}
+
+.timeline_header .username {
+    position: relative;
+    top: 4px;
+    float: right;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.timeline_header .username,
+.timeline_header .username a {
+    color: #2d353c;
+}
+
+.timeline img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Edit On This */
+.timeline_content {
+    color: rgb(128, 126, 126); 
+    font-weight: 600;
+    text-align: right;
+    font-size: 16px;
+}
+/* Edit On This */
+
+.timeline_content:after,
+.timeline_content:before {
+    content: '';
+    display: table;
+    clear: both;
+    padding-top: 10px;
+}
+
+/* Second Border */
+.timeline_footer {
+    background: #fff;
+    border-top: 1px solid #e2e7ec;
+    padding-top: 30px;
+}
+/* Second Border */
+
+.timeline_footer a:not(.btn) {
+    color: #575d63;
+}
+
+.timeline_footer a:not(.btn):focus,
+.timeline_footer a:not(.btn):hover {
+    color: #2d353c;
+}
+
+
+/* Here Location Style */
+.timeline_likes {
+    color: #6d767f;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.timeline_likes .stats_right {
+    float: right;
+}
+
+.timeline_likes .stats_text {
+    line-height: 40px;   
+    font-size: 14px;
+}
+
+/* Location Icon */
+.stats_text i{
+    font-size: 15px;
+    color: #041858;
+}
+
+
+/* Location Icon */
+
+.timeline_likes .stats_text+.stats_text {
+    margin-left: 15px;
+}
+/* Here Location Style */
+
+
+/* Propsal */
+.timeline_comment_box {
+    direction: rtl;
+    background: #f2f3f4;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding: 20px 25px;
+}
+.timeline_comment_box .user {
+    float: right;
+    width: 34px;
+    height: 34px;
+    overflow: hidden ;
+    border-radius: 30px;
+}
+
+.timeline_comment_box .user+.input_Proposal {
+    margin-right: 44px;
+}
+/* Propsal */
+
+/* Proposal Input */
+.PoroposalInput{
+    resize: none;
+    border: 1px #b3b3b3 solid;
+    border-radius: 5px;
+    font-size: 15px;
+    /* margin-top: 6px; */
+    margin-bottom: 4px;
+    min-height: 100px;
+    padding: 5px;
+}
+
+/* Proposal Input */
+
+.btn_outline_primary {
+    padding: 0.5rem 1.125rem !important;
+    color: #fff !important;
+    background-color: #00A02B !important;
+    border: 1px solid #00A02B;
+    border-radius: 0.25rem;
+    background-size: 300% 100% ;
+    moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+  }
+
+  .btn_outline_primary:hover {
+    background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+    box-shadow: 0 4px 15px 0 rgba(3, 106, 55, 0.75);
+    background-position: 100% 0;
+    moz-transition: all 0.3s ease-in-out;
+    border: 1px solid #00A02B !important;
+    border-radius: 0.25rem !important;
+    transition: all 0.3s ease-in-out;
+  }
+
+
+
+
+  /* New */
+  .fb-comments{
+    /* background-color: #041858; */
+}
+.fb-comments li {
+    border-top: 1px solid #e3e0e0;
+    padding: 15px;
+}
+.ProposalBody{
+    color: #041858;
+    text-align: right;
+    width: 87%;
+    display: block !important;
+    color: #041858;
+    font-size: 14px;
+}
+.fb-comments .cmt-thumb  {
+    float: right;
+    width: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.fb-comments .cmt-thumb img {
+    border-radius: 50% ;
+    width: 50px;
+    height: 50px;
+}
+
+.fb-comments .cmt-details {
+    padding-top: 15px;
+    text-align: right;
+    color: #041858;
+    font-size: 14px;
+}
+
+.fb-comments .cmt-details a  {
+    font-size: 14px;
+    text-align: right;
+    color: #00A02B;
+    font-weight: bold;
+    display: block;
+}
+
+
+.fb-comments{
+    list-style-type:none;
+}
+
+@media (max-width: 768px){
+    .fb-comments .cmt-thumb img {
+        border-radius: 50% ;
+        width: 40px;
+        height: 40px;
+    }
+    .fb-comments .cmt-details a  {
+        font-size: 13px;
+        text-align: right;
+        color: #00A02B;
+        font-weight: bold;
+        display: block;
+    }
+    .cmt-details {
+        flex-direction: column-reverse;
+        flex-wrap: wrap;
+        margin-bottom: -17px;
+    }
+    .ProposalTimer{
+        font-size: 12px;
+    }
+}
+  /* New */
+
+  /* No Data */
+  .Nodata{
+    text-align: center;
+    width: 50%;
+    margin: -70px auto;
+    opacity: 0.9;
+  }
+  .Nodata h1{
+    font-size: 26px;
+    color: #041858;
+    margin-top: -50px;
+    margin-bottom: 20px;
+    position: relative;
+    top: -70px;
+    left: -40px;
+  }
+
+  @media (max-width: 1200px){
+    .Nodata{
+        text-align: center;
+        width: 50%;
+        margin: -70px auto;
+        opacity: 0.9;
+      }
+      .Nodata h1{
+        font-size: 25px;
+        color: #041858;
+        margin-top: -30px;
+        margin-bottom: 20px;
+        position: relative;
+        top: -80px;
+        left: -40px;
+      }
+  }
+
+  @media (max-width: 992px){
+    .Nodata{
+        text-align: center;
+        width: 75%;
+        margin: -70px auto;
+        opacity: 0.9;
+      }
+      .Nodata h1{
+        font-size: 25px;
+        color: #041858;
+        margin-top: -20px;
+        margin-bottom: 20px;
+        position: relative;
+        top: -80px;
+        left: -40px;
+      }
+  }
+
+  @media (max-width: 576px){
+    .Nodata{
+        text-align: center;
+        width: 100%;
+        margin: -70px auto;
+        opacity: 0.9;
+      }
+      .Nodata h1{
+        font-size: 24px;
+        color: #041858;
+        margin-top: -10px;
+        margin-bottom: 20px;
+        position: relative;
+        top: -80px;
+        left: -40px;
+      }
+  }

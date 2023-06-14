@@ -1,0 +1,33 @@
+
+* {
+  font-family: 'Cairo', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+  display: inline-block !important;
+}
+
+ul {
+  list-style: none !important;
+}
+
+img {
+  max-width: 100% !important;
+  font-size: 0 !important;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+.active{
+  color: #EEED3F !important;  
+}

@@ -1,0 +1,177 @@
+$body-bg: #fff;
+$background-Primary: #0C2753;
+$background-Secondary: #F2F4EA;
+$text-secondary: #EEED3F;
+$body-bg3:#eee;
+$main-color:#0071ba;
+$preview-card-shadow: 0px 3px 10px rgba(34, 35, 58, 0.2);
+$preview-card-border-radius: 25px;
+$preview-card-image-bg: linear-gradient(147deg, #000 0%, #000 74%);
+$preview-card-image-bg-after: linear-gradient(147deg, #000 0%, #000 74%);
+$preview-card-image-shadow: 0px 3px 9px 0px rgb(0 113 186 / 62%);;
+$preview-card-code: #7b7992;
+$preview-card-title: #0d0925;
+$preview-card-desc: #4e4a67;
+$preview-card-button-text: #fff;
+$preview-card-button-text-hover: #989898;
+$preview-card-button-bg: linear-gradient(147deg, #000 0%, #000 74%);
+$preview-card-button-shadow: 0px 3px 10px rgba(252, 56, 56, 0.4);
+$star-rating-outline-color: #cccccc;
+$star-rating-fill-color: #ffb400;
+$star-rating-aside-color: #999999;
+aside{
+    .filter{
+      background-color: $background-Primary;
+      width: 28%;
+      height: auto; 
+      // position: absolute;
+      margin-top: 75px;
+    margin-left: 5px;
+      text-align: center;
+      padding: 20px;
+      border-radius: 20px;
+      /* Media Query */
+    /*mobile*/
+    @media (max-width:767px) {
+    
+      }
+      /*small screen*/
+      @media (min-width:768px ) {
+         
+      }
+      /*midium screen*/
+      @media (min-width:992px) {
+      
+       
+      }
+      /*larger screen*/
+      @media (min-width:1193px) {
+        
+      }
+      /*custom screen*/
+      @media (max-width:1199px) {
+          
+      }
+      h1{
+        color: white;
+      }
+      hr{
+        border: 1px solid white;
+      }
+      .search-bar{
+        @media (max-width:400px) {
+    
+          flex-wrap: nowrap !important;
+         }
+        input{
+          border-radius: 0px 5px 5px 0px !important;
+         }
+     
+        
+        button{
+          border-radius: 5px 0 0 5px !important;
+    background-color: #0071ba !important;
+    color: white !important;
+    i{
+      color: white;
+    }  
+        }
+      
+    }
+      .form-main{
+        
+        .bt-cnt{
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    @media screen and ( max-width:767px ) {
+      font-size: 9px;
+      flex-wrap: wrap;
+    }
+        } 
+    
+         
+        .apply{
+          width: 44%;
+          background-color: #0071ba;
+          border-radius: 20px;
+          border: 1px solid #0071ba;
+          padding: 10px;
+          @media screen and ( max-width:767px ) {
+            width: 100%;
+          }
+          a{
+            text-decoration: none;
+            color: white;
+          }
+        }
+        .clear{
+          background-color: transparent;
+          border-color: transparent;
+          font-weight: 500;
+          a{
+            text-decoration: none;
+            color: white;
+            transition: .3s;
+          }
+          a:hover{
+            border-bottom: 2px solid $main-color;
+            padding-bottom: 8px;
+          }
+        }
+      }
+      &__content{
+        text-align: right;
+        label{
+          display: block;
+          font-size: 20px;
+          color: white;
+          font-weight: 600;
+          @media screen and (max-width: 426px) {
+          
+            font-size: 9px;
+          }
+        }
+       
+       select{
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 15px;
+        @media screen and (max-width: 426px) {
+          height: 20px;
+          font-size: 9px;
+         
+        }
+       }
+       .check-g{
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+        @media screen and (max-width: 426px)
+           {
+            flex-wrap: wrap;
+           }
+           @media screen and (max-width: 767px)
+           {
+            flex-wrap: wrap;
+           }
+        .form-check-input[type=radio] {
+          @media screen and (max-width: 426px)
+           {
+            height: 15px;
+            width: 15px;
+          }
+          // border-radius: 25%;
+         
+        }
+       }
+      
+    }
+    }
+     
+  }

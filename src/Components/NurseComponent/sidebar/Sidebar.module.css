@@ -1,0 +1,161 @@
+ .filter {
+  background-color: #041858;
+  width: 100%;
+  height: auto;
+  margin-top: 75px;
+  margin-left: 85px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+  /* Media Query */
+  /*mobile*/
+  /*small screen*/
+  /*midium screen*/
+  /*larger screen*/
+  /*custom screen*/
+}
+ .filter h1 {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+ .filter hr {
+  border: 1px solid white;
+}
+@media (max-width: 400px) {
+  .filter .searchbar {
+    flex-wrap: nowrap !important;
+  }
+}
+ .filter .searchbar input {
+  border-radius: 0px 5px 5px 0px !important;
+}
+ .filter .searchbar button {
+  border-radius: 5px 0 0 5px !important;
+  background-color: #00A02B !important;
+  color: white !important;
+}
+ .filter .searchbar button i {
+  color: white;
+}
+ .filter .form-main .bt-cnt {
+  display: flex;
+  justify-content: space-around;
+  font-size: 17px;
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+ .filter .form-main button a {
+  color: #EEED3F !important;
+}
+.filter .form-main button a:hover{
+  color: rgb(255, 60, 60) !important;
+}
+@media screen and (max-width: 767px) {
+   .filter .form-main .bt-cnt {
+    font-size: 9px;
+    flex-wrap: wrap;
+  }
+}
+ .filter .form-main .apply {
+  width: 44%;
+  background-color: #00A02B;
+  border-radius: 20px;
+  border: 1px solid #00A02B;
+  padding: 10px;
+}
+.filter .form-main .apply:hover{
+  background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+  box-shadow: 0 4px 15px 0 rgba(3, 106, 55, 0.75);
+  background-position: 100% 0;
+  moz-transition: all 0.3s ease-in-out;
+  border: 1px solid #00A02B !important;
+  /* border-radius: 0.25rem !important; */
+  transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width: 767px) {
+   .filter .form-main .apply {
+    width: 100%;
+  }
+}
+ .filter .form-main .apply  {
+  text-decoration: none;
+  color: white;
+}
+ .filter .form-main .clear {
+  background-color: transparent;
+  border-color: transparent;
+  font-weight: 500;
+}
+ .filter .form-main .clear a {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+ .filter .form-main .clear a:hover {
+  border-bottom: 2px solid white;
+  padding-bottom: 8px;
+}
+ .filter__content {
+  text-align: right;
+}
+.filter__content label {
+  display: block;
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+}
+@media screen and (max-width: 426px) {
+   .filter__content label {
+    font-size: 9px;
+  }
+}
+ .filter__content select {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+@media screen and (max-width: 426px) {
+  .filter__content select {
+    height: 20px;
+    font-size: 9px;
+  }
+}
+.filter__content .check-g {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+@media screen and (max-width: 426px) {
+   .filter__content .check-g {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 767px) {
+   .filter__content .check-g {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 426px) {
+   .filter__content .check-g .form-check-input[type=radio] {
+    height: 15px;
+    width: 15px;
+  }
+}/*# sourceMappingURL=Sidebar.css.map */
+
+
+/* My Style */
+.btn-outline-secondary{
+  background: #00A02B !important;
+}
+.form-field-content label{
+  margin-bottom: 10px;
+}
+.form-check label{
+  /* margin-bottom: 10px; */
+  font-size: 17px;
+}

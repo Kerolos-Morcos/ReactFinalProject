@@ -1,0 +1,222 @@
+.CartPage{
+    /* background: #ddd; */
+    min-height: 80vh;
+    vertical-align: middle;
+    margin-top: 50px;
+    padding-top: 80px;
+    margin-bottom: 50px;
+    display: flex;
+    font-size: 0.9rem;
+    font-weight: bold;
+    direction: rtl;
+}
+.title{
+    margin-bottom: 2vh;
+}
+.Heading h4>b{
+    font-size: 22px;
+}
+.card{
+    margin: auto;
+    max-width: 950px;
+    width: 90%;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent;
+}
+@media(max-width:767px){
+    .card{
+        margin: 3vh auto;
+    }
+}
+.cart{
+    background-color: #fff;
+    padding: 4vh 5vh;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+@media(max-width:767px){
+    .cart{
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem;
+    }
+}
+.summary{
+    /* background-color: #ddd; */
+    background-color: #041858;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    /* color: rgb(65, 65, 65); */
+    color: white;
+}
+@media(max-width:767px){
+    .summary{
+    border-top-right-radius: unset;
+    border-bottom-left-radius: 1rem;
+    }
+}
+.summary .col-2{
+    padding: 0;
+}
+.summary .col-10
+{
+    padding: 0;
+}
+.CartPage .row{
+    margin: 0;
+}
+
+.main{
+    margin: 0;
+    padding: 2vh 0;
+    width: 100%;
+}
+.CartPage .col-2, .col{
+    padding: 0 1vh;
+}
+.CartPage a{
+    padding: 0 1vh;
+}
+.close{
+    font-size: 0.7rem;
+}
+.delIcon button{
+    background-color: transparent;
+    border: none;
+    font-size: 1.1rem;
+    color: rgba(255, 0, 0, 0.715);
+    transition: all 0.2s linear;
+}
+.delIcon button:hover{
+    transform: rotate(360deg);
+    color: red;
+}
+.delAll button{
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s linear;
+    text-decoration: underline !important;
+    color: rgba(255, 0, 0, 0.715);
+    font-size: 15px;
+    font-weight: 700;
+}
+.delAll button:hover{
+    color: rgba(255, 0, 0, 0.845);
+    transform: scale(1.05);
+}
+.CartPage img{
+    width: 100%;
+}
+
+.CartPage h5{
+    margin-top: 4vh;
+}
+
+.CartPage hr{
+    margin-top: 1.25rem;
+}
+
+.CartButn{
+    color: white;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 4vh;    
+    padding: 0.5rem 1.125rem !important;
+    color: #fff !important;
+    background-color: #00A02B !important;
+    border: 1px solid #00A02B;
+    border-radius: 0.25rem;
+    background-size: 150% 100% ;
+    moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+.CartButn:focus{
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    color: white;
+    -webkit-box-shadow: none;
+    -webkit-user-select: none;
+    transition: none; 
+    border: none;
+}
+.CartButn:hover{
+    background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+    box-shadow: 0 4px 15px 0 rgba(3, 106, 55, 0.75);
+    background-position: 100% 0;
+    moz-transition: all 0.3s ease-in-out;
+    border: 1px solid #00A02B !important;
+    border-radius: 0.25rem !important;
+    transition: all 0.3s ease-in-out;
+}
+
+.code{
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
+}
+
+.CartPage .col {
+    margin-left: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.border{
+    border: 1px solid #00A02B !important;
+    font-size: 15px;
+    color: #041858;
+}
+.Minuses{
+    background-color: transparent;
+    border: none;
+    color: #041858;
+    font-size: 28px;
+    margin-left: 5px;
+    transition: all 0.3s ease-in-out;
+}
+.Minuses:hover{
+    color: red;
+}
+.Pluses{
+    margin-right: 5px;
+    background-color: transparent;
+    border: none;
+    color: #041858;
+    font-size: 26px;
+    transition: all 0.3s ease-in-out;
+}
+.Pluses:hover{
+    color: #00A02B;
+}
+
+/* Sweat Alert */
+.my_cancel_button_class{
+    background-color: transparent !important;
+    border: 1px solid #041858 !important;
+    color: #041858 !important;
+    transition: all 0.3s ease-in-out !important;
+}
+.my_cancel_button_class:hover{
+    background: none !important;
+    border: 1px solid #00A02B !important;
+    color: #00A02B !important;
+}
+.my_confirm_button_class{
+    background-color: rgba(255, 0, 0, 0.7) !important;
+    color: white !important;
+    transition: all 0.3s ease-in-out !important;
+}
+.my_confirm_button_class:hover{
+    background: red !important;
+    color: white !important;
+    border: 0 !important;
+}
+.my_ok_button_class{
+    background-color: #00A02B !important;
+    color: white !important;
+    border: 0 !important;
+}

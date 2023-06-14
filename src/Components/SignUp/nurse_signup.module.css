@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  /* overflow-y: hidden; */
+/* }  */
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  opacity: 0.9;
+  background-color: #fff;
+  padding: 25px 30px;
+  margin-top: 32px;
+  border-radius: 5px;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.15);
+}
+.container .title {
+ 
+  text-align: center; 
+  
+}
+   
+
+
+
+/* .container .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+} */
+
+.content form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+
+form .user-details .input-box {
+  margin-bottom: 15px;
+  width: calc(50% - 20px);
+}
+.input-box .btn{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  background-color: #041858;
+  color: white;
+}
+
+.user-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus, .user-details .input-box input:valid {
+  border-color: #041858;
+}
+
+form .gender-details .gender-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+.certbtn{
+  text-decoration: none;
+  /* height: 30px; */
+  border-radius: 10px;
+  padding: 11px;
+
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background:  #00A02B ;
+  color: white
+}
+.certbtn:hover{
+  background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+  box-shadow: 0 4px 15px 0 rgba(3, 106, 55, 0.75);
+  background-position: 100% 0;
+  transition: all 0.3s ease-in-out;
+}
+
+form .category {
+  direction: ltr;
+  display: flex;
+  width: 80%;
+  /* margin: 14px 0; */
+  justify-content: space-between;
+}
+form .category label {
+  gap: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+form .category label .dot {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+
+#dot-1:checked ~ .category label .one, #dot-2:checked ~ .category label .two, #dot-3:checked ~ .category label .three {
+  background: #041858;
+  border-color: #d9d9d9;
+}
+
+form input[type=radio] {
+  display: block;
+}
+form .button {
+  width: 100%;
+  display: flex;
+}
+form .button button {
+  text-decoration: none;
+  height: 40px;
+  width: 50%;
+  border-radius: 10px;
+  border: 1px solid #041858;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #041858;
+}
+form .button button:hover {
+  background: white;
+  color: #041858;
+  border: 1px solid #041858;
+}
+
+@media (max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+  form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+label[for=file-input] {
+  display: block;
+  margin-bottom: 1em;
+  font-size: 1em;
+  opacity: 0.9;
+}
+
+input[type=file] {
+  cursor: pointer !important;
+}
+input[type=file]::-webkit-file-upload-button {
+  background: #eab104;
+  border: 0;
+  padding: 1em 2em;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 0.2em;
+}
+input[type=file]::-ms-browse {
+  background: #eab104;
+  border: 0;
+  padding: 1em 2em;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 0.2em;
+}
+
+.files {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.files .item input {
+  padding: 0px !important;
+}/*# sourceMappingURL=nurse_signup.css.map */
+
+
+
+/* Flexing BTNS */
+.FlexingBTNS{
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+
+/* Flexing BTNS */
