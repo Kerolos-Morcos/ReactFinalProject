@@ -39,7 +39,7 @@ function App() {
 
   useEffect(() => {
     const page = location.pathname.split('/')[1];
-    if (page !== 'Signup' && page !== 'SignupNurse' && page !== 'SignupPatient' && page !== 'Login') {
+    if (page !== 'Signup' && page !== 'SignupNurse' && page !== 'SignupPatient' && page !== 'Login' && page !=="") {
       setFlag(true);
     } else {
       setFlag(false);

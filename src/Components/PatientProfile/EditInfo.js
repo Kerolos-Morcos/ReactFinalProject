@@ -49,7 +49,7 @@ function EditInfo(props) {
   return (
     <>
       <a variant="primary" onClick={handleShow}>
-        تعديل الملف الشخصي
+        تعديل  البيانات
       </a>
     
       <Modal show={showModal} onHide={handleClose}>

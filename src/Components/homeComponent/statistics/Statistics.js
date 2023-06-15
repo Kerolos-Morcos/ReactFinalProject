@@ -12,25 +12,25 @@ function Statistics() {
           {/*======= PROPOSALS SENT =========*/}
           <li className={"col-sm-3"}>
             {" "}
-            <i className={`${"fa fa-smile-o"} ${StatStyle.fa_smile_o}`}/> <span className={"count1"}>9501</span>
-            <p>DISCHARGED</p>
+            <i className={`${"fa fa-user-md"} ${StatStyle.fa_smile_o}`}/> <span className={"count1"}>9501</span>
+            <p>عدد الممرضين</p>
           </li>
           {/*======= PROPOSALS SENT =========*/}
           <li className={"col-sm-3"}>
             {" "}
             <i className={"fa fa-bed"}/> <span className={"count2"}>38</span>
-            <p>BEDS</p>
+            <p>عدد المرضى</p>
           </li>
           {/*======= AWARDS WON =========*/}
           <li className={"col-sm-3"}>
             {" "}
-            <i className={"fa fa-user-md"}/> <span className={"count3"}>572</span>
-            <p>DOCTORS</p>
+            <i className={"fa fa-pump-medical"}/> <span className={"count3"}>572</span>
+            <p>عدد الأجهزة</p>
           </li>
           <li className={"col-sm-3"}>
             {" "}
-            <i className={"fa fa-ambulance"}/> <span className={"count4"}>14</span>
-            <p>AMBULANCES</p>
+            <i className={"fa fa-business-time"}/> <span className={"count4"}>14</span>
+            <p>عدد مرات الحجز</p>
           </li>
         </ul>
       </div>

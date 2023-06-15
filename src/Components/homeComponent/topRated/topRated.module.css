@@ -52,7 +52,7 @@
   .doctor_info {
     text-align: center;
     margin-top: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
   .doctor_info h3 {
     line-height: 1;
@@ -289,3 +289,11 @@
 } */
 
 /* End Substitute Of Next, Prev Buttons */
+
+
+
+/* Ratings */
+.region {
+  display: block;
+  margin-bottom: 10px !important;
+}

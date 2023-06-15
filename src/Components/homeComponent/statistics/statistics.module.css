@@ -31,7 +31,7 @@
   }
   
   .fa_smile_o:before {
-    content: "\f118";
+    /* content: "\f118"; */
   }
   
   .counters ul li span {

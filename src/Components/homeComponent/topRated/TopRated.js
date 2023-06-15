@@ -13,20 +13,24 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay } from 'swiper';
+import Rating from '../../nurseProfile/Rates';
 
 
 
 // END SWIPER
 
-
+// const api = "http://localhost:3500/"
 function TopRated() {
   let [topRated, getTopRated] = useState([])
-  useEffect(()=>{
-    axios.get('https://dummyjson.com/users').then(res=>{
-      let m =  getTopRated(res.data.users)
-      // console.log(res.data.users);
-    })
-  },[])
+  console.log(topRated);
+  useEffect(() => {
+    axios.get('http://localhost:3500/nurse/top-rated').then((res) => {
+      getTopRated(res.data.data);
+      console.log(res.data.data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, []);
   
   return (
       <div>
@@ -109,13 +113,19 @@ function TopRated() {
         <SwiperSlide className={`${"col-md-6 col-lg-4 col-12"}`}>
           <div className={`${TopStyle.single_doctor}`}>
             <div className={`${TopStyle.doctor_profile}`}>
-              <img src={user.image} />
+              {/* <img src={` ${api}${user.profile}`} /> */}
+              <img src={` ${user.profile}`} />
             </div>
             <div className={`${TopStyle.doctor_info}`}>
               <h3>
-                <a href="#">{user.firstName}</a>
+                <a href="#">{user.name}</a>
               </h3>
-              <span>{user.company.title}</span>
+
+              <span>
+                <span className={TopStyle.region}> {user.region} </span>
+                <Rating rate={user.rate} />
+              </span>
+              
             </div>
             <div className={`${TopStyle.doctor_social_icons}`}>
               <a href="#"  >

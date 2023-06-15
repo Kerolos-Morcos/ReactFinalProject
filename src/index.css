@@ -31,3 +31,35 @@ img {
 .active{
   color: #EEED3F !important;  
 }
+
+/* Changing Scroll Bar Style */
+
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+  width: 15px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00A02B; /* Color of the scrollbar thumb */
+  border-radius: 8px; /* Rounded corners of the scrollbar thumb */
+  /* border: 1px solid #041858; */
+}
+
+/* For Mozilla Firefox */
+::-moz-scrollbar {
+  width: 15px; /* Width of the scrollbar */
+}
+
+::-moz-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+::-moz-scrollbar-thumb {
+  background-color: #041858; /* Color of the scrollbar thumb */
+  border-radius: 8px;
+  border: 1px solid #00A02B; /* Rounded corners of the scrollbar thumb */
+}

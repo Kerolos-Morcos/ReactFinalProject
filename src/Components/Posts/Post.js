@@ -1,3 +1,5 @@
+import io from 'socket.io-client';
+
 import React, { useEffect, useState } from "react";
 import PostStyle from "./post.module.css";
 import NoData from "../../assets/images/No data-rafiki.svg";
@@ -97,6 +99,25 @@ function Posts() {
   // }, [send]);
   // const currentTime = moment.utc();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   useEffect(()=>{
     const IntervalId = setInterval(()=>{
       setCurrentTime(moment.utc())
@@ -110,6 +131,7 @@ function Posts() {
     //   moment.utc(postTime),
     //   "seconds"
     // );
+  
     let elapsedTime;
     
 
