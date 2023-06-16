@@ -10,10 +10,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { json } from "react-router-dom";
 
-function Posts() {
+function Posts({socket, user}) {
   const [temp, setTemp] = useState(0);
   const handleClick = (_id) => {
     setTemp(_id);
+    socket.emit("sendNotification",{
+      nurseName: nameOfNurse.name,
+      nurseImg: nameOfNurse.profile,
+      nurseId: nameOfNurse._id
+    })
     console.log(temp);
   };
   // console.log(temp);
@@ -133,10 +138,7 @@ function Posts() {
     // );
   
     let elapsedTime;
-    
-
-    let hour = "ساعة"
-    
+        
 
 
     if (elapsedTimeInSeconds < 60) {
@@ -233,6 +235,7 @@ function Posts() {
                                 </div>
                               </div>
 
+                    {/* Comments */}
                               {/* New */}
                               <ul
                                 className={`${"fb-comments"} ${

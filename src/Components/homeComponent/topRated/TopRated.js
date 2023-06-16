@@ -26,7 +26,7 @@ function TopRated() {
   useEffect(() => {
     axios.get('http://localhost:3500/nurse/top-rated').then((res) => {
       getTopRated(res.data.data);
-      console.log(res.data.data);
+      // console.log(res.data.data);
     }).catch((error) => {
       console.log(error);
     });
@@ -46,7 +46,7 @@ function TopRated() {
     spaceBetween={100}
    
     slidesPerView={3}
-    onSlideChange={() => console.log('slide change')}
+    // onSlideChange={() => console.log('slide change')}
     // onSwiper={(swiper) => console.log(swiper)}
     navigation
     modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay]}

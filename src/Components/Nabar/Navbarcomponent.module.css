@@ -292,3 +292,36 @@ nav {
   
     } */
     
+
+
+    /* SOCKET IO */
+    .notification{
+      position: relative;
+    }
+    .notification i{
+      cursor: pointer;
+      margin-right: 15px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+  
+    .counter{
+      width: 5px;
+      height: 5px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 8px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -1px;
+      right: 9px;
+    }
+
+
+
+
+    /* SOCKET IO */

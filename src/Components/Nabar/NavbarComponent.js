@@ -4,6 +4,17 @@ import Logo from "../../assets/images/Navbar__Logo.png";
 import { NavLink, Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
+
+// SOCKET IO
+
+
+
+
+
+
+
+
+
 function Navbar() {
   const [username, setUsername] = useState("");
   const [isLoggedOut, setIsLoggedOut] = useState(false);
@@ -183,7 +194,12 @@ function Navbar() {
                           />
                         </Link>
                       )}
-
+                      <span className={NavStyle.notification}>
+                          <i className="fa fa-bell text-white fa-lg "></i>
+                          <div className={NavStyle.counter}>
+                              2
+                          </div>
+                      </span>
                       {!username ? (
                         <>
                           <NavLink

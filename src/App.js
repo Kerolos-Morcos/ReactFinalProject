@@ -31,9 +31,34 @@ import NurseProfileShowPage from './Pages/ShowNurseProfile/NurseProfileShowPage'
 import ShowNurseProfile from './Components/showNurseProfile/ShowNurseProfile';
 // import DeviceDetailsPage from './Pages/DeviceDetails/DeviceDetails';
 
-
+// Socket IO
+import { io } from "socket.io-client";
 
 function App() {
+  // Socket IO
+  const [username, setUsername] = useState('');
+  const [user, setUser] = useState('');
+const [socket, setSocket] = useState(null)
+
+  useEffect(()=>{
+     setSocket(io('http://localhost:5000'));
+  },[]);
+
+  useEffect(()=>{
+    socket?.emit("newUser", user)
+        // console.log(user)
+  },[socket, user]);
+  // Socket IO
+
+
+
+
+
+
+
+
+
+
   const [flag,setFlag]=useState(false);
   const location = useLocation();
 
@@ -50,7 +75,7 @@ function App() {
     <div className="App">
 
       <Scroll/>
-      {flag && <Navbar />}
+      {flag && <Navbar socket={socket} />}
       <Routes>
         <Route index path='/Home' element={<Home/>} />
         <Route path='/' element={<Login />} />
@@ -63,7 +88,7 @@ function App() {
         <Route path='contactUs' element={<ContactUs />} />
         <Route path='Devices' element={<Devices />} />
         <Route path='About' element={<About />} />
-        <Route path='Posts' element={<Posts />} />
+        <Route path='Posts' element={<Posts socket={socket} user={user} />} />
         <Route path='nurseProfile' element={<NurseProfilePage />} />
         <Route path='patientProfile' element={<PatientProfilePage />} />
         <Route path="/Devicedetails/:id" element={<Devicedetails />} />
