@@ -19,7 +19,7 @@ function Posts({socket, user}) {
       nurseImg: nameOfNurse.profile,
       nurseId: nameOfNurse._id
     })
-    console.log(temp);
+    // console.log(temp);
   };
   // console.log(temp);
 
@@ -32,7 +32,7 @@ function Posts({socket, user}) {
 
 
   // console.log(nameOfNurse._id);
-   console.log(nameOfNurse.profile);
+  //  console.log(nameOfNurse.profile);
   //  Img= nameOfNurse.profile
 
   // const ids = post._id;
@@ -59,11 +59,16 @@ function Posts({socket, user}) {
           values
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           let index=posts.findIndex((item)=>item._id==res.data._id)
-        console.log(index);
+        // console.log(index);
         posts[index].comments=res.data.comments;
-        console.log(posts);
+        // console.log(posts);
+        socket.emit("sendNotificationComment", {
+          Comment: posts[index].comments.comment,
+          // receiverName: post.username,
+          // type,
+        });
         getPost([...posts]);
           // console.log(res.data.comments[6].nurseName);
           resetForm();

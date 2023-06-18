@@ -19,13 +19,13 @@ export default function Sidebar() {
   }
 
   let schema = Yup.object().shape({
-   rate: Yup.number().required("Rate is required"),
+   rates: Yup.number().required("Rate is required"),
     gender: Yup.string().required("gender is required"),
     address: Yup.string().required("Region is required"),
   });
   const formik = useFormik({
     initialValues: {
-      rate: "",
+      rates: "",
       address: "",
       gender: "",
     },
@@ -64,14 +64,14 @@ export default function Sidebar() {
 <div className={sidebarStyle["filter__content"]}>
 <div className={`${"form-field-content"} ${sidebarStyle['form-field-content']} `}>
 <label htmlFor="">التقييم</label>
-<select className="" onChange={formik.handleChange} name='rate'>
+<select className="" onChange={formik.handleChange} name='rates'>
   <option selected >-اختر التقييم-</option>
-  <option value="5.0+">5.0+</option>
-  <option value="4.0+">4.0+</option>
-  <option value="3.0+">3.0+</option>
-  <option value="2.0+">2.0+</option>
-  <option value="1.0+">1.0+</option>
-  <option value="0">0</option>
+  <option value={5}>5.0+</option>
+  <option value={4}>4.0+</option>
+  <option value={3}>3.0+</option>
+  <option value={2}>2.0+</option>
+  <option value={1}>1.0+</option>
+  <option value={0}>0</option>
 </select>
 </div>
 <hr/>

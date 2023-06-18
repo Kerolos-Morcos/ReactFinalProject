@@ -23,14 +23,14 @@ function Navbar() {
     setIsLoggedOut(true);
   }
 
-  // const userName = {
-  //   name: 'Negm',
-  // }
-  // function show(){
-  //   socket.emit("sendNotification", userName)
+  const userName = {
+    name: 'Negm',
+  }
+  function show(){
+    socket.emit("sendNotificationComment",Comment)
 
     
-  // }
+  }
 
   useEffect(() => {
     if (isLoggedOut) {
@@ -228,9 +228,9 @@ function Navbar() {
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                           >
-                                {/* <button className="btn btn-outline-secondary" onClick={()=>show()}>
+                                <button className="btn btn-outline-secondary" onClick={()=>show()}>
                                     SHOW
-                                </button> */}
+                                </button>
                             <i className="fa fa-bell text-white fa-lg "></i>
                             <div className={NavStyle.counter}>2</div>
                           </button>
