@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 // import { getPatient } from '../Redux/Slices/PatientSlice';
-import { getPatient } from "../../Redux/Slices/PatientSlice";
+import { getPatient,getBookindNurse} from "../../Redux/Slices/PatientSlice";
+import { addRateToNurse } from "../../Redux/Slices/NurseProfileR";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import ModalPost from "../Modal/Modal";
@@ -13,39 +14,65 @@ import RadioGroupRating from "../../Pages/AddRating/AddRate";
 
 const MySwal = withReactContent(Swal)
 
-const handleRating = () => {
-  const RatingModal = () => {
+// const handleRating = (id) => {
+//   // console.log(id);
+//   const RatingModal = ({ id,onRatingSelected }) => { 
+//     return <RadioGroupRating size="large" onRatingSelected={onRatingSelected} />;
+//   };
 
-    return <RadioGroupRating  size="large"/>;
-  };
+//   // const 
 
-  MySwal.fire({
-    title: <p>ما تقييمك؟</p>,
-    html: <RatingModal />,
-  }).then((result) => {
-    // Handle the rating result
-    if (result.isConfirmed) {
-      // Rating submitted
-      const rating = result.value;
-      // Process the rating
-    } else {
-      // Rating canceled
-    }
-  });
-};
-
+//   MySwal.fire({
+//     title: <p>ما تقييمك؟</p>,
+//     html: <RatingModal id={id} onRatingSelected={(rating) => {
+//       if (rating) {
+//         dispatch(getBookindNurse(id,rating))
+//         // console.log(id);
+//         // console.log(`Rating selected: ${rating}`);
+//         // Process the rating, e.g. send it to a server
+//       }
+//     }} />,
+//   });
+// };
 
 
 function PatientProfile() {
+  const [rateNum,setRateNum]=useState(0)
   const patientes = useSelector((state) => state.PatientSlice.patient);
-  // console.log(patientes.patient);
+  const nursesBooking = useSelector((state) => state.PatientSlice.booking);
+  // console.log(nursesBooking);
   const dispatch = useDispatch();
   let info = patientes;
   useEffect(() => {
     dispatch(getPatient());
+    dispatch(getBookindNurse())
     //  console.log(patientes.data)
   }, []);
+  const api="http://localhost:3500/"
   // console.log(patientes);
+
+  const RatingModal = ({ id,onRatingSelected }) => { 
+    return <RadioGroupRating size="large" onRatingSelected={onRatingSelected} />;
+  };
+  const handleRating = (id,ratenumbering) => {
+  //  console.log(id);
+    MySwal.fire({
+      title: <p>ما تقييمك؟</p>,
+      html: <RatingModal id={id} onRatingSelected={(rating) => {
+        if (rating) {
+          // setRateNum=rating
+          // const ratenumbering=rating
+          dispatch(addRateToNurse({ NurseProfileId: id, ratenumbering: rating }))
+          // dispatch(addRateToNurse({ NurseProfileId: id, rate: rating }))
+          // console.log(id);
+          console.log(`Rating selected: ${rating}`);
+          // Process the rating, e.g. send it to a server
+        }
+      }} />,
+    });
+  };
+
+  ////////////////////////
   return (
     <div className="mt-4">
       <section className="pt-5" style={{ backgroundColor: "#eee" }} dir="rtl">
@@ -241,60 +268,22 @@ function PatientProfile() {
                     </h1>
                     {/* Card Example */}
                     <div className="container" style={{overflow: 'auto', display: 'flex' , scrollSnapType: 'x', gap: '30px', width:'780px'}}>
-                      <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
-                        <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" />
-                        <h1 style={{color: '#041858', fontSize: '1.3rem', padding: '0px', margin: '8px auto'}}>
-                          اسم الممرض
-                        </h1>
-                        <button onClick={handleRating} className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
-                          قيّمه الآن
-                        </button>
-                      </div>
-                      <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
-                        <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" />
-                        <h1 style={{color: '#041858', fontSize: '1.3rem', margin: '8px auto', padding: '0px'}}>
-                          اسم الممرض
-                        </h1>
-                        <button className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
-                        قيّمه الآن
-                        </button>
-                      </div>
-                      <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
-                        <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" />
-                        <h1 style={{color: '#041858', fontSize: '1.3rem', margin: '8px auto', padding: '0px'}}>
-                          اسم الممرض
-                        </h1>
-                        <button className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
-                        قيّمه الآن
-                        </button>
-                      </div>
-                      <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
-                        <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" />
-                        <h1 style={{color: '#041858', fontSize: '1.3rem', margin: '8px auto', padding: '0px'}}>
-                          اسم الممرض
-                        </h1>
-                        <button className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
-                        قيّمه الآن
-                        </button>
-                      </div>
-                      <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
-                        <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" />
-                        <h1 style={{color: '#041858', fontSize: '1.3rem', margin: '8px auto', padding: '0px'}}>
-                          اسم الممرض
-                        </h1>
-                        <button className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
-                        قيّمه الآن
-                        </button>
-                      </div>
-                      <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
-                        <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" />
-                        <h1 style={{color: '#041858', fontSize: '1.3rem', margin: '8px auto',  padding: '0px'}}>
-                          اسم الممرض
-                        </h1>
-                        <button className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
-                        قيّمه الآن
-                        </button>
-                      </div>
+                      {nursesBooking && nursesBooking.map((item)=>{
+                        console.log(item);
+                        return (
+                          <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
+                          <img style={{borderRadius: '8px', height: '240px', width: '240px'}} src={`${api}${item.profile}`} />
+                          {/* <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src={item.profile} /> */}
+                          <h1 style={{color: '#041858', fontSize: '1.3rem', padding: '0px', margin: '8px auto'}}>
+                             {item.name}
+                          </h1>
+                          <button onClick={()=>handleRating(item._id)} className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
+                            قيّمه الآن
+                          </button>
+                        </div>
+                        )
+                      })}
+
                     </div>
                     {/* Card Example */}
                   

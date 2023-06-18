@@ -46,14 +46,19 @@ IconContainer.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function RadioGroupRating() {
+export default function RadioGroupRating({ onRatingSelected }) {
+
   return (
     <StyledRating
       name="highlight-selected-only"
-      defaultValue={0}
+      defaultValue={1} 
+      max={5} 
       IconContainerComponent={IconContainer}
       getLabelText={(value) => customIcons[value].label}
       highlightSelectedOnly
+      onChange={(event, newValue) => {
+        onRatingSelected(newValue); // Call the onRatingSelected function with the new value
+      }}
     />
   );
 }

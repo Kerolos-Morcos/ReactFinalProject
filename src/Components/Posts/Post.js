@@ -66,10 +66,8 @@ function Posts({socket, user}) {
         console.log(posts);
         getPost([...posts]);
           // console.log(res.data.comments[6].nurseName);
-
           resetForm();
           // setShowModal(false);
-          
         });
     },
   });

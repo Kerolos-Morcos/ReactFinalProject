@@ -67,7 +67,7 @@ function NurseFormComponent() {
       const token = localStorage.getItem("token");
       const decoded = jwtDecode(token);
       const patientId = decoded.userid;
-      axios.post(`http://localhost:3500/nurse/bookNurse/${id}?patientId=${patientId}`,values,{
+      axios.post(`http://localhost:3500/book/bookNurse/${id}?patientId=${patientId}`,values,{
         headers: { authorization: `Bearer ${token}` },
     })
       .then((res) => {

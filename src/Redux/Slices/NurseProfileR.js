@@ -164,6 +164,29 @@ export const updateNurseInfo = createAsyncThunk(
 );
 
 
+// Hany
+export const addRateToNurse = createAsyncThunk('PatientSlice/addRateToNurse', async ({ NurseProfileId, ratenumbering }) => {
+  console.log(NurseProfileId);
+  try {
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const patientId = decoded.userid;
+    console.log(patientId);
+    console.log(ratenumbering);
+    const response = await axios.put(`http://localhost:3500/patient/addrate/${patientId}/${NurseProfileId}`, { rate: ratenumbering }, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    console.log(response);
+    // return response.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+
+
+
 
   const nurseProfileSlice = createSlice({
     name: "nurseProfile",
@@ -188,7 +211,26 @@ export const updateNurseInfo = createAsyncThunk(
             },
             [getNurse.rejected]: (state, action) => {
                  console.log("rejected")
-            }
+            },
+
+
+            // Hany
+          [addRateToNurse.pending]:(state,action)=>{
+              console.log("pending");
+              
+          },
+          [addRateToNurse.fulfilled]:(state,action)=>{
+              console.log("fulfilled");
+              // console.log(action.payload);
+              state.nurseProfile = action.payload;
+              // console.log(state.cart);
+              // return state.cart
+              
+          },
+          [addRateToNurse.rejected]:(state,action)=>{
+              console.log("rejected");
+              
+          },
         }
 
 })

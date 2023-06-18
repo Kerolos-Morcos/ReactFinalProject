@@ -117,6 +117,7 @@ nav {
   }
   
   .fa_cart_plus {
+    position: relative;
     font-size: 1.25rem;
     font-weight: 600;
     color: #fff;
@@ -183,6 +184,9 @@ nav {
   .cont{
     margin-bottom: 0px ;
   }
+  .offcanvas_body .notification{
+    display: none !important;
+  }
 }
 @media (max-width: 767.5px)
 {
@@ -201,6 +205,9 @@ nav {
   }
   .cont{
     margin-bottom: 0px;
+  }
+  .offcanvas_body .notification{
+    display: none !important;
   }
 }
 @media (max-width: 576px) {
@@ -229,6 +236,9 @@ nav {
       padding-right: calc(var(--bs-gutter-x) * 1) !important;
       padding-left: calc(var(--bs-gutter-x) * 1) !important;
       margin-top: var(--bs-gutter-y) !important;
+    }
+    .offcanvas_body .notification{
+      display: none !important;
     }
   }  
 
@@ -282,7 +292,7 @@ nav {
       width: 30px;
     }
     .btn{
-      padding: 10px 30px;
+      /* padding: 10px 30px; */
     }
     /* .cartbody{
   
@@ -303,6 +313,10 @@ nav {
       margin-right: 15px;
       margin-left: 10px;
       vertical-align: middle;
+      transition: all 0.4s ease-in-out;
+    }
+    .notification i:hover{
+      transform: rotate(360deg);
     }
   
     .counter{
@@ -317,11 +331,75 @@ nav {
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: -1px;
-      right: 9px;
+      top: 1px;
+      right: 20px;
+      animation: fade 2.5s infinite;
+    }
+    @keyframes fade {
+      0% {
+        box-shadow: 0 0 0 0.2em red;
+      }
+      25% {
+        box-shadow: 0 0 0 0.0em red;
+      }
+      50% {
+        box-shadow: 0 0 0 0.2em red;
+      }
+      75% {
+        box-shadow: 0 0 0 0em red;
+      }
+      100% {
+        box-shadow: 0 0 0 0.2em red;
+      }
+    }
+    .cart_Counter{
+      width: 5px;
+      height: 5px;
+      background-color: red;
+      box-shadow: 0 0 0 0.1em red;
+      color: white;
+      border-radius: 50%;
+      padding: 8px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -7px;
+      left: 16px;
     }
 
-
+    
+/* New */
+    .dropdown-toggle::after {
+      display: none;
+    }
+    
+    .dropdown-menu {
+      color: red;
+      text-align: right;
+      margin-left: -45px;
+      width: 10% !important;
+      background-color: white !important;
+      transition: all 0.4s linear;
+    }
+    .dropdown-menu li{
+      cursor: pointer;
+      width: 95%;
+      font-size: 12.5px;
+      margin: 0 auto;
+      padding: 8px;
+      border-bottom: 1px solid #04185823;
+    }
+    .dropdown-menu li:hover{
+      color: #041858;
+    }
+    .dropdown-menu li:last-child{
+      border: 0;
+    }
+    .btn{
+      border: none !important;
+    }
 
 
     /* SOCKET IO */

@@ -4,18 +4,15 @@ import Logo from "../../assets/images/Navbar__Logo.png";
 import { NavLink, Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
-
+import CartComponent from "../Cart/Cart";
+import { useSelector } from "react-redux";
+import { io } from "socket.io-client";
 // SOCKET IO
 
 
 
-
-
-
-
-
-
 function Navbar() {
+  const [socket, setSocket] = useState(null);
   const [username, setUsername] = useState("");
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [userRole, setUserRole] = useState("");
@@ -25,10 +22,21 @@ function Navbar() {
     localStorage.removeItem("token");
     setIsLoggedOut(true);
   }
+
+  // const userName = {
+  //   name: 'Negm',
+  // }
+  // function show(){
+  //   socket.emit("sendNotification", userName)
+
+    
+  // }
+
   useEffect(() => {
     if (isLoggedOut) {
       window.location.href = "/Login";
     }
+    setSocket(io("http://localhost:3500"));
   }, []);
 
   useEffect(() => {
@@ -43,6 +51,12 @@ function Navbar() {
       setUserRole(token.role);
     }
   }, []);
+
+  // CART BADGE
+  const [cartCount, setCartCount] = useState(5);
+  const { cart } = useSelector((state) => state.CartSlice);
+
+  console.log(CartComponent);
 
   return (
     <>
@@ -159,7 +173,7 @@ function Navbar() {
                         </NavLink>
                       </li>
                     )}
-                    
+
                     <li className={"nav-item"}>
                       <NavLink
                         className={`${"nav-link"} ${NavStyle.nav_link}`}
@@ -180,26 +194,59 @@ function Navbar() {
                   </ul>
                   {/* Buttons */}
                   <ul
-                    className={
-                      "offset-xxl-0 offset-xl-0 ms-xl-0 col-xxl-4 col-xl-4 col-lg-4 ms-lg-2 ps-lg-0 navbar-nav mt-xxl-0"
-                    }
+                    className={`{"offset-xxl-0 offset-xl-0 ms-xl-0 col-xxl-4 col-xl-4 col-lg-4 ms-lg-2 ps-lg-0 navbar-nav mt-xxl-0"} ${NavStyle.FlexDir}`}
                   >
                     <li className={"nav-item ms-auto w-100"}>
-                      {userRole !== "nurse" && (
+                      {userRole !== "nurse" &&  username &&(
                         <Link to="/Cart">
                           <i
                             className={`${"fa fa-cart-plus"} ${
                               NavStyle.fa_cart_plus
                             }`}
-                          />
+                          >
+                            {cart.length > 0 && (
+                              <span className={NavStyle.cart_Counter}>
+                                {cart.length}
+                              </span>
+                            )}
+                          </i>
                         </Link>
                       )}
-                      <span className={NavStyle.notification}>
-                          <i className="fa fa-bell text-white fa-lg "></i>
-                          <div className={NavStyle.counter}>
-                              2
-                          </div>
-                      </span>
+                      {username && (
+
+                      
+                      <a className={NavStyle.notification}>
+                        <div
+                          className={`${NavStyle.Notify} dropdown ${NavStyle.dropdown}`}
+                        >
+                          <button
+                            className={`${"btn dropdown-toggle"} ${
+                              NavStyle["dropdown-toggle"]
+                            } ${NavStyle["btn"]}`}
+                            type="button"
+                            id="profileDropdownMenuButton"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                                {/* <button className="btn btn-outline-secondary" onClick={()=>show()}>
+                                    SHOW
+                                </button> */}
+                            <i className="fa fa-bell text-white fa-lg "></i>
+                            <div className={NavStyle.counter}>2</div>
+                          </button>
+                          <ul
+                            className={`${"dropdown-menu"} ${
+                              NavStyle["dropdown-menu"]
+                            }`}
+                            aria-labelledby="profileDropdownMenuButton"
+                          >
+                            <li>
+                              <a>قام هاني محمود بالتعليق علي منشورك</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                      )}
                       {!username ? (
                         <>
                           <NavLink

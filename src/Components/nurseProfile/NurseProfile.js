@@ -20,12 +20,12 @@ function NurseProfile() {
   let R =  0;
   // console.log( typeof info.rate);
   // console.log(R);
-if (!info.rate) {
+if (!info.rates) {
     R = 0
   
 }
 else{
-  R = info.rate
+  R = info.rates
 
 }
   console.log(`${url}${info.profile}`);

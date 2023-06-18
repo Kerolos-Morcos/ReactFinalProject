@@ -19,13 +19,14 @@ import Rating from '../../nurseProfile/Rates';
 
 // END SWIPER
 
-// const api = "http://localhost:3500/"
+const api = "http://localhost:3500/"
 function TopRated() {
   let [topRated, getTopRated] = useState([])
   console.log(topRated);
   useEffect(() => {
     axios.get('http://localhost:3500/nurse/top-rated').then((res) => {
       getTopRated(res.data.data);
+      console.log(topRated);
       // console.log(res.data.data);
     }).catch((error) => {
       console.log(error);
@@ -113,8 +114,8 @@ function TopRated() {
         <SwiperSlide className={`${"col-md-6 col-lg-4 col-12"}`}>
           <div className={`${TopStyle.single_doctor}`}>
             <div className={`${TopStyle.doctor_profile}`}>
-              {/* <img src={` ${api}${user.profile}`} /> */}
-              <img src={` ${user.profile}`} />
+              <img src={` ${api}${user.profile}`} />
+              {/* <img src={` ${user.profile}`} /> */}
             </div>
             <div className={`${TopStyle.doctor_info}`}>
               <h3>
@@ -123,7 +124,7 @@ function TopRated() {
 
               <span>
                 <span className={TopStyle.region}> {user.region} </span>
-                <Rating rate={user.rate} />
+                <Rating rate={user.rates} />  
               </span>
               
             </div>

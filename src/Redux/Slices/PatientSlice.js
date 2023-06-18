@@ -73,13 +73,28 @@ export const getNurseById=createAsyncThunk('PatientSlice/getNurseById',async (Nu
   }
 })
 
-
-
+// Hany
+export const getBookindNurse=createAsyncThunk('PatientSlice/getBookindNurse',async (NurseProfileId) =>{
+  try{
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const patientId = decoded.userid;
+  const response = await axios.get(`http://localhost:3500/book/Nursebooking?patientId=${patientId}`, {
+    headers: { authorization: `Bearer ${token}` },
+  });
+//  console.log(response.data.data);
+  return response.data.data;
+ }
+  catch(err){
+      console.log(err);
+  }
+})
 
 const PatientSlice = createSlice({
     name: 'patient',
     initialState: {
         patient: [],
+        booking:[],
     },
     reducers: {
     //    addnurse:(state,action)=>{
@@ -120,6 +135,26 @@ const PatientSlice = createSlice({
           console.log("rejected");
           
       },
+
+
+      // Hany
+      [getBookindNurse.pending]:(state,action)=>{
+        console.log("pending");
+        
+    },
+    [getBookindNurse.fulfilled]:(state,action)=>{
+        console.log("fulfilled");
+        // console.log(action.payload);
+        state.booking = action.payload;
+        // console.log(state.cart);
+        // return state.cart
+        
+    },
+    [getBookindNurse.rejected]:(state,action)=>{
+        console.log("rejected");
+        
+    },
+    
     }
 })
 

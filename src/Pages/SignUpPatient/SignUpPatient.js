@@ -21,7 +21,7 @@ function SignupPatient() {
     address: Yup.string().required("العنوان مطلوب"),
     region: Yup.string().required("المنطقة السكنية مطلوبة"),
     age: Yup.number().required('السن مطلوب'),
-    nationalID: Yup.string().required("الرقم القومي مطلوب"),
+    nationalId: Yup.string().required("الرقم القومي مطلوب"),
   })
   const formik = useFormik({
     initialValues: {
@@ -33,7 +33,7 @@ function SignupPatient() {
       address: '',
       region: '',
       age: '',
-      nationalID: '',
+      nationalId: '',
       gender: '',
     },
     validationSchema: schema,
@@ -280,18 +280,18 @@ function SignupPatient() {
                 <span className={styleSignNurse.details}>الرقم القومى</span>
                 <input
                   type="number"
-                  name="nationalID"
+                  name="nationalId"
                   placeholder="ادخل الرقم القومى"
                   onChange={formik.handleChange}
                   onBlur={()=> 
                     { 
-                      formik.setTouched({nationalID:true}) 
+                      formik.setTouched({nationalId:true}) 
                     }} 
-                    style={{ border: formik.touched.nationalID &&formik.errors.nationalID ? 'solid 1px red' : '' }}
+                    style={{ border: formik.touched.nationalId &&formik.errors.nationalId ? 'solid 1px red' : '' }}
                 />
-                {formik.touched.nationalID && (
+                {formik.touched.nationalId && (
                   <small id="emailHelp" style={{ color: 'red' }}>
-                    {formik.errors.nationalID}
+                    {formik.errors.nationalId}
                   </small>
                 )}
               </div>

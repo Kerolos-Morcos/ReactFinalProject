@@ -29,6 +29,7 @@ import PatientProfilePage from './Pages/PatientProfilePage/PatientProfilePage';
 import Devicedetails from './Components/DeviceDetails/Devicedetails';
 import NurseProfileShowPage from './Pages/ShowNurseProfile/NurseProfileShowPage';
 import ShowNurseProfile from './Components/showNurseProfile/ShowNurseProfile';
+import MedArtical from './Components/Articles/MedArtical';
 // import DeviceDetailsPage from './Pages/DeviceDetails/DeviceDetails';
 
 // Socket IO
@@ -95,6 +96,7 @@ const [socket, setSocket] = useState(null)
         <Route path="/ShowNurseProfile/:id" element={<ShowNurseProfile />} />
         <Route path="/FormNurse/:id" element={<NurseForm />} />
         <Route path="/AskDevicePage" element={<AskDevicePage />} />
+        <Route path="/MedicalArticles" element={<MedArtical />} />
       </Routes>
       {flag && <Footer />}
     </div>
