@@ -33,7 +33,7 @@ export const addToCart = createAsyncThunk(
                     headers: { authorization: `Bearer ${token}` },
                 }
             );
-            console.log(response.data);
+            // console.log(response.data);
             return response.data.data;
         } catch (err) {
             return thunkAPI.rejectWithValue(err.response.data);

@@ -90,11 +90,36 @@ export const getBookindNurse=createAsyncThunk('PatientSlice/getBookindNurse',asy
   }
 })
 
+export const getPatientNotifications = createAsyncThunk (
+  "patient/getPatientNotifications",
+  async (_, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const decoded = jwtDecode(token);
+    //   console.log(decoded);
+      const patientId = decoded.userid;
+    //  console.log(patientId);
+      const response = await axios.get(
+        `http://localhost:3500/notificationPost/getNotif/?patientId=${patientId}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
+      // console.log(response);
+      return response.data.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
 const PatientSlice = createSlice({
     name: 'patient',
     initialState: {
         patient: [],
         booking:[],
+        notification:[]
     },
     reducers: {
     //    addnurse:(state,action)=>{
@@ -154,6 +179,23 @@ const PatientSlice = createSlice({
         console.log("rejected");
         
     },
+
+    [getPatientNotifications.pending]:(state,action)=>{
+      console.log("pending");
+      
+  },
+  [getPatientNotifications.fulfilled]:(state,action)=>{
+      console.log("fulfilled");
+      // console.log(action.payload);
+      state.notification = action.payload;
+      // console.log(state.cart);
+      // return state.cart
+      
+  },
+  [getPatientNotifications.rejected]:(state,action)=>{
+      console.log("rejected");
+      
+  },
     
     }
 })

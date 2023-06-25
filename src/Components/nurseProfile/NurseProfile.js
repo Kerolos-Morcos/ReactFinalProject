@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import nurseProfilee from "./NurseProfile.module.css";
 import AddExperience from "./AddExperience";
 import NurseResume from "./NurseResume";
@@ -8,36 +8,78 @@ import { getNurse } from "../../Redux/Slices/NurseProfileR";
 import NurseEduAdd from "./NurseEduAdd";
 import AddEducation from "./AddEducation";
 import Rating from "./Rates";
+import WorkingTimes from './WorkingTimes'
 
-function NurseProfile() {
+// Modal Try
+import { Modal, Button } from "react-bootstrap";
+import Chat from "../ChatComponent/Chat";
+import { NavLink } from "react-router-dom";
+
+function NurseProfile({ Socket }) {
+
+  // console.log("Socket....",Socket);
   const url = "http://localhost:3500/";
   const dispatch = useDispatch();
   const nurse = useSelector((state) => state.nurseProfileSlice);
-  console.log(nurse);
+  const userChat = JSON.parse(localStorage.getItem("user"));
+  // console.log(nurse);
   // console.log(nurse["data"]["name"]);
   // console.log(nurse.nurse.age);
   let info = nurse.nurseProfile;
-  let R =  0;
+  let R = 0;
   // console.log( typeof info.rate);
   // console.log(R);
-if (!info.rates) {
-    R = 0
-  
-}
-else{
-  R = info.rates
-
-}
-  console.log(`${url}${info.profile}`);
-  console.log(info);
-  console.log(info.education);
+  if (!info.rates) {
+    R = 0;
+  } else {
+    R = info.rates;
+  }
+  // console.log(`${url}${info.profile}`);
+  // console.log(info);
+  // console.log(info.education);
   useEffect(() => {
     dispatch(getNurse()); // fire action
 
-    console.log("object");
+    // console.log("object");
   }, []);
 
- 
+  // chat
+  const username = JSON.parse(localStorage.getItem("user")).name;
+  const NurseId = JSON.parse(localStorage.getItem("user"))._id;
+  const room = 2;
+  
+  const joinRoom = () => {
+    // if (username !== "" && room !== "") {
+      // alert("join")
+      // console.log(Socket);
+      Socket?.emit("join_room", NurseId);
+      // setShowChat(true);
+    // }
+  };
+
+  const sendChatNotification = () =>{
+    Socket?.emit("sendNotificationChat", {
+      username:userChat.name,
+      userId:nurse._id
+     });
+
+    //  Socket?.on("sendNotificationChat", (data) => {
+
+    //   console.log(data);
+    //  });
+  }
+
+  // Modal TRy
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <section
@@ -80,14 +122,61 @@ else{
                       <div className={`${nurseProfilee.r} ${" mt-4 "}`}>
                         <Rating rate={R} />
                       </div>
-                     
 
+                      <Button
+                        className={`${"btn mt-3"} ${
+                          nurseProfilee["btn_outline_primary"]
+                        }`}
+                        onClick={() => {
+                          joinRoom();
+                          handleOpenModal();
+                          sendChatNotification();
+                        }}
+                      >
+                        الرسائل الواردة <i className="fa-solid fa-comment-dots "></i>
+                      </Button>
+
+                       {/* <NavLink to="/Chat"
+                        className={`${"btn mt-3"} ${
+                          nurseProfilee["btn_outline_primary"]
+                        }`}
+                        onClick={() => {joinRoom();  }}
+                      >
+                        الرسائل الواردة <i className="fa-solid fa-comment-dots "></i>
+                      </NavLink> */}
+
+                      {/* Modal */}
+                      <Modal show={showModal}>
+                        <Modal.Header
+                          style={{
+                            background: "#43a047",
+                            color: "white",
+                            flexDirection: "row-reverse",
+                          }}
+                        >
+                          <Modal.Title>مباشر الآن</Modal.Title>
+                          <Modal.Title
+                            type="button"
+                            class="close"
+                            style={{ cursor: "pointer", fontSize: "32px" }}
+                            onClick={handleCloseModal}
+                          >
+                            {" "}
+                            &times;{" "}
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Chat Socket={Socket} username={username} room={NurseId}/>
+                        </Modal.Body>
+                      </Modal>
                       {/* <h6>اخصائية تمريض بمستشفي أسوان الجامعي</h6> */}
                       <h6>
                         {info.experience &&
                           info.experience.length > 0 &&
                           `${info.experience[0].title} في ${info.experience[0].company}`}
                       </h6>
+
+
                       <a
                         href="#pablo"
                         className={`${nurseProfilee.btn} ${nurseProfilee.btn_just_icon} ${nurseProfilee.btn_link}`}
@@ -101,6 +190,13 @@ else{
                       >
                         <i class="fa-solid fa-certificate fa-lg ps-2"></i>
                         <AddExperience />
+                      </a>
+                      <a
+                        href="#pablo"
+                        className={`${nurseProfilee.btn} ${nurseProfilee.btn_just_icon} ${nurseProfilee.btn_link}`}
+                      >
+                        <i class="fa-solid fa-clock fa-lg ps-2"></i>
+                        <WorkingTimes />
                       </a>
                       <a
                         href="#pablo"
@@ -143,8 +239,7 @@ else{
                       <h3>مريض سعيد</h3>
                     </div>
                     <span className={nurseProfilee.counter_value}>
-                    {/* {info.booking.length + info.booking.length} */}
-
+                      {/* {info.booking.length + info.booking.length} */}
                     </span>
                   </div>
                 </div>

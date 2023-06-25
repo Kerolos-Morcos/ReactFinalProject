@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { getAllCartProduct, deleteFromCart, emptyFromCart, addQuantity, minusQuantity } from '../../Redux/Slices/CartSlice'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import {motion} from 'framer-motion'
 
 function CartComponent() {
 
@@ -94,7 +95,14 @@ function CartComponent() {
 
 
   return (
-    <div className={CartStyle.CartPage}>
+    <motion.div className={CartStyle.CartPage}
+    initial={ {opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={ {opacity: 0 }}
+    variants={{duration: 0.2}}
+    transition={{yoyo: Infinity}}
+style={{overflow: 'hidden'}}
+    >
       <div className={CartStyle.card}>
         <div className={`${"row"} ${CartStyle.row}`}>
           <div className={`${"col-md-8"} ${CartStyle.cart}`}>
@@ -179,7 +187,7 @@ function CartComponent() {
         </div>
       </div>
 
-    </div>
+    </motion.div>
   )
 }
 

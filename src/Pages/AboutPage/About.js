@@ -9,15 +9,25 @@ import Hero from '../../Components/AboutComponent/Hero/Hero'
 import Work from '../../Components/AboutComponent/Work/Work'
 import Services from '../../Components/AboutComponent/Services/Services'
 import Ourservices from '../../Components/AboutComponent/Our-services/Ourservices'
+import {motion} from 'framer-motion'
+
+
 
 function About() {
   return (
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={ {opacity: 0 }}
+      variants={{duration: 0.2}}
+      transition={{yoyo: Infinity}}
+  style={{overflow: 'hidden'}}
+    >
     <Hero></Hero>
     <Work></Work>
     <Services></Services>
     <Ourservices></Ourservices>
-    </>
+    </motion.div>
     
   )
 }

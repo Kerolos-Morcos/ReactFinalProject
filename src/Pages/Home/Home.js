@@ -22,10 +22,21 @@ import Everywhere from '../../Components/homeComponent/everyWhere/Everywhere'
 import './home.css'
 import { Route, Routes } from 'react-router-dom'
 // import { themeContext } from '../components/ConfigContext/DarkMode' 
+import {motion} from 'framer-motion'
+import Fade from 'react-reveal/Fade'
 
 function Home() {
   return (
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={ {opacity: 0 }}
+    variants={{duration: 0.2}}
+    transition={{yoyo: Infinity}}
+style={{overflow: 'hidden'}}
+    >
+      <Fade bottom distance="10%" duration={1500}>
+
     {/* <Navbar/> */}
     <Hero/>
     <Services/>
@@ -33,7 +44,8 @@ function Home() {
     <TopRated/>
     <Statistics/>
     {/* <Footer/> */}
-    </>
+      </Fade>
+    </motion.div>
   )
 }
 

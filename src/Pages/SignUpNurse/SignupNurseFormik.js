@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Helmet } from "react-helmet";
 import bgImg from '../../assets/images/Patients-PNG-HD.png';
 import { useNavigate } from "react-router-dom";
-
+import {motion} from 'framer-motion'
 
 
 function SignupNurseFormik() {
@@ -81,9 +81,26 @@ function SignupNurseFormik() {
   console.log(formik.errors);
 
   return (
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={ {opacity: 0 }}
+      variants={{duration: 0.2}}
+      transition={{yoyo: {duration:1}}}
+
+      style={{
+        backgroundImage: `url(${bgImg})`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "10px",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: '100vh'
+      }}
+      >
     <Helmet>
-             <style>
+             {/* <style>
                 {`
                  body {
                   background-image: url(${bgImg});
@@ -97,10 +114,10 @@ function SignupNurseFormik() {
                          background-size: cover;
                   }
                 `}
-            </style>
+            </style> */}
          </Helmet>
 
-    <div dir="rtl" className={styleSignNurse.container}>
+    <div dir="rtl" style={{marginTop: '-5px'}} className={styleSignNurse.container}>
       <div className={styleSignNurse.title}>
       <div class={styleSignNurse.title}>
          <h2>سجل كممرض </h2>
@@ -354,7 +371,7 @@ function SignupNurseFormik() {
       </div>
       </div>
       
-    </>
+    </motion.div>
   );
 }
 

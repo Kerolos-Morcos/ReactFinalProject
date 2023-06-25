@@ -175,7 +175,7 @@
 }
 
 .create-acc {
-  color: white;
+  color: #041858;
   text-align: center;
 }
 .create-acc .login {
@@ -184,9 +184,10 @@
 }
 .create-acc .login a {
   text-decoration: underline !important;
-margin-right: 5px;
+  margin-right: 5px;
   color: #041858;
   font-weight:600;
+  transition: all 0.3s ease-in-out;
 }
 .create-acc .btn-box {
   margin: 50px -5px 0 -5px;
@@ -238,5 +239,10 @@ margin-right: 5px;
   padding-bottom: 20px;
   text-align: center;
   margin: 0 auto;
+}
+
+.create-acc .login a:hover{
+  color: #00A02B;
+  transform: scale(1.04);
 }
 /* Our Custom Style */

@@ -99,26 +99,9 @@ function EditInfo(props) {
                   handleSubmit();
                   handleClose();
                 }}
+                enctype="multipart/form-data"
               >
-{/* <Form.Group className="mb-3" controlId="profile">
 
-<div className="d-flex justify-content-center align-items-center mb-4"> 
-<div className="position-relative"> 
-<img src={image} alt="Profile" className="rounded-circle shadow" style={{ width: "120px", height: "120px", objectFit: "cover" }} /> 
-<label htmlFor="profile" className="btn btn-secondary rounded-circle position-absolute bottom-0 end-0 p-2"> <i className="fas fa-camera"></i> 
-</label> 
-<Form.Control type="file" id="profile" hidden name="profile" 
- onChange={(e) => {
-  setFieldValue("profile", e.currentTarget.files[0]);
-  let img= URL.createObjectURL(e.currentTarget.files[0])
-  setImage(img)
-  
-}}
-  placeholder=" " 
- autoFocus style={{ direction: "rtl", textAlign: "right", marginTop: '.5rem', }} /> 
- </div>
-  </div> 
-  </Form.Group> */}
    
 
 
@@ -204,27 +187,7 @@ function EditInfo(props) {
                   )}
                 </Field>
 
-                {/* <Field type="password" name="password">
-  {({
-    field: { value, onChange },
-    meta: { touched, error },
-  }) => (
-    <Form.Group className={"mb-3"} controlId="password">
-      <Form.Label className={"mb-3"}>كلمة المرور تحد</Form.Label>
-      <Form.Control
-        type="password" // set type to "password"
-        value={value}
-        onChange={onChange}
-        onBlur={handleBlur}
-        style={{ direction: "rtl", textAlign: "right" }}
-      />
-      {touched && error && (
-        <Form.Text className="text-danger">{error}</Form.Text>
-      )}
-    </Form.Group>
-  )}
-</Field> */}
-
+               
 <Field name="about">
   {({
     field: { value, onChange },

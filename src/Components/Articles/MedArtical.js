@@ -1,8 +1,18 @@
 import React from 'react'
 import ArtStyle from './medArtical.module.css'
+import {motion} from 'framer-motion'
+
+
 function MedArtical() {
   return (
-<div className={ArtStyle.Margins}>
+<motion.div className={ArtStyle.Margins}
+initial={ {opacity: 0 }}
+animate={{ opacity: 1 }}
+exit={ {opacity: 0 }}
+variants={{duration: 0.2}}
+transition={{yoyo: Infinity}}
+style={{overflow: 'hidden'}}
+>
   <div className="container">
 <div className='row'>
 
@@ -159,7 +169,7 @@ function MedArtical() {
   </div>
 
 
-</div>
+</motion.div>
 
 
   )

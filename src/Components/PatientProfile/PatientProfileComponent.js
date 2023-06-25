@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { getPatient } from '../Redux/Slices/PatientSlice';
-import { getPatient,getBookindNurse} from "../../Redux/Slices/PatientSlice";
+import { getPatient,getBookindNurse,getPatientNotifications} from "../../Redux/Slices/PatientSlice";
 import { addRateToNurse } from "../../Redux/Slices/NurseProfileR";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -40,13 +40,14 @@ function PatientProfile() {
   const [rateNum,setRateNum]=useState(0)
   const patientes = useSelector((state) => state.PatientSlice.patient);
   const nursesBooking = useSelector((state) => state.PatientSlice.booking);
-  // console.log(nursesBooking);
+  const patientNotifications = useSelector((state) => state.PatientSlice.notification);
+  // console.log("nursesBooking....",nursesBooking);
   const dispatch = useDispatch();
   let info = patientes;
   useEffect(() => {
     dispatch(getPatient());
     dispatch(getBookindNurse())
-    //  console.log(patientes.data)
+    dispatch(getPatientNotifications())
   }, []);
   const api="http://localhost:3500/"
   // console.log(patientes);
@@ -54,7 +55,7 @@ function PatientProfile() {
   const RatingModal = ({ id,onRatingSelected }) => { 
     return <RadioGroupRating size="large" onRatingSelected={onRatingSelected} />;
   };
-  const handleRating = (id,ratenumbering) => {
+  const handleRating = (id) => {
   //  console.log(id);
     MySwal.fire({
       title: <p>ما تقييمك؟</p>,
@@ -62,10 +63,11 @@ function PatientProfile() {
         if (rating) {
           // setRateNum=rating
           // const ratenumbering=rating
-          dispatch(addRateToNurse({ NurseProfileId: id, ratenumbering: rating }))
+          dispatch(addRateToNurse({ NurseProfileId: id, ratenumbering: rating })).then(()=>dispatch(getBookindNurse()))
+
           // dispatch(addRateToNurse({ NurseProfileId: id, rate: rating }))
           // console.log(id);
-          console.log(`Rating selected: ${rating}`);
+          // console.log(`Rating selected: ${rating}`);
           // Process the rating, e.g. send it to a server
         }
       }} />,
@@ -126,7 +128,7 @@ function PatientProfile() {
                     >
                       <p className={"mb-0"}>
                         {" "}
-                        <i className="fa fa-bell"></i> الاشعارات{" "}
+                        <i class="fa-solid fa-bag-shopping"></i> طلباتي {" "}
                       </p>
                     </li>
                     <div
@@ -143,7 +145,7 @@ function PatientProfile() {
                             aria-expanded="false"
                             aria-controls="flush-collapseOne"
                           >
-                            تصفح إشعاراتك الجديدة
+                            تتبَّع حالة الطلب
                           </button>
                         </h2>
                         <div
@@ -157,7 +159,10 @@ function PatientProfile() {
                               className={
                                 "list-group list-group-flush rounded-3"
                               }
+                              style={{overflow: 'auto', height: '150px'}}
                             >
+                              {patientes.order && patientes.order.map((item,index)=>{
+                                return (
                               <li
                                 className={
                                   "list-group-item d-flex justify-content-between align-items-center p-3"
@@ -167,17 +172,96 @@ function PatientProfile() {
                                   className={"mb-0"}
                                   style={{ cursor: "pointer", color: "green" }}
                                 >
-                                  قام هاني محمود بالرد علي استفسارك بخصوص تركيب
-                                  محلول{" "}
+                                  لقد قمت بطلب خدمة بتاريخ {item.createdAt} حالتة {item.patientStatus}
+                                </a>
+                              </li>
+                                )
+                              })}
+                              
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Notification Accordion */}
+                  </ul>
+                 
+                  
+                </div>
+              </div>
+              <div className={"card mt-4 mb-4 mb-lg-0"}>
+                <div className={"card-body p-0"}>
+                <ul className={"list-group list-group-flush rounded-3"}
+                 
+                >
+                  <li
+                      className={
+                        "list-group-item d-flex justify-content-between align-items-center p-3"
+                      }
+                    >
+                      <p className={"mb-0"}>
+                        {" "}
+                        <i class="fa-solid fa-bell"></i> إشعاراتي {" "}
+                      </p>
+                    </li>
+                    <div
+                      className="accordion accordion-flush"
+                      id="accordionFlushExample"
+                    >
+                      <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-headingOne">
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseTwo"
+                          >
+                            تصفَّح آخر الإشعارات
+                          </button>
+                        </h2>
+                        <div
+                          id="flush-collapseTwo"
+                          className="accordion-collapse collapse"
+                          aria-labelledby="flush-headingOne"
+                          data-bs-parent="#accordionFlushExample"
+                        >
+                          <div className="accordion-body">
+                            <ul
+                              className={
+                                "list-group list-group-flush rounded-3"
+                              }
+                              style={{overflow: 'auto', height: '150px'}}
+                            >
+                              {/* ///////////////// */}
+                              {patientNotifications && patientNotifications.map((item,index)=>{
+                                return (
+                                <li
+                                className={
+                                  "list-group-item d-flex justify-content-between align-items-center p-3"
+                                }
+                              >
+                                <a
+                                  className={"mb-0"}
+                                  style={{ cursor: "pointer", color: "green" }}
+                                >
+                                  قام {item.postNurseName} بإرسال طلب علي منشورك بعنوان {item.postTitle}
                                   <i className="fa fa-arrow-left mt-2"></i>
                                 </a>
                               </li>
+                                )
+                              })}
+                              
                             </ul>
                           </div>
                         </div>
                       </div>
                     </div>
                   </ul>
+                 
+                  
                 </div>
               </div>
             </div>
@@ -268,22 +352,24 @@ function PatientProfile() {
                     </h1>
                     {/* Card Example */}
                     <div className="container" style={{overflow: 'auto', display: 'flex' , scrollSnapType: 'x', gap: '30px', width:'780px'}}>
-                      {nursesBooking && nursesBooking.map((item)=>{
-                        console.log(item);
-                        return (
-                          <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
-                          <img style={{borderRadius: '8px', height: '240px', width: '240px'}} src={`${api}${item.profile}`} />
-                          {/* <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src={item.profile} /> */}
-                          <h1 style={{color: '#041858', fontSize: '1.3rem', padding: '0px', margin: '8px auto'}}>
-                             {item.name}
-                          </h1>
-                          <button onClick={()=>handleRating(item._id)} className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
-                            قيّمه الآن
-                          </button>
-                        </div>
-                        )
-                      })}
-
+                    {nursesBooking.map((item) => {
+                          if (item.status === "accepted") {
+                            return (
+                              <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>
+                                <img style={{borderRadius: '8px', height: '240px', width: '240px'}} src={`${api}${item.profile}`} />
+                                {/* <img style={{borderRadius: '8px', height: '250px', width: '250px'}} src={item.profile} /> */}
+                                <h1 style={{color: '#041858', fontSize: '1.3rem', padding: '0px', margin: '8px auto'}}>
+                                  {item.name}
+                                </h1>
+                                <button onClick={()=>handleRating(item._id)} className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
+                                  قيّمه الآن
+                                </button>
+                              </div>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
                     </div>
                     {/* Card Example */}
                   

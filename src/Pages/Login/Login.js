@@ -11,7 +11,7 @@ import userImg from '../../assets/images/doctor.png'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // End Toastify
-
+import {motion} from 'framer-motion'
 
 export default function Login() {
 
@@ -62,7 +62,23 @@ export default function Login() {
               });
          
   return (
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={ {opacity: 0 }}
+    variants={{duration: 0.2}}
+    transition={{yoyo: {duration:1}}}
+    style={{
+      backgroundImage: `url("https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80")`,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "10px",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      height: '100vh'
+    }}
+    >
      <Helmet>
              <style>
                 {`
@@ -125,8 +141,8 @@ className={LoginStyle.Toastify}
      
       <br />
       <div className={LoginStyle.txt2}>
-              <span className="">مستخدم جديد؟</span>
-              <NavLink to="/Signup" className="">
+              <span className="ms-auto"> مستخدم جديد؟  {" "}</span>
+              <NavLink to="/Signup" style={{fontSize: '15px'}} className="pe-1">
                 سجل معنا الان
               </NavLink>
             </div>
@@ -136,7 +152,7 @@ className={LoginStyle.Toastify}
 
 </>
 
-  </>
+  </motion.div>
   
   )
 }

@@ -5,6 +5,8 @@ import * as Yup from 'yup'
 import { Helmet } from 'react-helmet'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import {motion} from 'framer-motion'
+
 function SignupPatient() {
   const navigate = useNavigate();
   let schema = Yup.object().shape({
@@ -56,9 +58,26 @@ function SignupPatient() {
   })
 
   return (
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={ {opacity: 0 }}
+      variants={{duration: 0.2}}
+      transition={{yoyo: {duration:1}}}
+
+      style={{
+        backgroundImage: `url("https://designstripe-secure.imgix.net/scene-snapshots/06833868-f28d-4fb6-926a-44cfbe167500/1640021720669/default?auto=format&fit=clip&h=850&mark=%2Fwatermark.png&markfit=max&markalign=middle%2Ccenter&markw=1&markh=1&s=44d9a637a6aea08cf1585b6bf08a2368")`,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "10px",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: '100vh'
+      }}
+    >
       <Helmet>
-        <style>
+        {/* <style>
           {`
                 body {
                   background-image: url("https://designstripe-secure.imgix.net/scene-snapshots/06833868-f28d-4fb6-926a-44cfbe167500/1640021720669/default?auto=format&fit=clip&h=850&mark=%2Fwatermark.png&markfit=max&markalign=middle%2Ccenter&markw=1&markh=1&s=44d9a637a6aea08cf1585b6bf08a2368");
@@ -70,9 +89,9 @@ function SignupPatient() {
                   background-size: cover;
                 }
                 `}
-        </style>
+        </style> */}
       </Helmet>
-      <div dir="rtl" className={styleSignNurse.container}>
+      <div dir="rtl" style={{marginTop: '-12px'}} className={styleSignNurse.container}>
         <div className={styleSignNurse.title}>
           <div className={styleSignNurse.title}>
             <h2>سجل كمريض </h2>
@@ -306,7 +325,7 @@ function SignupPatient() {
           </form>
         </div>
       </div>
-    </>
+    </motion.div>
   )
 }
 

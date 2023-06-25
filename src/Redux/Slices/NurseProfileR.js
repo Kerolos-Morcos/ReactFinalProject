@@ -36,7 +36,7 @@ export const updateNurseEducation = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      alert();
+      // alert();
       const token = localStorage.getItem("token");
       const decoded = jwtDecode(token);
       console.log(decoded);
@@ -88,7 +88,7 @@ export const updateNurseExperience = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      alert();
+      // alert();
       const token = localStorage.getItem("token");
       // const user = localStorage.getItem("user");
       const decoded = jwtDecode(token);
@@ -144,12 +144,13 @@ export const updateNurseInfo = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      alert();
+      // alert();
       const token = localStorage.getItem("token");
       // const user = localStorage.getItem("user");
       const decoded = jwtDecode(token);
       console.log(decoded);
       const id = decoded.userid;
+            console.log(id);
             console.log(values);
       const response = await axios.put(
         `http://localhost:3500/nurse/editNurseProf/${id}`,
@@ -171,13 +172,14 @@ export const addRateToNurse = createAsyncThunk('PatientSlice/addRateToNurse', as
     const token = localStorage.getItem("token");
     const decoded = jwtDecode(token);
     const patientId = decoded.userid;
-    console.log(patientId);
+    console.log("patientId.....",patientId);
+    console.log("NurseProfileId.....",NurseProfileId);
     console.log(ratenumbering);
     const response = await axios.put(`http://localhost:3500/patient/addrate/${patientId}/${NurseProfileId}`, { rate: ratenumbering }, {
       headers: { authorization: `Bearer ${token}` },
     });
-    console.log(response);
-    // return response.data.data;
+    console.log("responseRate....",response.data);
+    return response.data.data;
   } catch (err) {
     console.log(err);
   }

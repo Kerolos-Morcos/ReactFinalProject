@@ -31,24 +31,30 @@ import NurseProfileShowPage from './Pages/ShowNurseProfile/NurseProfileShowPage'
 import ShowNurseProfile from './Components/showNurseProfile/ShowNurseProfile';
 import MedArtical from './Components/Articles/MedArtical';
 // import DeviceDetailsPage from './Pages/DeviceDetails/DeviceDetails';
+import {AnimatePresence} from 'framer-motion'
+import Check from './Pages/Checkout/Check';
+import NurseProfile from './Components/nurseProfile/NurseProfile';
 
 // Socket IO
 import { io } from "socket.io-client";
+import Chat from './Components/ChatComponent/Chat';
 
 function App() {
   // Socket IO
-  const [username, setUsername] = useState('');
-  const [user, setUser] = useState('');
-const [socket, setSocket] = useState(null)
+  // const [username, setUsername] = useState('');
+  // const [user, setUser] = useState('');
+const [Socket, setSocket] = useState(null)
+
 
   useEffect(()=>{
-     setSocket(io('http://localhost:5000'));
+     setSocket(io('http://localhost:3500'));
+    //  console.log("nufftfgywfgyfw");
   },[]);
 
-  useEffect(()=>{
-    socket?.emit("newUser", user)
-        // console.log(user)
-  },[socket, user]);
+  // useEffect(()=>{
+  //   Socket?.emit("newUser", user)
+  //       // console.log(user)
+  // },[Socket, user]);
   // Socket IO
 
 
@@ -72,12 +78,26 @@ const [socket, setSocket] = useState(null)
     }
   }, [location]);
 
+  //////CHAT 
+  
+// const username = JSON.parse(localStorage.getItem("user")).name;
+// const room = 1;
+// // const [showChat, setShowChat] = useState(false);
+
+// const joinRoom = () => {
+//   if (username !== "" && room !== "") {
+//     Socket.emit("join_room", room);
+//     // setShowChat(true);
+//   }
+// };
+
+
   return (
     <div className="App">
-
+      {flag && <Navbar Socket={Socket} />}
       <Scroll/>
-      {flag && <Navbar socket={socket} />}
-      <Routes>
+      <AnimatePresence mode='wait'>
+      <Routes location={location} key={location.pathname}>
         <Route index path='/Home' element={<Home/>} />
         <Route path='/' element={<Login />} />
         <Route path='/Nurses' element={<Nurses />} />
@@ -89,17 +109,23 @@ const [socket, setSocket] = useState(null)
         <Route path='contactUs' element={<ContactUs />} />
         <Route path='Devices' element={<Devices />} />
         <Route path='About' element={<About />} />
-        <Route path='Posts' element={<Posts socket={socket} user={user} />} />
-        <Route path='nurseProfile' element={<NurseProfilePage />} />
+        <Route path='Posts' element={<Posts Socket={Socket} />} />
+        <Route path='nurseProfile' element={<NurseProfilePage Socket={Socket} />} />
         <Route path='patientProfile' element={<PatientProfilePage />} />
         <Route path="/Devicedetails/:id" element={<Devicedetails />} />
-        <Route path="/ShowNurseProfile/:id" element={<ShowNurseProfile />} />
-        <Route path="/FormNurse/:id" element={<NurseForm />} />
+        <Route path="/ShowNurseProfile/:id" element={<ShowNurseProfile Socket={Socket} />} />
+        <Route path="/FormNurse/:id" element={<NurseForm Socket={Socket}/>}/>
         <Route path="/AskDevicePage" element={<AskDevicePage />} />
         <Route path="/MedicalArticles" element={<MedArtical />} />
+        <Route path="/check" element={<Check />} />
+        {/* <Route path="/Chat" element={<Chat Socket={Socket} username={username} room={room}/>} /> */}
+        <Route path="/NurseProfileComponent" element={<NurseProfile Socket={Socket}/>} />
+
       </Routes>
       {flag && <Footer />}
+    </AnimatePresence>
     </div>
+
   );
 }
 

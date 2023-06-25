@@ -8,7 +8,8 @@ import { getAllNurses  } from '../../Redux/Slices/NurseSlice';
 import Header from '../../Components/NurseComponent/Header/Header';
 import  Sidebar  from '../../Components/NurseComponent/sidebar/Sidebar'
 import './Nurses.css'
-import { Navbar } from 'react-bootstrap';
+import {motion} from 'framer-motion'
+
 function Nurses() {
     const dispatch = useDispatch();
     
@@ -20,7 +21,14 @@ function Nurses() {
     // const { filter } = useSelector(state => state.NurseSlice)
    return (
     
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={ {opacity: 0 }}
+    variants={{duration: 0.2}}
+    transition={{yoyo: Infinity}}
+style={{overflow: 'hidden'}}
+    >
     {/* <Navbar/> */}
     <Header />
    
@@ -41,7 +49,7 @@ function Nurses() {
   <Sidebar/>
     </main>
    
-    </>
+    </motion.div>
    )
 }
 

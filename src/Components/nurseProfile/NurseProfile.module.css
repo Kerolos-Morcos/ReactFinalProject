@@ -271,3 +271,26 @@ justify-content: space-around;
     height: auto ;
     margin-bottom: -100px !important;
 }
+
+
+
+/* CONTACT CHAT BUTTON */
+.btn_outline_primary {
+    padding: 0.5rem 1.125rem !important;
+    color: #fff !important;
+    background-color: #00A02B !important;
+    border: none;
+    border-radius: 0.25rem;
+    background-size: 300% 100% ;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  .btn_outline_primary:hover {
+    background-image: linear-gradient(to right, #00a02b, #05be36, #0bc13c, #eeed3f);
+    box-shadow: 0 0px 15px 0 rgba(3, 106, 55, 0.75);
+    background-position: 95% 0;
+    moz-transition: all 0.3s ease-in-out;
+    border: none !important;
+    border-radius: 0.25rem !important;
+    transition: all 0.3s ease-in-out;
+}

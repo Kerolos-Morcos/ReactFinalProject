@@ -36,7 +36,7 @@ img {
 
 /* For WebKit-based browsers */
 ::-webkit-scrollbar {
-  width: 15px; /* Width of the scrollbar */
+  width: 10px; /* Width of the scrollbar */
 }
 
 ::-webkit-scrollbar-track {

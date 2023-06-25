@@ -2,6 +2,7 @@ import React from 'react'
 import feedBack from './feedback.module.css'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import {motion} from 'framer-motion'
 
 function Feedback() {
     let schema = Yup.object().shape({
@@ -16,7 +17,14 @@ function Feedback() {
         }
     })
     return (
-        <div className={`${"d-flex flex-wrap py-5"} ${feedBack.ContactPage}`}>
+        <motion.div className={`${"d-flex flex-wrap py-5"} ${feedBack.ContactPage}`}
+        initial={ {opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={ {opacity: 0 }}
+        variants={{duration: 0.2}}
+        transition={{yoyo: Infinity}}
+    style={{overflow: 'hidden'}}
+        >
             <figure className={"col-lg-6 col-md-10 col-sm-10 col-10"}>
                 <div className={feedBack.main_img}></div>
             </figure>
@@ -71,7 +79,7 @@ function Feedback() {
                     </form>
                 </div>
             </section>
-        </div>
+        </motion.div>
     )
 }
 

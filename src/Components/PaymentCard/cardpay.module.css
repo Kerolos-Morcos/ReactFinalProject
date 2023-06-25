@@ -1,0 +1,32 @@
+/* My Style */
+.PaymentCard{
+  /* display: flex; */
+  /* flex-direction: row; */
+}
+.PaymentCard h1{
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 28px;
+  color: #041858;
+}
+.form_group{
+  margin-bottom: 17px;
+}
+.form_group:first-child{
+  margin-top: 15px;
+}
+.form_group small{
+  display: block;
+  font-size: 16px;
+  text-align: right;
+}
+.form_group input{
+  margin-top: 3px;
+  border: 1px solid #041858;
+}
+.form_group input::placeholder{
+  color: #041858;
+}
+

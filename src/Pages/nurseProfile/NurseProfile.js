@@ -1,9 +1,19 @@
 import React from 'react'
 import NurseProfile from "../../Components/nurseProfile/NurseProfile"
-function NurseProfilePage() {
-  return (
+import {motion} from 'framer-motion'
 
-    <NurseProfile/>
+function NurseProfilePage({Socket}) {
+  return (
+    <motion.div 
+    initial={ {opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={ {opacity: 0 }}
+      variants={{duration: 0.2}}
+      transition={{yoyo: Infinity}}
+  style={{overflow: 'hidden'}}
+    >
+    <NurseProfile Socket={Socket}/>
+    </motion.div>
   )
 }
 

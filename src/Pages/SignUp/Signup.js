@@ -5,10 +5,18 @@ import one from '../../assets/images/Healthprofessionalteam-rafiki.svg'
 import two from '../../assets/images/Physical therapy exercise-rafiki.svg'
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
+import {motion} from 'framer-motion'
+
 function Signup() {
 
   return (
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={ {opacity: 0 }}
+      variants={{duration: 0.2}}
+      transition={{yoyo: {duration:1}}}
+    >
 
          <Helmet>
              <style>
@@ -21,8 +29,8 @@ function Signup() {
   /* height: 80vh; */
   color: #263238;
   font-family: "Noto Sans", sans-serif;
-  width: 70%;
-  margin: 100px auto;
+  width: 60%;
+  margin: 110px auto;
   min-height: 67vh;
   /* padding: auto 6vw; */
                   }
@@ -85,7 +93,7 @@ function Signup() {
     </div>
   </div>
   </section>
-</>
+</motion.div>
 
     
   )

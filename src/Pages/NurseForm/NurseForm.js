@@ -1,9 +1,9 @@
 import React from 'react'
 import NurseFormComponent from '../../Components/NurseForm/NurseFormComponent'
 
-function NurseForm() {
+function NurseForm({Socket}) {
   return (
-        <NurseFormComponent/>
+        <NurseFormComponent Socket={Socket}/>
   )
 }
 

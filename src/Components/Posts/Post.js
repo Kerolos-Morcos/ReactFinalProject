@@ -9,18 +9,50 @@ import moment from "moment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { json } from "react-router-dom";
+import {motion} from 'framer-motion'
 
-function Posts({socket, user}) {
+function Posts({Socket}) {
+  const NurseNameSocket = JSON.parse(localStorage.getItem("user"));
   const [temp, setTemp] = useState(0);
-  const handleClick = (_id) => {
-    setTemp(_id);
-    socket.emit("sendNotification",{
-      nurseName: nameOfNurse.name,
-      nurseImg: nameOfNurse.profile,
-      nurseId: nameOfNurse._id
-    })
-    // console.log(temp);
+  // const handleClick = (post) => {
+  //   // console.log(post);
+  //   setTemp(post._id);
+  //   // Socket.emit("sendNotification",{
+  //   //   postNameSender:post.patientName,
+  //   //   nurseName: NurseNameSocket.name,
+  //   //   nurseId: nameOfNurse._id,
+  //   // })
+  //   // console.log(temp);
+  // };
+/////////////socket
+
+const handleClick = (post) => {
+  setTemp(post._id);
+};
+
+// ...
+
+useEffect(() => {
+  Socket?.on("getNotification", (data) => {
+    // Handle received notifications
+  });
+
+  Socket?.on("disconnect", () => {
+    // Handle Socket disconnect
+  });
+
+  return () => {
+    Socket?.off("getNotification");
+    Socket?.off("disconnect");
   };
+}, [Socket]);
+
+
+
+//////////////////////////////////
+
+
+
   // console.log(temp);
 
   let [posts, getPost] = useState([]);
@@ -52,23 +84,38 @@ function Posts({socket, user}) {
       // console.log("values");
       // console.log(values.id);
       // let tests = values.id
-      console.log(values);
+      // console.log(Socket);
       axios
         .post(
           `http://localhost:3500/post/comments/${temp}/${nameOfNurse._id}`,
           values
         )
         .then((res) => {
-          // console.log(res.data);
           let index=posts.findIndex((item)=>item._id==res.data._id)
-        // console.log(index);
         posts[index].comments=res.data.comments;
-        // console.log(posts);
-        socket.emit("sendNotificationComment", {
-          Comment: posts[index].comments.comment,
-          // receiverName: post.username,
-          // type,
+        // console.log();
+        const lastComment = res.data.comments[res.data.comments.length - 1];
+        // console.log(res.data);
+
+         axios.post(`http://localhost:3500/NotifPost`,{
+          postNameSender: res.data.patientName,
+          patientId: res.data.patientId,
+          postNurseName: lastComment.nurseName,
+          nurseComment: lastComment.comment,
+          postTitle: res.data.title,
+          nurseImg: lastComment.nurseImg,
+          commentId: lastComment._id
+        })
+
+        Socket.emit("sendNotificationComment", {
+          postNameSender: res.data.patientName,
+          patientId: res.data.patientId,
+          postNurseName: lastComment.nurseName,
+          nurseComment: lastComment.comment,
+          postTitle:res.data.title,
+          nurseImg: lastComment.nurseImg
         });
+        
         getPost([...posts]);
           // console.log(res.data.comments[6].nurseName);
           resetForm();
@@ -76,7 +123,7 @@ function Posts({socket, user}) {
         });
     },
   });
-  console.log(posts);
+  // console.log(posts);
 
   useEffect(() => {
     axios.get("http://localhost:3500/post/posts").then((res) => {
@@ -159,9 +206,16 @@ function Posts({socket, user}) {
 
     return elapsedTime;
   };
-
+  const isPatient = NurseNameSocket.role === "patient";
   return (
-    <div className={PostStyle.PostsBG}>
+    <motion.div className={PostStyle.PostsBG}
+    initial={ {opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={ {opacity: 0 }}
+    variants={{duration: 0.2}}
+    transition={{yoyo: Infinity}}
+style={{overflow: 'hidden'}}
+    >
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -194,14 +248,20 @@ function Posts({socket, user}) {
                               <div className={`${PostStyle.timeline_content}`}>
                                 <p>{post.content}</p>
                               </div>
+                              
                               <div className={PostStyle.timeline_likes}>
                                 <div className={PostStyle.stats_right}>
                                   <span className={PostStyle.stats_text}>
+                                    
                                     {post.patientLocation}{" "}
                                     <i className="fa-solid fa-location-dot"></i>
                                   </span>
                                 </div>
+                              
                               </div>
+                              {!isPatient && (
+                                <>
+                               
                               <div className={PostStyle.timeline_footer}></div>
                               <div className={PostStyle.timeline_comment_box}>
                                 <div className={PostStyle.input_Proposal}>
@@ -229,7 +289,7 @@ function Posts({socket, user}) {
                                       <button
                                         className={`${PostStyle.btn_outline_primary}`}
                                         type="submit"
-                                        onClick={() => handleClick(post._id)}
+                                        onClick={() => handleClick(post)}
                                       >
                                         ارسال
                                       </button>
@@ -237,14 +297,16 @@ function Posts({socket, user}) {
                                   </form>
                                 </div>
                               </div>
-
+                              </>
+                              )}
                     {/* Comments */}
                               {/* New */}
                               <ul
                                 className={`${"fb-comments"} ${
                                   PostStyle["fb-comments"]
                                 }`}
-                              >
+                                >
+                                  
                                 {Array.isArray(post.comments) &&
                                   post.comments.length > 0 &&
                                   post.comments.map((comment) => (
@@ -310,7 +372,7 @@ function Posts({socket, user}) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

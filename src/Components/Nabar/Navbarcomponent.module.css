@@ -378,21 +378,22 @@ nav {
     .dropdown-menu {
       color: red;
       text-align: right;
-      margin-left: -45px;
-      width: 10% !important;
+      /* margin-top: 20px !important; */
+      margin-left: -355px;
+      width: 410px !important;
       background-color: white !important;
-      transition: all 0.4s linear;
+      /* transition: all 0.4s linear; */
     }
     .dropdown-menu li{
       cursor: pointer;
       width: 95%;
-      font-size: 12.5px;
+      font-size: 14.5px;
       margin: 0 auto;
       padding: 8px;
       border-bottom: 1px solid #04185823;
     }
-    .dropdown-menu li:hover{
-      color: #041858;
+    .dropdown-menu li p:hover{
+      color: #00A02B;
     }
     .dropdown-menu li:last-child{
       border: 0;
@@ -400,6 +401,47 @@ nav {
     .btn{
       border: none !important;
     }
-
-
+    .NotificationIMG{
+      color: red;
+      align-items: center;
+      justify-content: center;
+    }
+    .dropdown-menu li p{
+      transition: all 0.1s ease-in-out;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+    }
+    .NotificationIMG img{
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .NotificationLISTS {
+      font-size: 14px;
+      color: red;
+    }
+    .NotifyText span{
+      color:  #041858 ;
+      display: block;
+      margin-top: -12px;
+      margin-right: -100px;
+    }
+    .NotifyText{
+      padding: 5px !important;
+      padding-bottom: 18px !important;
+    }
+    .BordersBottoms{
+      display: block;
+      border-bottom: 1px solid #04185823;
+    }
+    .NotificationLISTS:last-child{
+      border: 0px !important;
+    }
     /* SOCKET IO */
+
+
+
+    

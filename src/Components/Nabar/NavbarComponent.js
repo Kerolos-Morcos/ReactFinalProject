@@ -7,11 +7,15 @@ import jwtDecode from "jwt-decode";
 import CartComponent from "../Cart/Cart";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
+import axios from "axios";
+
 // SOCKET IO
+function Navbar({ Socket }) {
+  let token;
+  const [notifications, setNotifications] = useState([]);
+  const [notificationChat, setNotificationChat] = useState([]);
+  const [notificationBook, setNotificationBook] = useState([]);
 
-
-
-function Navbar() {
   const [socket, setSocket] = useState(null);
   const [username, setUsername] = useState("");
   const [isLoggedOut, setIsLoggedOut] = useState(false);
@@ -22,41 +26,115 @@ function Navbar() {
     localStorage.removeItem("token");
     setIsLoggedOut(true);
   }
-
-  const userName = {
-    name: 'Negm',
-  }
-  function show(){
-    socket.emit("sendNotificationComment",Comment)
-
-    
-  }
-
+  const name = JSON.parse(localStorage.getItem("user"));
+  const displayNotification = ({ NAME }) => {
+    let action = "علَّق علي منشورك";
+    return <span className="notification">{`${NAME} ${action}`}</span>;
+  };
   useEffect(() => {
     if (isLoggedOut) {
       window.location.href = "/Login";
     }
-    setSocket(io("http://localhost:3500"));
   }, []);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("user"));
-    console.log("Token", token);
+    token = JSON.parse(localStorage.getItem("user"));
     if (token) {
-      // const decodeToken = jwtDecode(token)
-      // console.log(decodeToken);
-      // console.log(decodeToken.userid);
-      // localStorage.setItem('user', JSON.stringify(token))
       setUsername(token.name.split(" ")[0]);
       setUserRole(token.role);
     }
   }, []);
+  useEffect(() => {
+    Socket?.on("getNotification", (data) => {
+      if (data.patientId == token._id) {
+        setNotifications((prevNotifications) => [...prevNotifications, data]);
+      }
+    });
+  
+    Socket?.on("getNotificationBookNurse", (data) => {
+      if (data.NurseId == token._id) {
+        setNotificationBook((prevNotifications) => {
+          const updatedNotifications = [...prevNotifications, data];
+          localStorage.setItem("notificationBook", JSON.stringify(updatedNotifications));
+          return updatedNotifications;
+        });
+      }
+    });
+  
+    return () => {
+      Socket?.off("getNotification");
+      Socket?.off("getNotificationBookNurse");
+    };
+  }, [Socket]);
+
+  ///to save in the notification in localstorage 
+  useEffect(() => {
+    const storedNotificationBook = JSON.parse(localStorage.getItem("notificationBook"));
+    if (storedNotificationBook) {
+      setNotificationBook(storedNotificationBook);
+    }
+  }, []);
+
+    // Chat
+    // Socket?.on("getNotificationChat", (data) => {
+    //   // console.log("before",data);
+    //   // console.log();
+    //   if(data.userId == token._id)
+    //   {
+    //     // console.log("after",data);
+    //     setNotificationChat((prevNotificationsChat) => [...prevNotificationsChat, data]);
+    //   }
+    // });
+
+
+  //   return () => {
+  //     Socket?.off("getNotification");
+  //     Socket?.off("getNotificationBookNurse");
+  //   };
+  // }, [Socket]);
+
+
+// Edited By Hany
+  const acceptBooking = async (notification) => {
+    console.log("acceptBooking..",notification.bookId);
+    await axios.put(`http://localhost:3500/book/bookings/${notification.bookId}`,{
+      status: "accepted"
+    }).then((res)=>{
+      console.log(res.data);
+      const updatedNotifications = notificationBook.filter((item) => item._id !== notification._id);
+      setNotificationBook(updatedNotifications);
+      const storedNotificationBook = JSON.parse(localStorage.getItem("notificationBook"));
+      if (storedNotificationBook) {
+        const updatedLocalStorage = storedNotificationBook.filter((item) => item._id !== notification._id);
+        localStorage.setItem("notificationBook", JSON.stringify(updatedLocalStorage));
+      }
+    })
+  }
+// End Edited By Hany
+
+
+  // const acceptBooking= async (id) => {
+  //   console.log("acceptBooking..",id);
+  //   await axios.put(`http://localhost:3500/book/bookings/${id}`,{
+  //     status: "accepted"
+  //   }).then((res)=>{
+  //     console.log(res.data);
+  //   })
+  // }
+  const refuseBooking = (notification) => {
+    const updatedNotifications = notificationBook.filter((item) => item._id !== notification._id);
+    setNotificationBook(updatedNotifications);
+    const storedNotificationBook = JSON.parse(localStorage.getItem("notificationBook"));
+    if (storedNotificationBook) {
+      const updatedLocalStorage = storedNotificationBook.filter((item) => item._id !== notification._id);
+      localStorage.setItem("notificationBook", JSON.stringify(updatedLocalStorage));
+    }
+  };
 
   // CART BADGE
   const [cartCount, setCartCount] = useState(5);
   const { cart } = useSelector((state) => state.CartSlice);
-
-  console.log(CartComponent);
+  const api = 'http://localhost:3500/'
 
   return (
     <>
@@ -197,7 +275,7 @@ function Navbar() {
                     className={`{"offset-xxl-0 offset-xl-0 ms-xl-0 col-xxl-4 col-xl-4 col-lg-4 ms-lg-2 ps-lg-0 navbar-nav mt-xxl-0"} ${NavStyle.FlexDir}`}
                   >
                     <li className={"nav-item ms-auto w-100"}>
-                      {userRole !== "nurse" &&  username &&(
+                      {userRole !== "nurse" && username && (
                         <Link to="/Cart">
                           <i
                             className={`${"fa fa-cart-plus"} ${
@@ -213,39 +291,90 @@ function Navbar() {
                         </Link>
                       )}
                       {username && (
-
-                      
-                      <a className={NavStyle.notification}>
-                        <div
-                          className={`${NavStyle.Notify} dropdown ${NavStyle.dropdown}`}
-                        >
-                          <button
-                            className={`${"btn dropdown-toggle"} ${
-                              NavStyle["dropdown-toggle"]
-                            } ${NavStyle["btn"]}`}
-                            type="button"
-                            id="profileDropdownMenuButton"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
+                        <a className={NavStyle.notification}>
+                          <div
+                            className={`${NavStyle.Notify} dropdown ${NavStyle.dropdown}`}
                           >
-                                <button className="btn btn-outline-secondary" onClick={()=>show()}>
+                            <button
+                              
+                              className={`${"btn dropdown-toggle"} ${
+                                NavStyle["dropdown-toggle"]
+                              } ${NavStyle["btn"]}`}
+                              type="button"
+                              id="profileDropdownMenuButton"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              {/* <button className="btn btn-outline-secondary" >
                                     SHOW
-                                </button>
-                            <i className="fa fa-bell text-white fa-lg "></i>
-                            <div className={NavStyle.counter}>2</div>
-                          </button>
-                          <ul
-                            className={`${"dropdown-menu"} ${
-                              NavStyle["dropdown-menu"]
-                            }`}
-                            aria-labelledby="profileDropdownMenuButton"
-                          >
-                            <li>
-                              <a>قام هاني محمود بالتعليق علي منشورك</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </a>
+                                </button> */}
+                              <i className="fa fa-bell text-white fa-lg "></i>
+                              {notifications.length > 0 && (
+                                <div className={NavStyle.counter}>{notifications.length}</div>
+                              )}
+                              
+                              {notificationChat.length > 0 && (
+                                <div className={NavStyle.counter}>{notificationChat.length}</div>
+                              )}
+                              
+                              {notificationBook.length > 0 && (
+                                <div className={NavStyle.counter}>{notificationBook.length}</div>
+                              )}
+                              
+                            </button>
+                            <ul
+                              className={`${"dropdown-menu"} ${
+                                NavStyle["dropdown-menu"]
+                              }`}
+                              aria-labelledby="profileDropdownMenuButton"
+                            >
+                              {notifications.map((notification, index) => (
+                                <div key={index}>
+                                  <li className={`${NavStyle.NotificationLISTS}`}>
+                                    <a href="" className={NavStyle.NotificationIMG}> 
+                                          <p className={NavStyle.NotifyText}>
+                                              
+                                             : قام {notification.postNurseName}  بالتعليق علي منشورك بعنوان <img src={`${api}${notification.nurseImg}`} /> <br/>   {" "}
+                                            <span> {notification.postTitle} </span> 
+                                          </p>
+                                    </a>                        
+                                  <span className={NavStyle.BordersBottoms}></span>
+                                  </li>
+                                </div>
+                              ))}
+                              {/* nurse Booking */}
+                              {notificationBook.map((notification, index) => (
+                                <div key={index}>
+                                  <li className={`${NavStyle.NotificationLISTS}`}>
+                                    <a href="" className={NavStyle.NotificationIMG}> 
+                                          <p className={NavStyle.NotifyText}>
+                                              
+                                            <div className="d-flex">
+                                            <a onClick={(e) => {
+                                              console.log("notificationBook.bookId in the button",notification.bookId);
+                                              e.preventDefault();
+                                              acceptBooking(notification);
+                                            }}>
+                                              <i className="fa-solid fa-circle-check fa-fade fa-xl" style={{ color: "#00a02b" }}></i>
+                                            </a>
+                                              <a onClick={(e)=>{
+                                                e.preventDefault();
+                                               refuseBooking(notification)} 
+                                              }
+                                              >
+                                              <i class="fa-solid fa-circle-xmark fa-fade fa-xl" style={{ color: '#eb3b0f'}}></i>
+                                              </a>
+                                            :  {notification.times} بطلبك في ميعاد  {notification.patientName} قام 
+                                            </div>
+                                          </p>
+                                    </a>                        
+                                  <span className={NavStyle.BordersBottoms}></span>
+                                  </li>
+                                </div>
+                              ))}
+                            </ul>
+                          </div>
+                        </a>
                       )}
                       {!username ? (
                         <>

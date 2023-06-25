@@ -80,9 +80,13 @@
 }
 .form_css .txt2 a{
   color: rgba(255,255,255, 0.8);
-  text-decoration: none;
+  text-decoration: underline !important;
+  transition: all 0.3s ease-in-out;
 }
-
+.form_css .txt2 a:hover{
+  color: #EEED3F;
+  transform: scale(1.04);
+}
 
 /* Toastify */
 

@@ -12,7 +12,7 @@ function ShowNurseResume() {
  
   const dispatch = useDispatch();
   const nurseprofileid=useSelector((state) => state.PatientSlice.device);
-  console.log(nurseprofileid);
+  // console.log(nurseprofileid);
   const {id}  = useParams();
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import CardDetails from './Devicedetails.module.css'
 import { addToCart } from '../../Redux/Slices/CartSlice'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {motion} from 'framer-motion'
 
 const notify = () =>
     toast.success('! تمت اضافة المنتج الي السلة', {
@@ -41,7 +42,14 @@ function Devicedetails({ data }) {
   
 
   return (
-    <>
+    <motion.div
+    initial={ {opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={ {opacity: 0 }}
+    variants={{duration: 0.2}}
+    transition={{yoyo: Infinity}}
+style={{overflow: 'hidden'}}
+    >
         <ToastContainer className="mt-5"></ToastContainer>
       {deviceDetails && deviceDetails.image && deviceDetails.image[0] && (
         <main className={"mt-5 pt-4"} style={{direction:'rtl'}}>
@@ -130,7 +138,7 @@ function Devicedetails({ data }) {
           </div>
         </main>
       )}
-    </>
+    </motion.div>
   );
 }
 
