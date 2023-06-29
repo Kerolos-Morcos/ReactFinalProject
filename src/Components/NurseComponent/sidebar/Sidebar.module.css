@@ -1,9 +1,10 @@
  .filter {
   background-color: #041858;
-  width: 100%;
+  width: 90%;
   height: auto;
   margin-top: 75px;
   margin-left: 85px;
+  margin-right: 15px;
   text-align: center;
   padding: 20px;
   border-radius: 20px;
@@ -26,6 +27,7 @@
   .filter .searchbar {
     flex-wrap: nowrap !important;
   }
+  
 }
  .filter .searchbar input {
   border-radius: 0px 5px 5px 0px !important;
@@ -56,6 +58,7 @@
     font-size: 9px;
     flex-wrap: wrap;
   }
+
 }
  .filter .form-main .apply {
   width: 44%;
@@ -73,10 +76,16 @@
   /* border-radius: 0.25rem !important; */
   transition: all 0.3s ease-in-out;
 }
+@media (max-width: 992px) {
+  .filter{
+    width: 85%;
+  }
+}
 @media screen and (max-width: 767px) {
    .filter .form-main .apply {
     width: 100%;
   }
+
 }
  .filter .form-main .apply  {
   text-decoration: none;
@@ -109,6 +118,7 @@
    .filter__content label {
     font-size: 9px;
   }
+  
 }
  .filter__content select {
   width: 100%;
@@ -124,6 +134,7 @@
     height: 20px;
     font-size: 9px;
   }
+  
 }
 .filter__content .check-g {
   display: flex;

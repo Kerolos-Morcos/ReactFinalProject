@@ -1,11 +1,21 @@
 import React from 'react'
 import HeroStyle from './hero.module.css'
+import DarkStyle from '../../DarkMode/darkBtn.module.css'
+import { useEffect } from 'react';
 
 function Hero() {
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if (isDarkMode) {
+      document.querySelector("body").classList.add(DarkStyle["dark-mode"]);
+      document.querySelector("#hero").classList.add(DarkStyle["dark-mode"]);
+      document.querySelector("#heroSection")?.classList.add(DarkStyle["heroSection"]);
+    }
+  }, []);
   return (
-    <>
+    <div id='heroSection'>
   {/* Start Hero */}
-  <section className={HeroStyle.hero}>
+  <section className={HeroStyle.hero} id='hero'>
     {" "}
     {/*color*/}
     <div className={"container"}>
@@ -2227,7 +2237,7 @@ function Hero() {
     </div>
   </section>
   {/* End Hero */}
-</>
+</div>
 
   )
 }

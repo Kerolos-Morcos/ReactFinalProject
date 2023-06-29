@@ -4,30 +4,39 @@ import one from "../../../assets/images/aboutImgs/edit.png"
 import two from "../../../assets/images/aboutImgs/medical-team.png"
 import three from"../../../assets/images/aboutImgs/monitoring.png"
 import four from"../../../assets/images/aboutImgs/signuppic.png"
+import DarkStyle from '../../DarkMode/darkBtn.module.css'
+import { useEffect } from 'react'
 
 
 
 
 
 function Work() {
+  useEffect(()=>{
+    // Dark Mode
+    const isDarkMode = localStorage.getItem("isDarkMode")
+    if(isDarkMode){
+      document.querySelector("#AboutWork")?.classList.toggle(DarkStyle["AboutWork"], isDarkMode);
+      document.querySelector("#AboutWorkCardOne")?.classList.toggle(DarkStyle["AboutWorkCardOne"], isDarkMode);
+      document.querySelector("#AboutWorkCardTwo")?.classList.toggle(DarkStyle["AboutWorkCardOne"], isDarkMode);
+      document.querySelector("#AboutWorkCardThree")?.classList.toggle(DarkStyle["AboutWorkCardOne"], isDarkMode);
+    }
+  },[])
   return (
     <>
-    <body dir="rtl">
+    <body style={{paddingBottom: '70px'}} id='AboutWork' dir="rtl">
     <section className={`${workstyle.work_section} ${workstyle.padding_top}`}>
     <div className={"container"}>
       <div className={workstyle.heading_container}>
         <h2>كيف تحجز فى موقعنا</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-          voluptatem odit cum ut fugiat! Quae nisi voluptates quia libero, neque
-          commodi perspiciatis placeat ipsum natus quidem. Eveniet ipsam cum
-          vitae?{" "}
+        <p style={{lineHeight:'25px'}} className='w-75 pb-3'>
+        نسعى جاهدين لتسهيل تجربتك وتوفير وسائل سهلة ومريحة لحجز المواعيد الطبية. نحن ندرك أهمية الوقت والتنظيم في الحصول على الرعاية الصحية المناسبة، ولذلك نقدم لكم خطوات بسيطة لحجز موعد في موقعنا.
         </p>
       </div>
       <div className={"row"}>
         <div className={"col-md-6"}>
           <div className={workstyle.detail_container}>
-            <div className={`${workstyle.box} ${workstyle.b_1}`}>
+            <div id='AboutWorkCardOne' className={`${workstyle.box} ${workstyle.b_1}`}>
               <div className={workstyle.top_box}>
                 <div className={workstyle.icon_box}>
                   <img src={one} alt="" />
@@ -36,9 +45,7 @@ function Work() {
               </div>
               <div className={workstyle.bottom_box}>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam
+                نؤمن بأهمية بداية جيدة لتجربة صحية مميزة. ومن أجل الاستفادة الكاملة من موقعنا الطبي، يتعين عليك التسجيل في الموقع. التسجيل هو الخطوة الأولى للوصول إلى محتوى حصري والحصول على ميزات إضافية تسهل تجربتك في استكشاف خدماتنا وحجز المواعيد الطبية بكل يسر وسهولة
                 </p>
                 <div className={workstyle.btn_box}>
                   <a href="/" className={workstyle.btn_1}>
@@ -47,7 +54,7 @@ function Work() {
                 </div>
               </div>
             </div>
-            <div className={`${workstyle.box} ${workstyle.b_1}`}>
+            <div id='AboutWorkCardTwo' className={`${workstyle.box} ${workstyle.b_1}`}>
               <div className={workstyle.top_box}>
                 <div className={workstyle.icon_box}>
                   <img src={two} alt="" />
@@ -56,9 +63,7 @@ function Work() {
               </div>
               <div className={workstyle.bottom_box}>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam
+                نحن نقدم لكم أيضًا خدمة حجز الممرضين في موقعنا. فهمنا أن بعض الحالات الطبية تتطلب رعاية مستمرة ومراقبة دقيقة، وهنا يأتي دور الممرضين الذين يقدمون الرعاية الأساسية والتمريضية.
                 </p>
                 <div className={workstyle.btn_box}>
                   <a href="/" className={workstyle.btn_1}>
@@ -67,7 +72,7 @@ function Work() {
                 </div>
               </div>
             </div>
-            <div className={`${workstyle.box} ${workstyle.b_1}`}>
+            <div id='AboutWorkCardThree' className={`${workstyle.box} ${workstyle.b_1}`}>
               <div className={workstyle.top_box}>
                 <div className={workstyle.icon_box}>
                   <img src={three} alt="" />
@@ -76,9 +81,7 @@ function Work() {
               </div>
               <div className={workstyle.bottom_box}>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam
+                نسعى جاهدين لتلبية جميع احتياجاتك الطبية. بغض النظر عن الجهاز الطبي الذي تحتاجه، يمكنك الآن حجز أجهزة طبية مهمة في موقعنا. ندرك أهمية توفير الأجهزة اللازمة للرعاية الصحية المستمرة والعلاجات المنزلية، ولذلك نقدم لك خدمة حجز الأجهزة الطبية المتخصصة في موقعنا.
                 </p>
                 <div className={workstyle.btn_box}>
                   <a href="/" className={workstyle.btn_1}>

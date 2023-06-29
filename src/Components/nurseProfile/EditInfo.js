@@ -32,7 +32,7 @@ function EditInfo(props) {
     form.append("name", values.name);  
     form.append("phoneNumber", values.phoneNumber); 
     form.append("region", values.region);    
-    // form.append("password", values.password);
+    form.append("shiftPrice", values.shiftPrice);
     form.append("profile", values.profile);
     form.append("about", values.about);
     form.append("skills", values.skills);
@@ -68,7 +68,7 @@ function EditInfo(props) {
               name: data.name,
               phoneNumber: data.phoneNumber,
               region: data.region,
-              // password: '',
+              shiftPrice: data.shiftPrice,
                about:data.about,
                skills:data.skills
             }}
@@ -77,7 +77,7 @@ function EditInfo(props) {
               name: Yup.string().required("الرجاء إدخال الاسم"),
               phoneNumber: Yup.string().required("الرجاء إدخال رقم الهاتف"),
               region: Yup.string().required("الرجاء إدخال المنطقة"),
-              // password: Yup.string().required("الرجاء إدخال كلمة المرور"),
+              shiftPrice: Yup.string().required("الرجاء إدخال سعر الشيفت"),
               about :Yup.string().required("الرجاء ادخال نبذة عنك "),
               skills :Yup.string().required("الرجاء ادخال المهارات المطلوبة "),
             })}
@@ -154,6 +154,26 @@ function EditInfo(props) {
                   }) => (
                     <Form.Group className={"mb-4"} controlId="phoneNumber">
                       <Form.Label className={"mb-1"}>رقم الموبايل</Form.Label>
+                      <Form.Control
+                        value={value}
+                        onChange={onChange}
+                        onBlur={handleBlur}
+                        style={{ direction: "rtl", textAlign: "right" }}
+                      />
+                      {touched && error && (
+                        <Form.Text className="text-danger">{error}</Form.Text>
+                      )}
+                    </Form.Group>
+                  )}
+                </Field>
+
+                <Field type="text" name="shiftPrice">
+                  {({
+                    field: { value, onChange },
+                    meta: { touched, error },
+                  }) => (
+                    <Form.Group className={"mb-4"} controlId="shiftPrice">
+                      <Form.Label className={"mb-1"}>سعر الشيفت</Form.Label>
                       <Form.Control
                         value={value}
                         onChange={onChange}

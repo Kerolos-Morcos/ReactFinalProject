@@ -7,6 +7,7 @@ import { addToCart } from '../../Redux/Slices/CartSlice'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {motion} from 'framer-motion'
+import DarkStyle from '../DarkMode/darkBtn.module.css'
 
 const notify = () =>
     toast.success('! تمت اضافة المنتج الي السلة', {
@@ -19,6 +20,7 @@ const notify = () =>
         progress: undefined,
         theme: "colored",
         className: "custom_toast",
+        style: { textAlign: "center" },
       });
 
 
@@ -38,6 +40,12 @@ function Devicedetails({ data }) {
 
   useEffect(() => {
     dispatch(getDeviceById(id));
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if (isDarkMode) {
+      document.querySelector("#DeviceDetails").classList.toggle(DarkStyle["DeviceDetails"], isDarkMode);
+      document.querySelector("#productPrice").classList.toggle(DarkStyle["productPrice"], isDarkMode);
+      document.querySelector("#DeviceDetailing").classList.toggle(DarkStyle["DeviceDetailing"], isDarkMode);
+    }
   }, []);
   
 
@@ -52,7 +60,7 @@ style={{overflow: 'hidden'}}
     >
         <ToastContainer className="mt-5"></ToastContainer>
       {deviceDetails && deviceDetails.image && deviceDetails.image[0] && (
-        <main className={"mt-5 pt-4"} style={{direction:'rtl'}}>
+        <main id='DeviceDetails' className={"mt-5 pt-4"} style={{direction:'rtl'}}>
           <div className={"container mt-5"}>
             <div className={"row"}>
               <div className={`${"col-md-6 mb-4"} ${CardDetails.MainImg}`}>
@@ -80,13 +88,13 @@ style={{overflow: 'hidden'}}
                     </a>
                   </div>
                   <h1 className={"mb-3 mt-3"}>{deviceDetails.name}</h1>
-                  <p className={`${"lead"} ${CardDetails.prdPrice}`}>
+                  <p id='productPrice' className={`${"lead"} ${CardDetails.prdPrice}`}>
                     <span> سعر الجهاز :  {deviceDetails.price}$</span>
                   </p>
                   <div className={`${CardDetails.DescriptionTitle}`}>
-                    <p>التفاصيل</p>
+                    <p className='pb-3'>التفاصيل</p>
                   </div>
-                  <p>{deviceDetails.details}</p>
+                  <p id='DeviceDetailing'>{deviceDetails.details}</p>
                   {/* <form className={"d-flex justify-content-left"}> */}
                     <button className={`${"btn btn-primary ms-1"} ${CardDetails.AddToCartBTN} `}  onClick={() => handleAddToCart(deviceDetails._id)} >
                       إضافة للعربة

@@ -33,6 +33,7 @@ function Signup() {
   margin: 110px auto;
   min-height: 67vh;
   /* padding: auto 6vw; */
+  transition: none;
                   }
                 `}
             </style>

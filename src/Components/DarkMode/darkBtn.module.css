@@ -1,0 +1,284 @@
+.top_to_btm{
+    position: relative;
+  }
+  .icon_position{
+    position: fixed;
+    bottom: 40px;
+    left: 25px;
+    z-index: 20;
+  }
+  .icon_style{
+    background-color: #041858;
+    /* border: 2px solid #fff; */
+    border-radius: 50%;
+    height: 50px;
+    padding: 10px;
+    width: 50px;
+    color: #fff;
+    cursor: pointer;
+    transition: all .5s linear;
+  }
+  /* .icon_style:hover{
+    background: #00A02B;
+    color: #fff;
+  } */
+
+  .fade_in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+  }
+  
+  .fade_out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+
+  body,
+  nav,
+  section,
+  footer{
+    transition: all 0.3s ease-in-out;
+  }
+
+
+  body.dark-mode, nav.dark-mode, footer.dark-mode
+  {
+    background-color: #000000 !important;
+  }
+
+
+  /* Home Dark Mode */
+  .heroSection section{
+    background-color: #111111 !important;
+    background: #111111 !important;
+  }
+  .offcanvasNavbar{
+    background-color: #111111 !important;
+    background: #111111 !important;
+  }
+
+  /* section.dark-mode{
+    background-color: #111111 !important;
+  } */
+  
+  .Services h2{
+    color: white !important;
+  }
+  .everyWhere_EveryWhere{
+    background-color: #111111 !important;
+    background: #111111 !important;
+  }
+  .TopRated h1{
+    color: white !important;
+  }
+.TopRated span{
+  background-color: white !important;
+}
+.social span{
+  background-color: black !important;
+}
+
+/* Contact Us Page */
+.contact{
+  background: #111111 !important;
+  color: white !important;
+}
+.contact input[type="text"], .contact input[type="email"], .contact textarea, .contact p{
+  background-color: #111111 !important;
+  color: white !important;
+}
+
+.contact form input::placeholder, .contact form textarea::placeholder{
+  color: white !important;
+}
+.contact input[type="text"]::placeholder, .contact input[type="email"]::placeholder{
+color: white !important;
+}
+.contact a{
+  color: #EEED3F !important;
+}
+
+/* Posts Page */
+.post {
+  background-color: #111111 !important;
+}
+.post h1{
+  font-size: 20px !important;
+}
+
+/* Nurses Page */
+.main{
+  background-color: #111111 !important;
+}
+.NurseSidebar{
+  background-color: #444444 !important;
+  height: auto;
+  /* margin-top: 75px; */
+  margin-bottom: 75px;
+  /* margin-left: 85px; */
+  text-align: center;
+  /* padding: 20px; */
+  border-radius: 20px;
+}
+.NurseSidebar h1{
+  font-size: 30px !important;
+}
+
+
+/* Medical Devices Page */
+.sidebarFilterSearch{
+  background-color: #111111 !important;
+}
+.offcanvasRight{
+  background-color: #222222 !important;
+}
+
+/* Device Details Page */
+.DeviceDetails{
+  background-color: #111111 !important;
+}
+.DeviceDetails h1{
+  color: white !important;
+}
+.DeviceDetails h4{
+  color: white !important;
+}
+.DeviceDetails hr{
+  color: white !important;
+}
+.productPrice span{
+  color: #EEED3F !important;
+}
+.DeviceDetailing{
+  color: white !important;
+}
+
+/* Cart */
+.CartComp{
+  background-color: #111111 !important;
+}
+.CartSummary{
+  background-color: #333333 !important;
+}
+
+/* Checkout */
+.CheckOutPage{
+  background-color: #222222 !important;
+}
+.CheckOutPage{
+  color: white !important;
+}
+.CheckOutPage h1{
+  color: white !important;
+}
+.CheckOutPage h2{
+  color: #EEED3F !important;
+}
+.CheckOutPage h3{
+  color: white !important;
+}
+.CheckoutElementsTitle p:nth-child(1), .CheckOutInfo p:nth-child(1) {
+  color: white !important;
+}
+.CheckoutElementsTitle p:nth-child(2){
+  color: #EEED3F !important;
+}
+
+/* Patient Profile */
+.PatientPage section{
+  background-color: #222222 !important;
+}
+
+/* Articles Page */
+.ArticlesPage{
+  background-color: #111111 !important;
+}
+
+
+/* Nurse Profile & Its View*/
+.MainProfileBackground{
+  background-color: #111111 !important;
+}
+.MainProfile{
+  background-color: #222222 !important;
+}
+.NurseName{
+  color: #EEED3F !important;
+}
+.NurseName h3{
+  color: white !important;
+}
+.NurseName a{
+  color: white !important;
+}
+.NurseName a:hover{
+  color: #EEED3F !important;
+}
+.NurseCounter{
+  border-color: #EEED3F !important;
+}
+.NurseCounter::after{
+  border-color: white !important;
+}
+.NurseResumeHeadings h4{
+  color: white !important;
+}
+.NurseResumeHeadings p{
+  color: white !important;
+}
+.NurseResumeHeadings span{
+  color: #EEED3F !important;
+}
+.NurseResumeHeadings strong{
+  color: white !important;
+}
+.resume h3{
+  color: white !important;
+}
+.resume h4{
+  color: #EEED3F !important;
+}
+.resume h5{
+  color: white !important;
+  background-color: #0d0d0dd8 !important;
+}
+.resume p{
+  color: white !important;
+}
+
+
+
+/* About Page */
+.AboutHero{
+  background-color: #000000 !important;
+  background-image: url(../../assets/images/aboutImgs/تصميم_بدون_عنوان-removebg.png) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important; 
+}
+.AboutWork{
+  background-color: #111111 !important;
+  color: white;
+}
+.AboutWorkCardOne{
+  background-color: #333333 !important;
+}
+.AboutWorkCardOne:hover{
+  background-color: #444444 !important;
+}
+.AboutOurServices{
+  background-color: #222222 !important;
+}
+.AboutOurServices h2{
+  color: white !important;
+  background-color: #222222 !important;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.AboutOurServicesCard{
+  background-color: #222222 !important;
+}
+.AboutOurServicesCard img{
+  box-shadow: none !important;
+}

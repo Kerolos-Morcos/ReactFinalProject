@@ -9,6 +9,7 @@ import NurseEduAdd from "./NurseEduAdd";
 import AddEducation from "./AddEducation";
 import Rating from "./Rates";
 import WorkingTimes from './WorkingTimes'
+import DarkStyle from '../DarkMode/darkBtn.module.css'
 
 // Modal Try
 import { Modal, Button } from "react-bootstrap";
@@ -39,7 +40,15 @@ function NurseProfile({ Socket }) {
   // console.log(info.education);
   useEffect(() => {
     dispatch(getNurse()); // fire action
-
+    const isDarkMode = localStorage.getItem("isDarkMode")
+    if(isDarkMode){
+    document.querySelector("#MainProfileBackground").classList.toggle(DarkStyle["MainProfileBackground"], isDarkMode);
+    document.querySelector("#MainProfile").classList.toggle(DarkStyle["MainProfile"], isDarkMode);
+    document.querySelector("#NurseName").classList.toggle(DarkStyle["NurseName"], isDarkMode);
+    document.querySelector("#NurseCounter").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#NurseCounterFastService").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#NurseCounterHomeShift").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    }
     // console.log("object");
   }, []);
 
@@ -81,7 +90,7 @@ function NurseProfile({ Socket }) {
   };
 
   return (
-    <>
+    <div id="MainProfileBackground">
       <section
         style={{ direction: "rtl" }}
         className={`${nurseProfilee.profile_page} ${nurseProfilee.container}`}
@@ -95,7 +104,7 @@ function NurseProfile({ Socket }) {
             backgroundSize: "cover",
           }}
         ></div>
-        <div className={`${nurseProfilee.main} ${nurseProfilee.main_raised}`}>
+        <div id="MainProfile" className={`${nurseProfilee.main} ${nurseProfilee.main_raised}`}>
           <div className={"profile-content"}>
             <div className={"container"}>
               <div className={"row"}>
@@ -117,7 +126,7 @@ function NurseProfile({ Socket }) {
                       />
                     </div>
 
-                    <div className={nurseProfilee.name}>
+                    <div id="NurseName" className={nurseProfilee.name}>
                       <h3 className={nurseProfilee.title}>{info.name}</h3>
                       <div className={`${nurseProfilee.r} ${" mt-4 "}`}>
                         <Rating rate={R} />
@@ -205,14 +214,7 @@ function NurseProfile({ Socket }) {
                         <i class="fa-solid fa-pen-to-square fa-lg ps-2"></i>
                         {info != {} && <EditInfo data={info} />}
                       </a>
-                      <a
-                        href="#pablo"
-                        className={`${nurseProfilee.btn} ${nurseProfilee.btn_just_icon} ${nurseProfilee.btn_link}`}
-                      >
-                        {/* <i className="fa fa-pinterest" /> */}
-                        <i class="fa-solid fa-sack-dollar fa-lg ps-2"></i>
-                        الرصيد
-                      </a>
+             
                     </div>
                   </div>
                 </div>
@@ -231,7 +233,7 @@ function NurseProfile({ Socket }) {
             <div className={nurseProfilee.parent}>
               <div className={nurseProfilee.row}>
                 <div className={"col-md-3 col-sm-6 m-4"}>
-                  <div className={nurseProfilee.counter}>
+                  <div id="NurseCounter" className={nurseProfilee.counter}>
                     <div className={nurseProfilee.counter_content}>
                       <div className={nurseProfilee.counter_icon}>
                         <i class="fa-solid fa-bed-pulse fa-2xl"></i>
@@ -240,12 +242,13 @@ function NurseProfile({ Socket }) {
                     </div>
                     <span className={nurseProfilee.counter_value}>
                       {/* {info.booking.length + info.booking.length} */}
+                      10
                     </span>
                   </div>
                 </div>
 
                 <div className={"col-md-3 col-sm-6 m-4"}>
-                  <div className={nurseProfilee.counter}>
+                  <div id="NurseCounterFastService" className={nurseProfilee.counter}>
                     <div className={nurseProfilee.counter_content}>
                       <div className={nurseProfilee.counter_icon}>
                         <i class="fa-solid fa-syringe fa-2xl"></i>
@@ -254,12 +257,13 @@ function NurseProfile({ Socket }) {
                     </div>
                     <span className={nurseProfilee.counter_value}>
                       {/* {info.booking.length} */}
+                      15
                     </span>
                   </div>
                 </div>
 
                 <div className={"col-md-3 col-sm-6 m-4 "}>
-                  <div className={nurseProfilee.counter}>
+                  <div id="NurseCounterHomeShift" className={nurseProfilee.counter}>
                     <div className={nurseProfilee.counter_content}>
                       <div className={nurseProfilee.counter_icon}>
                         <i class="fa-solid fa-house-medical fa-2xl"></i>
@@ -268,6 +272,7 @@ function NurseProfile({ Socket }) {
                     </div>
                     <span className={nurseProfilee.counter_value}>
                       {/* {info.booking.length} */}
+                      25
                     </span>
                   </div>
                 </div>
@@ -277,7 +282,7 @@ function NurseProfile({ Socket }) {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

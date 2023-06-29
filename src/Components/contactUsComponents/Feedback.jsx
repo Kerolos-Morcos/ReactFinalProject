@@ -3,8 +3,17 @@ import feedBack from './feedback.module.css'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import {motion} from 'framer-motion'
+import DarkStyle from '../DarkMode/darkBtn.module.css'
+import { useEffect } from 'react';
 
 function Feedback() {
+    useEffect(() => {
+        const isDarkMode = localStorage.getItem("isDarkMode");
+        if (isDarkMode) {
+            document.querySelector("#contact")?.classList.toggle(DarkStyle["contact"], isDarkMode);
+        }
+      }, []);
+
     let schema = Yup.object().shape({
         name: Yup.string().min(3, "your name must be 3 characters at least").max(30,"your name must be less than 30 characters").required("required field"),
         email: Yup.string().email().required("required field").min(10,"your email must be at least 10 characters and contain @").max(30,"your email must be less than 30 characters"),
@@ -17,7 +26,7 @@ function Feedback() {
         }
     })
     return (
-        <motion.div className={`${"d-flex flex-wrap py-5"} ${feedBack.ContactPage}`}
+        <motion.div id='contact' className={`${"d-flex flex-wrap py-5"} ${feedBack.ContactPage}`}
         initial={ {opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={ {opacity: 0 }}

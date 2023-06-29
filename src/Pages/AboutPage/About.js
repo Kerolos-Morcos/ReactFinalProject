@@ -7,7 +7,7 @@ import React from 'react'
 // import Navbar from '../Components/Navbar/Navbar'
 import Hero from '../../Components/AboutComponent/Hero/Hero'
 import Work from '../../Components/AboutComponent/Work/Work'
-import Services from '../../Components/AboutComponent/Services/Services'
+// import Services from '../../Components/AboutComponent/Services/Services'
 import Ourservices from '../../Components/AboutComponent/Our-services/Ourservices'
 import {motion} from 'framer-motion'
 
@@ -25,7 +25,7 @@ function About() {
     >
     <Hero></Hero>
     <Work></Work>
-    <Services></Services>
+    {/* <Services></Services> */}
     <Ourservices></Ourservices>
     </motion.div>
     

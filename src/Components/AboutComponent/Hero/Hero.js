@@ -4,15 +4,23 @@ import herostyle from '../Hero/herostyle.module.css'
 // import hero from '../../assets/aboutImgs/Healthprofessionalteam-rafiki.svg'
 import hero from '../../../assets/images/Healthprofessionalteam-rafiki.svg'
 import { NavLink } from 'react-router-dom'
-
+import DarkStyle from '../../DarkMode/darkBtn.module.css'
+import { useEffect } from 'react'
 
 
 
 function Hero() {
+  useEffect(()=>{
+    // Dark Mode
+    const isDarkMode = localStorage.getItem("isDarkMode")
+    if(isDarkMode){
+      document.querySelector("#AboutHero")?.classList.toggle(DarkStyle["AboutHero"], isDarkMode);
+    }
+  },[])
   return (
     <>
     <body dir="rtl">
-    <div className={herostyle.hero_area}>  
+    <div id='AboutHero' className={herostyle.hero_area}>  
        
         <section className={herostyle.hero_section}>
          
@@ -25,7 +33,7 @@ function Hero() {
                          نحن هنا من اجل صحتك
                         </h1>
                         <p className={herostyle.herop}>
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ex laborum aut, modi ratione veniam saepe enim, harum aliquam nesciunt exercitationem facere optio iusto consequuntur quia? Magni similique voluptatum aliquid?
+                        مرحبًا بكم في موقعنا الطبي ، نفخر بأن نكون جزءًا من رحلتك نحو العافية والسعادة، حيث نسعى لتوفير المعلومات والأدوات التي تحتاجها للحفاظ على صحتك العامة وعلاج أمراضك بشكل شامل. نحن هنا لنساعدك في اتخاذ قرارات صحية مستنيرة وتحقيق أفضل نتائج صحية ممكنة. انضموا إلينا في هذه الرحلة واستفيدوا من فوائد موقعنا الطبي المتنوعة والموثوقة.
                         </p>
                         <div className={`${herostyle.btn_box} ${"text-center"}`}>
                           <NavLink to="/Nurses" className={herostyle.btn_1} >

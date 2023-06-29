@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EveryStyle from "./everyWhere.module.css";
 import everyVideo from "./APenbykerolos.webm";
+import DarkStyle from '../../DarkMode/darkBtn.module.css'
+
 function Everywhere() {
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if (isDarkMode) {
+      document.querySelector("#EveryWhere")?.classList.toggle(DarkStyle["everyWhere_EveryWhere"], isDarkMode);
+    }
+  }, []);
   return (
-    <section className={EveryStyle.EveryWhere}>
+    <section className={EveryStyle.EveryWhere} id="EveryWhere">
       <div className={"container"}>
         <div className={EveryStyle.EveryWhere__Parent}>
         <div className={EveryStyle.EveryWhere__Text}>

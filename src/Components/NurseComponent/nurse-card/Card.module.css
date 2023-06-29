@@ -15,12 +15,13 @@
 @media (min-width: 1400px) { ... } */
 .preview-card {
   position: relative;
-  margin: 15px;
   background: #fff;
+  margin: 15px;
   box-shadow: 0px 3px 10px rgba(34, 35, 58, 0.2);
   border-radius: 25px;
   transition: all 0.3s;
-  width: 93%;
+  width: 88%;
+  margin: 15px auto;
   height: 320px;
 }
 @media screen and (max-width: 1136px) {

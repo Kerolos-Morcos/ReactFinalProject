@@ -80,13 +80,13 @@
 
 .WhatsOnMind::placeholder {
     font-size: 17px;
-    color: #858585;
+    color: #858585 !important;
     direction: rtl;
     padding: 5px;
 }
 
 .WhatsOnMind:focus::placeholder {
-    color: #b3b3b3;
+    color: #b3b3b3 !important;
     direction: rtl;
     padding: 5px;
 }
@@ -107,13 +107,13 @@
 
 .subjectTitle::placeholder {
     font-size: 17px;
-    color: #858585;
+    color: #858585 !important;
     direction: rtl;
     padding: 3px;
 }
 
 .subjectTitle:focus::placeholder {
-    color: #b3b3b3;
+    color: #b3b3b3 !important;
     direction: rtl;
     padding: 2px;
 }

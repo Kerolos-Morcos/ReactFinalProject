@@ -67,13 +67,14 @@ function SignupPatient() {
 
       style={{
         backgroundImage: `url("https://designstripe-secure.imgix.net/scene-snapshots/06833868-f28d-4fb6-926a-44cfbe167500/1640021720669/default?auto=format&fit=clip&h=850&mark=%2Fwatermark.png&markfit=max&markalign=middle%2Ccenter&markw=1&markh=1&s=44d9a637a6aea08cf1585b6bf08a2368")`,
+        backgroundColor: 'white', 
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         padding: "10px",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        height: '100vh'
+        height: '100vh',
       }}
     >
       <Helmet>
@@ -90,6 +91,17 @@ function SignupPatient() {
                 }
                 `}
         </style> */}
+        <style>
+          {`
+          body{
+            transition: none;
+          }
+          ::placeholder{
+            color: gray !important;
+          }
+          
+          `}
+        </style>
       </Helmet>
       <div dir="rtl" style={{marginTop: '-12px'}} className={styleSignNurse.container}>
         <div className={styleSignNurse.title}>

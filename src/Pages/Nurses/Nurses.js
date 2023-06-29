@@ -9,12 +9,18 @@ import Header from '../../Components/NurseComponent/Header/Header';
 import  Sidebar  from '../../Components/NurseComponent/sidebar/Sidebar'
 import './Nurses.css'
 import {motion} from 'framer-motion'
+import DarkStyle from '../../Components/DarkMode/darkBtn.module.css'
+
 
 function Nurses() {
     const dispatch = useDispatch();
     
     useEffect(() => {
       dispatch(getAllNurses());
+      const isDarkMode = localStorage.getItem("isDarkMode");
+      if (isDarkMode) {
+          document.querySelector("#main")?.classList.toggle(DarkStyle["main"], isDarkMode);
+      }
     },[])
     const { filteredNerses } = useSelector(state => state.NurseSlice)
     console.log(filteredNerses);
@@ -32,13 +38,13 @@ style={{overflow: 'hidden'}}
     {/* <Navbar/> */}
     <Header />
    
-    <main className='d-flex main'>
+    <main id='main' className='d-flex main'>
     <div className="container">
-    <div className='row mt-5 nurse-card'>
+    <div  className='row mt-5 mb-5 nurse-card'>
                  
                  {
                   filteredNerses &&  filteredNerses.map((item, index) => {
-                   return <Card data={item} key={index} />;
+                   return <Card  data={item} key={index} />;
                  })
                } 
                

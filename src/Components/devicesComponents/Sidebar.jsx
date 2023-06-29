@@ -3,6 +3,8 @@ import side from './sidebar.module.css'
 import app from './app.module.css'
 import { useDispatch } from 'react-redux'
 import { search, departmentFilter, filterSubmit, filterCancel, evaluteFilter } from '../../Redux/Slices/DeviceSlice'
+import DarkStyle from '../DarkMode/darkBtn.module.css'
+import { useEffect } from 'react'
 
 function Sidebar() {
     const dispatch = useDispatch()
@@ -42,10 +44,18 @@ function Sidebar() {
         setActive(name)
     }
 
+    useEffect(()=>{
+        const isDarkMode = localStorage.getItem("isDarkMode");
+        if (isDarkMode) {
+            document.querySelector("#sidebarFilterSearch")?.classList.toggle(DarkStyle["sidebarFilterSearch"], isDarkMode);
+            document.querySelector("#offcanvasRight")?.classList.toggle(DarkStyle["offcanvasRight"], isDarkMode);
+        }
+    },[])
+
     return (
         <>
             {/* filter */}
-            <div className={`${side.sidebar} ${"d-flex justify-content-between align-items-center"}`}>
+            <div id='sidebarFilterSearch' className={`${side.sidebar} ${"d-flex justify-content-between align-items-center"}`}>
                 <div className={`${side.group} ${"ms-5"}`}>
                     <svg className={side.icon} aria-hidden="true" viewBox="0 0 24 24">
                         <g>

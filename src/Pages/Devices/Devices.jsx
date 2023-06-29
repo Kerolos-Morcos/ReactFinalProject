@@ -5,15 +5,21 @@ import Card from '../../Components/devicesComponents/Card'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDevices } from '../../Redux/Slices/DeviceSlice'
 import {motion} from 'framer-motion'
+import DarkStyle from '../../Components/DarkMode/darkBtn.module.css'
 
 function Devices() {
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getDevices())
+        const isDarkMode = localStorage.getItem("isDarkMode");
+        if (isDarkMode) {
+            document.querySelector("#Device")?.classList.toggle(DarkStyle["sidebarFilterSearch"], isDarkMode);
+            document.querySelector("#DeviceCard")?.classList.toggle(DarkStyle["sidebarFilterSearch"], isDarkMode);
+        }
     },[])
     const {filteredDevices} = useSelector(state => state.DeviceSlice)
     return (
-        <motion.div
+        <motion.div id='Device'
         initial={ {opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={ {opacity: 0 }}
@@ -23,7 +29,7 @@ function Devices() {
         >
             <Header />
             <Sidebar />
-            <div className='d-flex flex-wrap justify-content-evenly'>{
+            <div id='DeviceCard' className='d-flex flex-wrap justify-content-evenly'>{
                 filteredDevices.map((dev,index) => {
                     return <Card data={dev} key={index} />
                 })

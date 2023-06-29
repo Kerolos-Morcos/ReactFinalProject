@@ -12,6 +12,8 @@ import { motion } from 'framer-motion'
 import { NavLink } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import Chat from "../ChatComponent/Chat";
+import Rating from "../nurseProfile/Rates";
+import DarkStyle from '../DarkMode/darkBtn.module.css'
 // New For Chat
 
 function ShowNurseProfile({ data, Socket }) {
@@ -41,6 +43,15 @@ function ShowNurseProfile({ data, Socket }) {
   // }
   useEffect(() => {
     dispatch(getNurseById(id));
+    const isDarkMode = localStorage.getItem("isDarkMode")
+    if(isDarkMode){
+    document.querySelector("#MainShowProfileBackground").classList.toggle(DarkStyle["MainProfileBackground"], isDarkMode);
+    document.querySelector("#MainShowProfile").classList.toggle(DarkStyle["MainProfile"], isDarkMode);
+    document.querySelector("#ShowNurseName").classList.toggle(DarkStyle["NurseName"], isDarkMode);
+    document.querySelector("#ShowNurseCounter").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#ShowNurseCounterFastService").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#ShowNurseCounterHomeShift").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    }
   }, []);
 
 
@@ -79,7 +90,7 @@ function ShowNurseProfile({ data, Socket }) {
   };
 
   return (
-    <motion.div
+    <motion.div id="MainShowProfileBackground"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -101,7 +112,7 @@ function ShowNurseProfile({ data, Socket }) {
               backgroundSize: "cover",
             }}
           ></div>
-          <div className={`${nurseProfilee.main} ${nurseProfilee.main_raised}`}>
+          <div id="MainShowProfile" className={`${nurseProfilee.main} ${nurseProfilee.main_raised}`}>
             <div className={"profile-content"}>
               <div className={"container"}>
                 <div className={"row"}>
@@ -123,11 +134,11 @@ function ShowNurseProfile({ data, Socket }) {
                         />
                       </div>
 
-                      <div className={nurseProfilee.name}>
+                      <div id="ShowNurseName" className={nurseProfilee.name}>
                         <h3 className={nurseProfilee.title}>{nurseprofileid.name}</h3>
                         <div className={`${nurseProfilee.r} ${" mt-4 "}`}>
-                          {/* <ShowRating rate={R} /> */}
-                        </div>
+                          <Rating rate={nurseprofileid.rates} />
+                      </div>
                         <h6>
                           {nurseprofileid.experience &&
                             nurseprofileid.experience.length > 0 &&
@@ -179,7 +190,7 @@ function ShowNurseProfile({ data, Socket }) {
               <div className={nurseProfilee.parent}>
                 <div className={nurseProfilee.row}>
                   <div className={"col-md-3 col-sm-6 m-4"}>
-                    <div className={nurseProfilee.counter}>
+                    <div id="ShowNurseCounter" className={nurseProfilee.counter}>
                       <div className={nurseProfilee.counter_content}>
                         <div className={nurseProfilee.counter_icon}>
                           <i class="fa-solid fa-bed-pulse fa-2xl"></i>
@@ -188,13 +199,13 @@ function ShowNurseProfile({ data, Socket }) {
                       </div>
                       <span className={nurseProfilee.counter_value}>
                         {/* {nurseprofileid.booking.length + nurseprofileid.booking.length} */}
-
+                          10
                       </span>
                     </div>
                   </div>
 
                   <div className={"col-md-3 col-sm-6 m-4"}>
-                    <div className={nurseProfilee.counter}>
+                    <div id="ShowNurseCounterFastService" className={nurseProfilee.counter}>
                       <div className={nurseProfilee.counter_content}>
                         <div className={nurseProfilee.counter_icon}>
                           <i class="fa-solid fa-syringe fa-2xl"></i>
@@ -203,12 +214,13 @@ function ShowNurseProfile({ data, Socket }) {
                       </div>
                       <span className={nurseProfilee.counter_value}>
                         {/* {nurseprofileid.booking.length} */}
+                        15
                       </span>
                     </div>
                   </div>
 
                   <div className={"col-md-3 col-sm-6 m-4 "}>
-                    <div className={nurseProfilee.counter}>
+                    <div id="ShowNurseCounterHomeShift" className={nurseProfilee.counter}>
                       <div className={nurseProfilee.counter_content}>
                         <div className={nurseProfilee.counter_icon}>
                           <i class="fa-solid fa-house-medical fa-2xl"></i>
@@ -217,6 +229,7 @@ function ShowNurseProfile({ data, Socket }) {
                       </div>
                       <span className={nurseProfilee.counter_value}>
                         {/* {nurseprofileid.booking.length} */}
+                        25
                       </span>
                     </div>
                   </div>

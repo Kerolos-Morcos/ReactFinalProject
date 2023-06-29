@@ -26,7 +26,7 @@ export default function Login() {
     password: ''
   },
     validationSchema: Yup.object().shape({
-        email: Yup.string().email('Email is not valid').required("البريد الإلكتروني مطلوب"),
+        email: Yup.string().email('بريد إلكتروني غير صالح').required("البريد الإلكتروني مطلوب"),
         password: Yup.string().required("كلمة السر مطلوبة")
         }),
         
@@ -54,6 +54,7 @@ export default function Login() {
                 draggable: true,
                 progress: undefined,
                 theme: "colored",
+                style: { textAlign: "center" },
                 });
                 notify();
               }
@@ -76,7 +77,7 @@ export default function Login() {
       padding: "10px",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
-      height: '100vh'
+      height: '100vh',
     }}
     >
      <Helmet>
@@ -88,6 +89,7 @@ export default function Login() {
                     background-repeat: no-repeat;
                     background-size: cover;
                     height: 100vh;
+                      transition: none;
                   }
                 `}
             </style>

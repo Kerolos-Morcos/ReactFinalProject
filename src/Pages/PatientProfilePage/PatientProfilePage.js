@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PatientProfileComponent from '../../Components/PatientProfile/PatientProfileComponent'
 import {motion} from 'framer-motion'
+import DarkStyle from '../../Components/DarkMode/darkBtn.module.css'
 
 function PatientProfilePage() {
+  useEffect(()=>{
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if (isDarkMode) {
+      document.querySelector("#PatientPage")?.classList.toggle(DarkStyle["PatientPage"], isDarkMode);
+    }
+  },[])
   return (
-    <motion.div
+    <motion.div id='PatientPage'
     initial={ {opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={ {opacity: 0 }}

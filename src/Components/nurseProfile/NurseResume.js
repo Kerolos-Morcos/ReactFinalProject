@@ -6,12 +6,23 @@ import { getNurse } from "../../Redux/Slices/NurseProfileR";
 
 import {useSelector,useDispatch} from 'react-redux'
 import {deleteNurseExperience, deleteNurseEducation} from "../../Redux/Slices/NurseProfileR";
- 
+import { useEffect } from "react";
+import DarkStyle from '../DarkMode/darkBtn.module.css'
+import moment from "moment";
+
 function NurseResume() {
- 
+ useEffect(()=>{
+  const isDarkMode = JSON.parse(localStorage.getItem("isDarkMode"));
+  if(isDarkMode){
+    document.querySelector("#NurseResumeHeadings").classList.toggle(DarkStyle["NurseResumeHeadings"], isDarkMode);
+    document.querySelector("#resume").classList.toggle(DarkStyle["resume"], isDarkMode);
+  }
+ },[])
+
   const dispatch = useDispatch();
   const nurse = useSelector(state => state.nurseProfileSlice);
   const info = nurse.nurseProfile;
+  console.log(info);
   const handleDeleteExperience = (experienceId) => {
     if (window.confirm(`Are you sure you want to delete this experience?`)) {
       dispatch(
@@ -64,10 +75,11 @@ function NurseResume() {
         id="about"
         className={`${nurseProfile.about} ${nurseProfile.container} ${nurseProfile.uppersec}`}
       >
-        <div>
-          <div className={nurseProfile.section_title}>
+        <div id="NurseResumeHeadings">
+          <div  className={`${nurseProfile.section_title} ${'d-flex justify-content-evenly text-center mt-3 mb-3'}`}>
             {/* <h2> {info.experience[0].title}  </h2> */}
-            <h4>نبذة  </h4>
+            <div>
+            <h4 className="pb-1" style={{borderBottom: '3px solid #00A02B', width: '30px', margin: '0 auto'}}>نبذة  </h4>
             <p>
             {info.about}
               {/* حاصلة على دبلوم الدولة في التمريض مع أكثر من 4 سنوات من الخبرة في
@@ -75,39 +87,42 @@ function NurseResume() {
               ولهذا السبب أقدم طلبي إليكم. أنا متحمس جدا وأمل أن أتمكن من
               الانضمام إلى فرقكم. */}
             </p>
-            <h4>المهارات</h4>
+            </div>
+            <div>
+            <h4 className="pb-1" style={{borderBottom: '3px solid #00A02B', width: '40px', margin: '0 auto'}}>المهارات</h4>
             <p>
             {info.skills}
               {/* مراقبة و تقييم ومراقبة تطور الحالة الصحية للمرضى بالتعاون مع
               الطبيب المختص, دعم الأشخاص المصابين بأمراض مزمنة, رعاية المسنين
               متعددي الأمراض */}
             </p>
+            </div>
           </div>
-          <div className={`${nurseProfile.row} row justify-content-between`}>
-            <div className={"col-lg-6"}>
+          <div style={{flexWrap:'nowrap', width: '50%' ,marginLeft: 'auto', marginRight:'auto'}} className={`${nurseProfile.row} ${'d-flex justify-content-between'}`}>
+            <div  className={" col-lg-10"}>
               <ul className={nurseProfile.ul}>
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-                  <strong> سعر الشفت :</strong> <span> {info.shiftPrice} ج.م</span>
+                  <i className={"bx bx-chevron-left"} />
+                  <strong> رقم الهاتف :</strong> <span> {info.phoneNumber}</span>
                 </li>
                 {/* <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li> */}
                 {/* <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li> */}
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-                  <strong>   العنوان : </strong> <span> {`${info.address} ${info.region}`}</span>
+                  <i className={"bx bx-chevron-left"} />
+                  <strong>   العنوان : </strong> <span> {`${info.region}`}</span>
                 </li>
               </ul>
             </div>
             <div className={"col-lg-6"}>
               <ul className={nurseProfile.ul}>
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-                  {/* <strong>الدرجة:</strong> <span>{info.education[0].degree}</span> */}
+                  <i className={"bx bx-chevron-left"} />
+                  <strong>سعر الشيفت : </strong> <span>{info.shiftPrice} ج.م </span>
                 </li>
                 {/* <li><i class="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>email@example.com</span> */}
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-                  <strong>الحالة:</strong> <span>متوفر</span>
+                  <i className={"bx bx-chevron-left"} />
+                  <strong>الحالة : </strong> <span>متوفر</span>
                 </li>
               </ul>
             </div>
@@ -140,19 +155,19 @@ function NurseResume() {
               data-aos="fade-up" >
   
     
-  <h3 className={nurseProfile.resume_title}>التعليم</h3> 
+  <h3 style={{borderBottom: '3px solid #00A02B', width: '40px', marginBottom: '30px'}} className={nurseProfile.resume_title}>التعليم</h3> 
   {info.education?.map((element, index) => (
   <div key={index}>
-    <div className={nurseProfile.resume_item}> 
+    <div id="resumeNodes" className={nurseProfile.resume_item}> 
       <h4>   
         {element.degree} 
        <EditEducation   index={index} nurse={element} />
        <i
-          class="fa-solid fa-trash-can fa-lg p-3"
+          class="fa-solid fa-trash fa-lg p-3"
           onClick={() => handleDeleteEducation(element._id,info._id)}
         ></i>
       </h4>
-      <h5>{element.toDate}</h5>
+      <h5>{moment(element.toDate).format('YYYY-MM-DD')}</h5>
       <p><em>{element.school}</em></p> 
       <p>{element.description}</p>
     </div>
@@ -189,19 +204,19 @@ function NurseResume() {
                 </div>
               </div>
             </div> */}
-<h3 className={nurseProfile.resume_title}>الخبرات</h3>
+<h3 style={{borderBottom: '3px solid #00A02B', width: '40px', marginBottom: '30px'}} className={nurseProfile.resume_title}>الخبرات</h3>
 {info.experience?.map((element, index) => (
   <div key={index}>
-    <div className={nurseProfile.resume_item}>
+    <div id="resumeExNodes" className={`${nurseProfile.resume_item}`}>
       <h4>
         {element.company}
         <EditExperience index={index} nurse={element} />
         <i
-          class="fa-solid fa-trash-can fa-lg p-3"
+          class="fa-solid fa-trash fa-lg p-3"
           onClick={() => handleDeleteExperience(element._id,info._id)}
         ></i>
       </h4>
-      <h5>{element.fromDate} - {element.toDate}</h5>
+      <h5>{moment(element.fromDate).format('YYYY-MM-DD')} / {moment(element.toDate).format('YYYY-MM-DD')}</h5>
       <p>
         <em>{element.title}</em>
         <em>{element.employmentType}</em>

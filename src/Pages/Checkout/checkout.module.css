@@ -145,3 +145,6 @@
 .KeepGoingAndPay:hover::after{
     margin-top: 12px;
 }
+.my_ok_button_class{
+    display: none !important;
+}

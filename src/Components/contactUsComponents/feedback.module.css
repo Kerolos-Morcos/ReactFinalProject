@@ -1,7 +1,9 @@
 .ContactPage{
     padding-top: 6.775rem !important;
 }
-
+.contact__us form input::placeholder, .contact__us textarea::placeholder{
+    color: black !important;
+}
 .main_img {
     background-image: url(../../assets/images/devices_imgs/us.jpg);
     background-size: cover;

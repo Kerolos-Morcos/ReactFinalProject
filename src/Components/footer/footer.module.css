@@ -228,7 +228,7 @@
   }
   
   .copyright_area {
-    background: #041858;
+    /* background: #041858; */
     border-top: 1px dashed #00A02B;
     padding: 1.875rem 0 1.875rem 0;
   }

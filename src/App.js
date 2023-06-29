@@ -34,6 +34,7 @@ import MedArtical from './Components/Articles/MedArtical';
 import {AnimatePresence} from 'framer-motion'
 import Check from './Pages/Checkout/Check';
 import NurseProfile from './Components/nurseProfile/NurseProfile';
+import DarkMode from './Components/DarkMode/DarkBTN';
 
 // Socket IO
 import { io } from "socket.io-client";
@@ -75,6 +76,7 @@ const [Socket, setSocket] = useState(null)
       setFlag(true);
     } else {
       setFlag(false);
+      
     }
   }, [location]);
 
@@ -95,7 +97,8 @@ const [Socket, setSocket] = useState(null)
   return (
     <div className="App">
       {flag && <Navbar Socket={Socket} />}
-      <Scroll/>
+      {flag && <DarkMode/>}  
+      <Scroll/> 
       <AnimatePresence mode='wait'>
       <Routes location={location} key={location.pathname}>
         <Route index path='/Home' element={<Home/>} />

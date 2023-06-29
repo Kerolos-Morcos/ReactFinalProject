@@ -42,9 +42,9 @@ style={{overflow: 'hidden'}}
     <Services/>
     <Everywhere/>
     <TopRated/>
-    <Statistics/>
     {/* <Footer/> */}
       </Fade>
+    <Statistics/>
     </motion.div>
   )
 }

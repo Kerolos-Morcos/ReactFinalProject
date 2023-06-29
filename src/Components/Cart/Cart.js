@@ -8,6 +8,7 @@ import { getAllCartProduct, deleteFromCart, emptyFromCart, addQuantity, minusQua
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {motion} from 'framer-motion'
+import DarkStyle from '../DarkMode/darkBtn.module.css'
 
 function CartComponent() {
 
@@ -23,6 +24,11 @@ function CartComponent() {
 
   useEffect(() => {
     dispatch(getAllCartProduct())
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if (isDarkMode) {
+      document.querySelector("#CartComp")?.classList.toggle(DarkStyle["CartComp"], isDarkMode);
+      document.querySelector("#CartSummary")?.classList.toggle(DarkStyle["CartSummary"], isDarkMode);
+    }
   }, []);
 
   // const handEmptyCart = () => {
@@ -95,7 +101,7 @@ function CartComponent() {
 
 
   return (
-    <motion.div className={CartStyle.CartPage}
+    <motion.div id='CartComp' className={`${'mb-5 pb-5'} ${CartStyle.CartPage}`}
     initial={ {opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={ {opacity: 0 }}
@@ -151,7 +157,7 @@ style={{overflow: 'hidden'}}
 
 
           </div>
-          <div className={`${"col-md-4 summary"} ${CartStyle.summary}`}>
+          <div id='CartSummary' className={`${"col-md-4 summary"} ${CartStyle.summary}`}>
             <div>
               <h5>
                 <b>ملخص السلة</b>
@@ -173,9 +179,9 @@ style={{overflow: 'hidden'}}
               <div className={`${"col text-left me-5"} ${CartStyle.col}`}>0 ج.م</div>
             </div>
 
-            <div
+            <div id='CartBorder'
               className={`${"row"} ${CartStyle.row}`}
-              style={{ borderTop: "1px solid rgba(0,0,0,.1)", padding: "2vh 0" }}
+              style={{ borderTop: "1px solid rgba(255, 255, 255, 0.3)", padding: "2vh 0" }}
             >
               <div className={`${"col-xxl-7 col-xl-8 col-lg-8 col-md-7 col-sm-7"} ${CartStyle.col}`}>الإجمـالــــــي </div>
               {cart.length > 0 && 

@@ -11,7 +11,7 @@ import {
 
 import 'react-credit-cards/es/styles-compiled.css'
 
-export default class CardPay extends React.Component {
+ export default class CardPay extends React.Component {
   state = {
     number: '',
     name: '',
@@ -22,19 +22,19 @@ export default class CardPay extends React.Component {
     formData: null,
     
   }
-
+  
   handleCallback = ({ issuer }, isValid) => {
     if (isValid) {
       this.setState({ issuer })
     }
   }
-
+  
   handleInputFocus = ({ target }) => {
     this.setState({
       focused: target.name
     })
   }
-
+  
   handleInputChange = ({ target }) => {
     if (target.name === 'number') {
       target.value = formatCreditCardNumber(target.value)
@@ -52,10 +52,10 @@ export default class CardPay extends React.Component {
     alert('You have finished payment!')
     this.form.reset()
   }
-
+  
   render () {
     const { name, number, expiry, cvc, focused, issuer } = this.state
-
+    
     return (
       <div key='Payment' className={CardPayStyle.PaymentCard}>
         <div className={`${CardPayStyle['App-payment']}`}>
@@ -135,4 +135,9 @@ export default class CardPay extends React.Component {
   }
 }
 
-render(<CardPay />, document.getElementById('root'))
+
+const storedDarkMode = JSON.parse(localStorage.getItem("isDarkMode"));
+{storedDarkMode &&
+  render(<CardPay />, document.getElementById('root'))
+}
+

@@ -7,6 +7,8 @@ import axios from 'axios';
 import { Helmet } from "react-helmet";
 import bgImg from '../../assets/images/Patients-PNG-HD.png';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {motion} from 'framer-motion'
 
 
@@ -77,7 +79,19 @@ function SignupNurseFormik() {
                 });
                 }
         });
-      
+        const handleFileSelect = () => {
+          toast.success('تم إرفاق الملف بنجاح', {
+            position: "top-center",
+            autoClose: 300,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            style: { textAlign: "center" },
+          });
+        };
   console.log(formik.errors);
 
   return (
@@ -90,13 +104,14 @@ function SignupNurseFormik() {
 
       style={{
         backgroundImage: `url(${bgImg})`,
+        backgroundColor: `white`,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         padding: "10px",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        height: '100vh'
+        height: '100vh',
       }}
       >
     <Helmet>
@@ -115,6 +130,16 @@ function SignupNurseFormik() {
                   }
                 `}
             </style> */}
+          <style>
+          {`
+          body{
+            transition: none;
+          }
+          ::placeholder{
+            color: gray !important;
+          }
+          `}
+        </style>
          </Helmet>
 
     <div dir="rtl" style={{marginTop: '-5px'}} className={styleSignNurse.container}>
@@ -333,13 +358,15 @@ function SignupNurseFormik() {
     
     <label className={styleSignNurse['certbtn']} htmlFor="gradeCert"> ادخل شهادة التخرج </label>
       <input multiple id="gradeCert" name='gradeCert'  type="file" hidden 
-           onChange={(event) =>
-                    formik.setFieldValue("gradeCert", event.target.files[0])} className={styleSignNurse['form-control']}  />
+           onChange={(event) => {
+                    formik.setFieldValue("gradeCert", event.target.files[0]); handleFileSelect(event)}} className={styleSignNurse['form-control']
+                     }  />
        {formik.touched.gradeCert && (
                 <small id="emailHelp" style={{ color: "red", display: 'block' }}>
                   {formik.errors.gradeCert}
                 </small>
               )}
+              <ToastContainer/>
             </div>
 {/*  */}
 
@@ -347,14 +374,15 @@ function SignupNurseFormik() {
             <div className={styleSignNurse["input-box item"]}>
   <label className={styleSignNurse["certbtn"]} for="license"> رخصة مزاولة المهنة </label>
     <input  multiple id="license" name='licenseJob' class={styleSignNurse["form-control"]} type="file" hidden 
-  onChange={(event) =>
-                    formik.setFieldValue("licenseJob", event.target.files[0])
-                  } />
+  onChange={(event) => {
+                    formik.setFieldValue("licenseJob", event.target.files[0]);
+                    handleFileSelect(event)}}/>
      {formik.touched.licenseJob && (
               <small id="emailHelp" style={{ color: "red" , display: 'block' }}>
                 {formik.errors.licenseJob}
               </small>
             )}
+              <ToastContainer/>
           </div>
           {/*  */}
 </div>

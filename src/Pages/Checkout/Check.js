@@ -72,6 +72,7 @@ import Swal from 'sweetalert2'
 import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import {motion} from 'framer-motion'
+import DarkStyle from '../../Components/DarkMode/darkBtn.module.css'
 
 function Check() {
   const navigate = useNavigate();
@@ -89,6 +90,9 @@ function Check() {
     MySwal.fire({
       title: `<p> تم اتمام الدفع بنجاح</p>`,
       icon: 'success',
+      customClass: {
+        confirmButton: `${checkStyle.my_ok_button_class}`,
+      },
     });
     dispatch(checkOutOrder(id));
     
@@ -99,6 +103,12 @@ function Check() {
   }
   useEffect(() => {
     dispatch(getPatient());
+      const isDarkMode = localStorage.getItem("isDarkMode");
+      if (isDarkMode) {
+        document.querySelector("#CheckOutPage")?.classList.toggle(DarkStyle["CheckOutPage"], isDarkMode);
+        document.querySelector("#CheckoutElementsTitle")?.classList.toggle(DarkStyle["CheckoutElementsTitle"], isDarkMode);
+        document.querySelector("#CheckOutInfo")?.classList.toggle(DarkStyle["CheckOutInfo"], isDarkMode);
+      }
     //  console.log(patientes.data)
   }, []);
 
@@ -127,7 +137,7 @@ function Check() {
     //   <input className={`${check.input} ${check.toleft} ${check.ccv}`} placeholder="year" />
     //   <input className={`${check.input} ${check.toleft} ${check.ccv}`} placeholder="CCV" />
     // </div>
-    <motion.div className={checkStyle.body}
+    <motion.div id="CheckOutPage" className={checkStyle.body}
     initial={ {opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={ {opacity: 0 }}
@@ -155,7 +165,7 @@ function Check() {
           </div>
 
           <div className={checkStyle.receipt}>
-            <div className={checkStyle.columnItems}>
+            <div id="CheckOutInfo" className={checkStyle.columnItems}>
               <div>
                 <p>الاسم :</p>
                 <h2 className={checkStyle.seller}> {patientes.name} </h2>
@@ -170,8 +180,8 @@ function Check() {
               </div>
             </div>
 
-            <div className={checkStyle.columnProduct}>
-              <p className={checkStyle.columnProductTitle}> عناصر الطلب :</p>
+            <div id="CheckoutElementsTitle" className={checkStyle.columnProduct}>
+              <p className={`${"pb-3"} ${checkStyle.columnProductTitle}`}> عناصر الطلب :</p>
               {patientes.order &&
                 patientes.order.length > 0 &&
                 patientes.order[patientes.order.length - 1].products.map(

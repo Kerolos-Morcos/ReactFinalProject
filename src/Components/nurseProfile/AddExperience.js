@@ -23,6 +23,13 @@ const AddExperience = () => {
 
   return (
     <>
+      <style>
+    {`
+      ::placeholder{
+        color: gray !important;
+      }
+    `}
+  </style>
       <a variant="primary" onClick={handleShow}>
         اضف خبرات
       </a>
@@ -91,7 +98,7 @@ const AddExperience = () => {
                   <Form.Label className={"mb-1"}>المسمي الوظيفي </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="اخصائي تمريض قسم الاطفال"
+                    placeholder="مثال : اخصائي تمريض قسم الاطفال"
                     name="experience.title"
                     value={values.experience.title}
                     onChange={handleChange}
@@ -147,7 +154,7 @@ const AddExperience = () => {
                   <Form.Label className={"mb-1"}>بداية العمل</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="مايو 2021"
+                    placeholder="يوم-شهر-سنة  (10-01-2018)"
                     name="experience.fromDate"
                     value={values.experience.fromDate}
                     onChange={handleChange}
@@ -161,7 +168,7 @@ const AddExperience = () => {
                   <Form.Label className={"mb-1"}>نهاية العمل</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="الان او يونيو 2023"
+                    placeholder="يوم-شهر-سنة  (10-01-2020)"
                     name="experience.toDate"
                     value={values.experience.toDate}
                     onChange={handleChange}

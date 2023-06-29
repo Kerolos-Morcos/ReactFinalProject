@@ -20,8 +20,8 @@ function Card({ data }) {
   }
 
   return (
-    <div className={cardNurseStyle["preview-card"]} dir='rtl'>
-      <div className={cardNurseStyle["preview-card__wrp"]}>
+    <div  className={cardNurseStyle["preview-card"]} dir='rtl'>
+      <div  className={cardNurseStyle["preview-card__wrp"]}>
         <div className={cardNurseStyle["preview-card__item"]}>
           <div className={cardNurseStyle["preview-card__img"]}>
             <img src={`${api}${data.profile}`} alt="" />
@@ -37,7 +37,7 @@ function Card({ data }) {
            <img src={imgex} alt=""/>{data.numOfExperience
 }</span> */}
             <div className={cardNurseStyle["preview-card__text"]}>
-              <p>
+              <p className='pb-3'>
                 <img src={imgc} alt="" /> : {data.phoneNumber}
               </p>
               <p>

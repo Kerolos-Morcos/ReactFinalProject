@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ArtStyle from './medArtical.module.css'
 import {motion} from 'framer-motion'
-
+import DarkStyle from '../DarkMode/darkBtn.module.css'
 
 function MedArtical() {
+  useEffect(()=>{
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if(isDarkMode){
+      document.querySelector("#ArticlesPage")?.classList.toggle(DarkStyle["ArticlesPage"], isDarkMode);
+    }
+  },[])
   return (
-<motion.div className={ArtStyle.Margins}
+<motion.div id='ArticlesPage' className={ArtStyle.Margins}
 initial={ {opacity: 0 }}
 animate={{ opacity: 1 }}
 exit={ {opacity: 0 }}

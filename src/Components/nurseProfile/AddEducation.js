@@ -16,9 +16,16 @@ function AddEducation() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  
   return (
     <>
-
+  <style>
+    {`
+      ::placeholder{
+        color: gray !important;
+      }
+    `}
+  </style>
       <a variant="primary" onClick={handleShow}>
         اضف تعليما
       </a>
@@ -138,7 +145,7 @@ function AddEducation() {
                   <Field
                     type="text"
                     name="education.toDate"
-                    placeholder="عام الحصول على المؤهل"
+                    placeholder="يوم-شهر-سنة  (10-01-2020)"
                     className={"form-control"}
                     value={values.education.toDate}
                     onChange={handleChange}

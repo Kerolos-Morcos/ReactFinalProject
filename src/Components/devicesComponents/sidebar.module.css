@@ -33,11 +33,11 @@
 }
 
 .sidebar .group .input::-moz-placeholder {
-    color: #041858;
+    color: #041858 !important;
 }
 
 .sidebar .group .input::placeholder {
-    color: #041858;
+    color: #041858 !important;
 }
 
 .sidebar .group .input:focus,

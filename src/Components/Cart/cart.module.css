@@ -216,6 +216,7 @@
     border: 0 !important;
 }
 .my_ok_button_class{
+    display: none !important;
     background-color: #00A02B !important;
     color: white !important;
     border: 0 !important;

@@ -2,13 +2,18 @@
     width: 80% !important;
     margin: 0 auto !important;
 }
-  
+
+.profile_page{
+    padding-bottom: 50px;
+ } 
  
 .profile_page .profile .name{
     margin-top: -100px;
 }
 
-
+.r{
+    direction: ltr !important;
+}
 
 .name h6 {
     margin-top: 10px;
@@ -45,7 +50,7 @@ a .material-icons {
     position: absolute;
     z-index: 1;
     width: 100%;
-    height: 100%;
+    height: 350px;
     display: block;
     left: 0;
     top: 0;
@@ -75,6 +80,7 @@ a .material-icons {
 .profile_page .profile img {
     max-width: 200px;
     width: 100%;
+    height: 55vh;
     margin: 0 auto;
     -webkit-transform: translate3d(0,-50%,0);
     -moz-transform: translate3d(0,-50%,0);
@@ -263,13 +269,14 @@ justify-content: space-around;
 /* New Style From Kerolos */
 .profIMG{
     padding-top: 2rem;
-    width: auto;
+    width: 300px;
     margin: 0 auto;
 }
 .profIMG img{
     width: auto !important;
-    height: auto ;
-    margin-bottom: -100px !important;
+    height: 50vh !important ;
+    margin-bottom: -115px !important;
+    padding-bottom: 10px;
 }
 
 /* CONTACT CHAT BUTTON */

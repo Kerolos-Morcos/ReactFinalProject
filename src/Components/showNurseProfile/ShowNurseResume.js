@@ -7,6 +7,8 @@ import {useSelector,useDispatch} from 'react-redux'
 // import {deleteNurseExperience, deleteNurseEducation} from "../../Redux/Slices/NurseProfileR";
 import { useParams } from 'react-router-dom';
 import { getNurseById } from "../../Redux/Slices/PatientSlice";
+import DarkStyle from '../DarkMode/darkBtn.module.css'
+import moment from "moment";
 
 function ShowNurseResume() {
  
@@ -17,6 +19,11 @@ function ShowNurseResume() {
 
   useEffect(() => {
     dispatch(getNurseById(id));
+    const isDarkMode = JSON.parse(localStorage.getItem("isDarkMode"));
+    if(isDarkMode){
+      document.querySelector("#ShowNurseResumeHeadings").classList.toggle(DarkStyle["NurseResumeHeadings"], isDarkMode);
+      document.querySelector("#resume").classList.toggle(DarkStyle["resume"], isDarkMode);
+    }
   }, []);
 
   return (
@@ -27,41 +34,46 @@ function ShowNurseResume() {
         id="about"
         className={`${nurseProfile.about} ${nurseProfile.container} ${nurseProfile.uppersec}`}
       >
-        <div>
-          <div className={nurseProfile.section_title}>
-            <h4>نبذة  </h4>
+        <div id="ShowNurseResumeHeadings">
+          <div className={`${nurseProfile.section_title} ${'d-flex justify-content-evenly text-center mt-3 mb-3'}`}>
+            <div>
+            <h4 className="pb-1" style={{borderBottom: '3px solid #00A02B', width: '30px', margin: '0 auto'}}>نبذة  </h4>
             <p>
             {nurseprofileid.about}
             </p>
-            <h4>المهارات</h4>
+            </div>
+            <div>
+            <h4 style={{borderBottom: '3px solid #00A02B', width: '40px', margin: '0 auto', paddingBottom: '2px'}}>المهارات</h4>
             <p>
             {nurseprofileid.skills}
             </p>
+            </div>
           </div>
-          <div className={`${nurseProfile.row} row justify-content-between`}>
-            <div className={"col-lg-6"}>
+          <div style={{flexWrap:'nowrap', width: '50%' ,marginLeft: 'auto', marginRight:'auto'}} className={`${nurseProfile.row} ${'d-flex justify-content-between'}`}>
+            <div  className={" col-lg-10"}>
               <ul className={nurseProfile.ul}>
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-                  <strong> سعر الشفت :</strong> <span> {nurseprofileid.shiftPrice} ج.م</span>
+                  <i className={"bx bx-chevron-left"} />
+                  <strong> رقم الهاتف :</strong> <span> {nurseprofileid.phoneNumber}</span>
                 </li>
-
+                {/* <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li> */}
+                {/* <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li> */}
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-                  <strong>   العنوان : </strong> <span> {`${nurseprofileid.address} ${nurseprofileid.region}`}</span>
+                  <i className={"bx bx-chevron-left"} />
+                  <strong>   العنوان : </strong> <span> {`${nurseprofileid.region}`}</span>
                 </li>
               </ul>
             </div>
             <div className={"col-lg-6"}>
               <ul className={nurseProfile.ul}>
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-
+                  <i className={"bx bx-chevron-left"} />
+                  <strong>سعر الشيفت : </strong> <span>{nurseprofileid.shiftPrice} ج.م </span>
                 </li>
-              
+                {/* <li><i class="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>email@example.com</span> */}
                 <li>
-                  <i className={"bi bi-chevron-right"} />{" "}
-                  <strong>الحالة:</strong> <span>متوفر</span>
+                  <i className={"bx bx-chevron-left"} />
+                  <strong>الحالة : </strong> <span>متوفر</span>
                 </li>
               </ul>
             </div>
@@ -79,14 +91,14 @@ function ShowNurseResume() {
               data-aos="fade-up" >
   
     
-  <h3 className={nurseProfile.resume_title}>التعليم</h3> 
+  <h3 style={{borderBottom: '3px solid #00A02B', width: '40px', marginBottom: '30px'}} className={nurseProfile.resume_title}>التعليم</h3> 
   {nurseprofileid.education?.map((element, index) => (
   <div key={index}>
     <div className={nurseProfile.resume_item}> 
       <h4>   
         {element.degree} 
       </h4>
-      <h5>{element.toDate}</h5>
+      <h5>{moment(element.toDate).format('YYYY-MM-DD')}</h5>
       <p><em>{element.school}</em></p> 
       <p>{element.description}</p>
     </div>
@@ -94,14 +106,14 @@ function ShowNurseResume() {
 
 ))}
 
-<h3 className={nurseProfile.resume_title}>الخبرات</h3>
+<h3 style={{borderBottom: '3px solid #00A02B', width: '40px', marginBottom: '30px'}} className={nurseProfile.resume_title}>الخبرات</h3>
 {nurseprofileid.experience?.map((element, index) => (
   <div key={index}>
     <div className={nurseProfile.resume_item}>
       <h4>
         {element.company}
       </h4>
-      <h5>{element.fromDate} - {element.toDate}</h5>
+      <h5>{moment(element.fromDate).format('YYYY-MM-DD')} / {moment(element.toDate).format('YYYY-MM-DD')}</h5>
       <p>
         <em>{element.title}</em>
         <em>{element.employmentType}</em>

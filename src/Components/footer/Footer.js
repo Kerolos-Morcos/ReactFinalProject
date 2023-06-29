@@ -3,9 +3,18 @@ import FooterStyle from './footer.module.css'
 import Logo from '../../assets/images/Navbar__Logo.png'
 // import { themeContext } from '../ConfigContext/DarkMode'
 import { NavLink, Link } from 'react-router-dom'
+import DarkStyle from '../DarkMode/darkBtn.module.css'
+import { useEffect } from 'react'
 
 function Footer() {
-  // const {theme, toggleDarkMode} = useContext(themeContext)
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem("isDarkMode");
+    if (isDarkMode) {
+      document.querySelector("body").classList.add(DarkStyle["dark-mode"]);
+      document.querySelector("footer").classList.add(DarkStyle["dark-mode"]);
+      document.querySelector("#social")?.classList.toggle(DarkStyle["social"], isDarkMode);
+    }
+  }, []);
   return (
     <>
   {/* Start Footer */}
@@ -55,9 +64,7 @@ function Footer() {
               </div>
               <div className={`${FooterStyle.footer_text}`}>
                 <p>
-                  Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed
-                  do eiusmod tempor incididuntut consec tetur adipisicing
-                  elit,Lorem ipsum dolor sit amet.
+                  يشرفنا تواجدك في موقعنا ، نحن متواجدون بصفة مستمرة للرد علي كل استفساراتك و طلباتك ، و نتشرف بخدمتك في اي وقت و بأي طريقة ممكنة ، و يمكنك التواصل معنا بطرق مختلفة
                 </p>
               </div>
             </div>
@@ -117,7 +124,7 @@ function Footer() {
             </div>
           </div>
           <div className={`${ FooterStyle.footer_social_icon}`}>
-            <button className={`${FooterStyle.social}`}>
+            <button id='social' className={`${FooterStyle.social}`}>
               <span>تابعنا علي</span>
               <div className={`${FooterStyle.container}`}>
                 <svg

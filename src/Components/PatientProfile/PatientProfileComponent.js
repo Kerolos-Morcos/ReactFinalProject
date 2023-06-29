@@ -55,10 +55,18 @@ function PatientProfile() {
   const RatingModal = ({ id,onRatingSelected }) => { 
     return <RadioGroupRating size="large" onRatingSelected={onRatingSelected} />;
   };
+
   const handleRating = (id) => {
   //  console.log(id);
     MySwal.fire({
       title: <p>ما تقييمك؟</p>,
+      customClass: {
+        confirmButton: 'my_ok_button_class',
+      },
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        confirmButton.style.display = 'none';
+      },
       html: <RatingModal id={id} onRatingSelected={(rating) => {
         if (rating) {
           // setRateNum=rating

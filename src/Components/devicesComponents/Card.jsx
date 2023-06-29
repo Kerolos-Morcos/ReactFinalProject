@@ -24,6 +24,7 @@ const notify = () =>
         progress: undefined,
         theme: "colored",
         className: "custom_toast",
+        style: { textAlign: "center" },
       });
       function Card({ data }) {
           const api = "http://localhost:3500/";
@@ -35,7 +36,7 @@ const notify = () =>
             return (
         <>
             {/* equipments */}
-            <section className={`${["mt-2"]} ${styles.all__devices}`}>
+            <section className={`${["mt-2 mb-5"]} ${styles.all__devices}`}>
                 <div className={`${["container-fluid px-4"]}`}>
                 <ToastContainer className="mt-5" />
                     <div className={`${["d-flex flex-wrap mx-1 justify-content-xlg-between justify-content-around"]}`}>
