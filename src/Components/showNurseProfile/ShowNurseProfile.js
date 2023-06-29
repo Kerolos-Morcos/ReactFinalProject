@@ -14,6 +14,7 @@ import { Modal, Button } from "react-bootstrap";
 import Chat from "../ChatComponent/Chat";
 import Rating from "../nurseProfile/Rates";
 import DarkStyle from '../DarkMode/darkBtn.module.css'
+import Fade from 'react-reveal/Fade'
 // New For Chat
 
 function ShowNurseProfile({ data, Socket }) {
@@ -45,13 +46,14 @@ function ShowNurseProfile({ data, Socket }) {
     dispatch(getNurseById(id));
     const isDarkMode = localStorage.getItem("isDarkMode")
     if(isDarkMode){
-    document.querySelector("#MainShowProfileBackground").classList.toggle(DarkStyle["MainProfileBackground"], isDarkMode);
-    document.querySelector("#MainShowProfile").classList.toggle(DarkStyle["MainProfile"], isDarkMode);
-    document.querySelector("#ShowNurseName").classList.toggle(DarkStyle["NurseName"], isDarkMode);
-    document.querySelector("#ShowNurseCounter").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
-    document.querySelector("#ShowNurseCounterFastService").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
-    document.querySelector("#ShowNurseCounterHomeShift").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#MainShowProfileBackground")?.classList.toggle(DarkStyle["MainProfileBackground"], isDarkMode);
+    document.querySelector("#MainShowProfile")?.classList.toggle(DarkStyle["MainProfile"], isDarkMode);
+    document.querySelector("#ShowNurseName")?.classList.toggle(DarkStyle["NurseName"], isDarkMode);
+    document.querySelector("#ShowNurseCounter")?.classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#ShowNurseCounterFastService")?.classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#ShowNurseCounterHomeShift")?.classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
     }
+    // window.scrollTo(0, 0);
   }, []);
 
 
@@ -99,6 +101,7 @@ function ShowNurseProfile({ data, Socket }) {
       style={{ overflow: 'hidden' }}
     >
       {nurseprofileid && (
+        <Fade top distance="10%" duration={1500}>
         <section
           style={{ direction: "rtl" }}
           className={`${nurseProfilee.profile_page} ${nurseProfilee.container}`}
@@ -239,6 +242,7 @@ function ShowNurseProfile({ data, Socket }) {
             </div>
           </div>
         </section>
+        </Fade>
       )}
     </motion.div>
   );

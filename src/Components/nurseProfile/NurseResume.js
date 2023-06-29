@@ -9,13 +9,14 @@ import {deleteNurseExperience, deleteNurseEducation} from "../../Redux/Slices/Nu
 import { useEffect } from "react";
 import DarkStyle from '../DarkMode/darkBtn.module.css'
 import moment from "moment";
+import Fade from 'react-reveal/Fade'
 
 function NurseResume() {
  useEffect(()=>{
   const isDarkMode = JSON.parse(localStorage.getItem("isDarkMode"));
   if(isDarkMode){
-    document.querySelector("#NurseResumeHeadings").classList.toggle(DarkStyle["NurseResumeHeadings"], isDarkMode);
-    document.querySelector("#resume").classList.toggle(DarkStyle["resume"], isDarkMode);
+    document.querySelector("#NurseResumeHeadings")?.classList.toggle(DarkStyle["NurseResumeHeadings"], isDarkMode);
+    document.querySelector("#resume")?.classList.toggle(DarkStyle["resume"], isDarkMode);
   }
  },[])
 
@@ -71,6 +72,7 @@ function NurseResume() {
 
   return (
     <div style={{ direction: "rtl" }}>
+      <Fade bottom distance="10%" duration={1500}>
       <section
         id="about"
         className={`${nurseProfile.about} ${nurseProfile.container} ${nurseProfile.uppersec}`}
@@ -144,7 +146,9 @@ function NurseResume() {
           </div> */}
         </div>
       </section>
+      </Fade>
 
+      <Fade top distance="10%" duration={1500}>
       <section
         id="resume"
         className={`${nurseProfile.resume} ${nurseProfile.container}`}
@@ -233,6 +237,8 @@ function NurseResume() {
           </div>
         </div>
       </section>
+      </Fade>
+      
     </div>
   );
 }

@@ -10,7 +10,7 @@ import  Sidebar  from '../../Components/NurseComponent/sidebar/Sidebar'
 import './Nurses.css'
 import {motion} from 'framer-motion'
 import DarkStyle from '../../Components/DarkMode/darkBtn.module.css'
-
+import Fade from 'react-reveal/Fade'
 
 function Nurses() {
     const dispatch = useDispatch();
@@ -35,8 +35,9 @@ function Nurses() {
     transition={{yoyo: Infinity}}
 style={{overflow: 'hidden'}}
     >
-    {/* <Navbar/> */}
+    <Fade top distance="10%" duration={1500}>
     <Header />
+    </Fade>
    
     <main id='main' className='d-flex main'>
     <div className="container">
@@ -44,15 +45,16 @@ style={{overflow: 'hidden'}}
                  
                  {
                   filteredNerses &&  filteredNerses.map((item, index) => {
-                   return <Card  data={item} key={index} />;
+                   return <Fade left distance="10%" duration={1500}> <Card  data={item} key={index} /> </Fade>;
                  })
                } 
                
 
            </div> 
     </div>
-     
+  <Fade right distance="10%" duration={1500}>
   <Sidebar/>
+  </Fade>
     </main>
    
     </motion.div>

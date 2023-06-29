@@ -315,6 +315,7 @@ import deviceForm from "./AskkDev.module.css";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { Link, NavLink } from "react-router-dom";
+import Fade from 'react-reveal/Fade'
 
 function AskDevice() {
   const navigate = useNavigate();
@@ -391,7 +392,7 @@ function AskDevice() {
 //   console.log(formik.errors);
 
   return (
-    <>
+    <Fade top distance="10%" duration={1500}>
       <div className={`${deviceForm.container} ${deviceForm.imageBody}`}>
         <div className={deviceForm.form}>
           <h2 className={deviceForm.sign}>أطلب جهاز طبي </h2>
@@ -619,7 +620,7 @@ function AskDevice() {
           </form>
         </div>
       </div>
-    </>
+    </Fade>
   );
 }
 

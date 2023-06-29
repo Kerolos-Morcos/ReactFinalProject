@@ -9,6 +9,8 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {motion} from 'framer-motion'
 import DarkStyle from '../DarkMode/darkBtn.module.css'
+import Slide from 'react-reveal/Slide'
+
 
 function CartComponent() {
 
@@ -109,6 +111,7 @@ function CartComponent() {
     transition={{yoyo: Infinity}}
 style={{overflow: 'hidden'}}
     >
+      <Slide bottom distance="10%" duration={1500}>
       <div className={CartStyle.card}>
         <div className={`${"row"} ${CartStyle.row}`}>
           <div className={`${"col-md-8"} ${CartStyle.cart}`}>
@@ -192,6 +195,7 @@ style={{overflow: 'hidden'}}
           </div>
         </div>
       </div>
+      </Slide>
 
     </motion.div>
   )

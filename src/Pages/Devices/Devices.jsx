@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getDevices } from '../../Redux/Slices/DeviceSlice'
 import {motion} from 'framer-motion'
 import DarkStyle from '../../Components/DarkMode/darkBtn.module.css'
+import Fade from 'react-reveal/Fade'
 
 function Devices() {
     const dispatch = useDispatch()
@@ -27,7 +28,10 @@ function Devices() {
         transition={{yoyo: Infinity}}
     style={{overflow: 'hidden'}}
         >
+            <Fade top distance="10%" duration={1500}>
+
             <Header />
+            </Fade>
             <Sidebar />
             <div id='DeviceCard' className='d-flex flex-wrap justify-content-evenly'>{
                 filteredDevices.map((dev,index) => {

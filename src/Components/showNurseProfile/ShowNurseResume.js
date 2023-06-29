@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { getNurseById } from "../../Redux/Slices/PatientSlice";
 import DarkStyle from '../DarkMode/darkBtn.module.css'
 import moment from "moment";
+import Fade from 'react-reveal/Fade'
 
 function ShowNurseResume() {
  
@@ -21,15 +22,16 @@ function ShowNurseResume() {
     dispatch(getNurseById(id));
     const isDarkMode = JSON.parse(localStorage.getItem("isDarkMode"));
     if(isDarkMode){
-      document.querySelector("#ShowNurseResumeHeadings").classList.toggle(DarkStyle["NurseResumeHeadings"], isDarkMode);
-      document.querySelector("#resume").classList.toggle(DarkStyle["resume"], isDarkMode);
+      document.querySelector("#ShowNurseResumeHeadings")?.classList.toggle(DarkStyle["NurseResumeHeadings"], isDarkMode);
+      document.querySelector("#resume")?.classList.toggle(DarkStyle["resume"], isDarkMode);
     }
   }, []);
 
   return (
     <>
     {nurseprofileid && (
-    <div style={{ direction: "rtl" }}>
+      <div style={{ direction: "rtl" }}>
+        <Fade bottom distance="10%" duration={1500}>
       <section
         id="about"
         className={`${nurseProfile.about} ${nurseProfile.container} ${nurseProfile.uppersec}`}
@@ -80,7 +82,9 @@ function ShowNurseResume() {
           </div>
         </div>
       </section>
+      </Fade>
 
+      <Fade top distance="10%" duration={1500}>
       <section
         id="resume"
         className={`${nurseProfile.resume} ${nurseProfile.container}`}
@@ -130,6 +134,7 @@ function ShowNurseResume() {
           </div>
         </div>
       </section>
+      </Fade>
     </div>
     )}
     </>

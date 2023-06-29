@@ -42,7 +42,7 @@ export const updatePatientInfo = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      alert();
+      // alert();
       // console.log(values);
       const token = localStorage.getItem("token");
       const decoded = jwtDecode(token);

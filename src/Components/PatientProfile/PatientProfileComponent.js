@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import ModalPost from "../Modal/Modal";
 import EditInfo from "./EditInfo";
+import Fade from 'react-reveal/Fade'
 
 // Swal
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import RadioGroupRating from "../../Pages/AddRating/AddRate";
+import moment from "moment/moment";
 
 const MySwal = withReactContent(Swal)
 
@@ -42,6 +44,7 @@ function PatientProfile() {
   const nursesBooking = useSelector((state) => state.PatientSlice.booking);
   const patientNotifications = useSelector((state) => state.PatientSlice.notification);
   // console.log("nursesBooking....",nursesBooking);
+  
   const dispatch = useDispatch();
   let info = patientes;
   useEffect(() => {
@@ -88,6 +91,7 @@ function PatientProfile() {
       <section className="pt-5" style={{ backgroundColor: "#eee" }} dir="rtl">
         <div className={"container py-5"}>
           <div className={"row"}>
+            <Fade right distance="10%" duration={1500}>
             <div className={"col-lg-4"}>
               <div className={"card mb-4"}>
                 <div className={"card-body text-center"}>
@@ -180,7 +184,7 @@ function PatientProfile() {
                                   className={"mb-0"}
                                   style={{ cursor: "pointer", color: "green" }}
                                 >
-                                  لقد قمت بطلب خدمة بتاريخ {item.createdAt} حالتة {item.patientStatus}
+                                  لقد قمت بطلب خدمة بتاريخ {moment(item.createdAt).format('DD-MM-YYYY')} حالتة {item.patientStatus}
                                 </a>
                               </li>
                                 )
@@ -273,6 +277,8 @@ function PatientProfile() {
                 </div>
               </div>
             </div>
+            </Fade>
+            <Fade left distance="10%" duration={1500}>
             <div className={"col-lg-8"}>
               <div className={"card mb-4"}>
                 <div className={"card-body"}>
@@ -385,6 +391,7 @@ function PatientProfile() {
                 </div>
               </div>
             </div>
+            </Fade>
           </div>
         </div>
       </section>

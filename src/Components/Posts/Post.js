@@ -13,6 +13,7 @@ import { json } from "react-router-dom";
 import { motion } from "framer-motion";
 import DarkStyle from "../DarkMode/darkBtn.module.css";
 import { search, filter, setFilteredPosts } from "../../Redux/Slices/PostSlice";
+import Fade from 'react-reveal/Fade'
 
 function Posts({ Socket }) {
   const dispatch = useDispatch();
@@ -268,6 +269,7 @@ const sideFormik = useFormik({
     >
       <div className="container">
         <div className=" d-flex">
+          <Fade bottom distance="10%" duration={1500}>
           <div className="col-md-11">
             <div className={PostStyle.Post_Body}>
               <div className={PostStyle.Post_Content}>
@@ -419,8 +421,10 @@ const sideFormik = useFormik({
               </div>
             </div>
           </div>
-
+          </Fade>
+          
           {/* Filter */}
+          <Fade right distance="10%" duration={1500}>
           <div className="col-md-2">
             <aside  dir="rtl">
               <div id="NurseSidebar" className={`${PostStyle.filter}`}>
@@ -482,6 +486,7 @@ const sideFormik = useFormik({
               </div>
             </aside>
           </div>
+          </Fade>
 
 
         </div>

@@ -7,6 +7,8 @@ import { addToCart } from '../../Redux/Slices/CartSlice'
 import { NavLink} from "react-router-dom";
 import { getDeviceById } from "../../Redux/Slices/DeviceSlice";
 import Devicedetails from '../DeviceDetails/Devicedetails';
+import Rotate from 'react-reveal/Rotate'
+
 
 // Toastify
 import { ToastContainer, toast } from 'react-toastify';
@@ -39,7 +41,7 @@ const notify = () =>
             <section className={`${["mt-2 mb-5"]} ${styles.all__devices}`}>
                 <div className={`${["container-fluid px-4"]}`}>
                 <ToastContainer className="mt-5" />
-                    <div className={`${["d-flex flex-wrap mx-1 justify-content-xlg-between justify-content-around"]}`}>
+                    <Rotate right distance="10%" duration={1500} className={`${["d-flex flex-wrap mx-1 justify-content-xlg-between justify-content-around"]}`}>
                         {/* card */}
                         <div className={`${["mb-4"]} ${styles.image_flip}`}>
                             <div className={`${["flip-0"]} ${styles.mainflip}`}>
@@ -92,7 +94,7 @@ const notify = () =>
                             </div>
                         </div>
                         {/* end card */}
-                    </div>
+                    </Rotate>
                 </div>
             </section>
             {/* end equipments */}

@@ -10,6 +10,7 @@ import AddEducation from "./AddEducation";
 import Rating from "./Rates";
 import WorkingTimes from './WorkingTimes'
 import DarkStyle from '../DarkMode/darkBtn.module.css'
+import Fade from 'react-reveal/Fade'
 
 // Modal Try
 import { Modal, Button } from "react-bootstrap";
@@ -42,12 +43,12 @@ function NurseProfile({ Socket }) {
     dispatch(getNurse()); // fire action
     const isDarkMode = localStorage.getItem("isDarkMode")
     if(isDarkMode){
-    document.querySelector("#MainProfileBackground").classList.toggle(DarkStyle["MainProfileBackground"], isDarkMode);
-    document.querySelector("#MainProfile").classList.toggle(DarkStyle["MainProfile"], isDarkMode);
-    document.querySelector("#NurseName").classList.toggle(DarkStyle["NurseName"], isDarkMode);
-    document.querySelector("#NurseCounter").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
-    document.querySelector("#NurseCounterFastService").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
-    document.querySelector("#NurseCounterHomeShift").classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#MainProfileBackground")?.classList.toggle(DarkStyle["MainProfileBackground"], isDarkMode);
+    document.querySelector("#MainProfile")?.classList.toggle(DarkStyle["MainProfile"], isDarkMode);
+    document.querySelector("#NurseName")?.classList.toggle(DarkStyle["NurseName"], isDarkMode);
+    document.querySelector("#NurseCounter")?.classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#NurseCounterFastService")?.classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
+    document.querySelector("#NurseCounterHomeShift")?.classList.toggle(DarkStyle["NurseCounter"], isDarkMode);
     }
     // console.log("object");
   }, []);
@@ -91,6 +92,7 @@ function NurseProfile({ Socket }) {
 
   return (
     <div id="MainProfileBackground">
+      <Fade top distance="10%" duration={1500}>
       <section
         style={{ direction: "rtl" }}
         className={`${nurseProfilee.profile_page} ${nurseProfilee.container}`}
@@ -282,6 +284,7 @@ function NurseProfile({ Socket }) {
           </div>
         </div>
       </section>
+      </Fade>
     </div>
   );
 }

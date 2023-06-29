@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import ArtStyle from './medArtical.module.css'
 import {motion} from 'framer-motion'
 import DarkStyle from '../DarkMode/darkBtn.module.css'
+import Slide from 'react-reveal/Slide'
+
 
 function MedArtical() {
   useEffect(()=>{
@@ -22,6 +24,7 @@ style={{overflow: 'hidden'}}
   <div className="container">
 <div className='row'>
 
+<Slide left distance="10%" duration={1500}>
 <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -36,14 +39,9 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
-
-   
-
-
-
-  
-
+    </Slide>
     
+    <Slide top distance="10%" duration={1500}>
     <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -59,7 +57,9 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
+    </Slide>
 
+<Slide bottom distance="10%" duration={1500}>
     <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -74,7 +74,9 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
+    </Slide>
 
+<Slide right distance="10%" duration={1500}>
     <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -90,10 +92,9 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
+    </Slide>
 
-
-
-
+    <Slide left distance="10%" duration={1500}>
     <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -109,14 +110,9 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
+    </Slide>
 
-
-    
-
-
-   
-
-
+    <Slide top distance="10%" duration={1500}>
     <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -133,9 +129,9 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
+    </Slide>
 
-
-   
+    <Slide bottom distance="10%" duration={1500}>
     <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -151,8 +147,9 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
+    </Slide>
 
-
+    <Slide right distance="10%" duration={1500}>
     <div className={`${ArtStyle["card"]}`}>
       <figure className={`${ArtStyle["card__thumb"]}`}>
         <img
@@ -168,7 +165,7 @@ style={{overflow: 'hidden'}}
         </figcaption>
       </figure>
     </div>
-
+    </Slide>
 
 
     </div>

@@ -73,6 +73,8 @@ import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import {motion} from 'framer-motion'
 import DarkStyle from '../../Components/DarkMode/darkBtn.module.css'
+import Slide from 'react-reveal/Slide'
+import Fade from 'react-reveal/Fade'
 
 function Check() {
   const navigate = useNavigate();
@@ -150,6 +152,7 @@ function Check() {
             checkStyle.BiggestContainer
           }`}
         >
+          <Slide left distance="10%" duration={1500}>
           <div className="mt-5 mb-5">
             <PaymentPage />
             <a className={checkStyle.KeepGoingAndPay}>
@@ -163,7 +166,9 @@ function Check() {
           
              </a>
           </div>
+          </Slide>
 
+          <Fade top distance="10%" duration={1500}>
           <div className={checkStyle.receipt}>
             <div id="CheckOutInfo" className={checkStyle.columnItems}>
               <div>
@@ -238,6 +243,8 @@ function Check() {
                 )}
             </div>
           </div>
+          </Fade>
+
         </div>
       </div>
     </motion.div>

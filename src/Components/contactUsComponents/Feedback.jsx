@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import {motion} from 'framer-motion'
 import DarkStyle from '../DarkMode/darkBtn.module.css'
 import { useEffect } from 'react';
+import Fade from 'react-reveal/Slide'
 
 function Feedback() {
     useEffect(() => {
@@ -34,9 +35,13 @@ function Feedback() {
         transition={{yoyo: Infinity}}
     style={{overflow: 'hidden'}}
         >
+            <Fade left distance="10%" duration={1500}>
             <figure className={"col-lg-6 col-md-10 col-sm-10 col-10"}>
                 <div className={feedBack.main_img}></div>
             </figure>
+            </Fade>
+
+            <Fade right distance="10%" duration={1500}>
             <section className={`${feedBack.contact__us} ${"col-12 col-lg-5 ps-lg-5 pe-lg-3"}`}>
                 <div className={"container"}>
                     <h1 className={"mt-4 mb-5"}>تواصل معنا</h1>
@@ -88,6 +93,8 @@ function Feedback() {
                     </form>
                 </div>
             </section>
+            </Fade>
+
         </motion.div>
     )
 }
