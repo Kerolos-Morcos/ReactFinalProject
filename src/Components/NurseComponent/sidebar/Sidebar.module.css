@@ -50,7 +50,7 @@
  .filter .form-main button a {
   color: #EEED3F !important;
 }
-.filter .form-main button a:hover{
+.filter .form-main .clear:hover{
   color: rgb(255, 60, 60) !important;
 }
 @media screen and (max-width: 767px) {
@@ -96,12 +96,12 @@
   border-color: transparent;
   font-weight: 500;
 }
- .filter .form-main .clear a {
+ .filter .form-main .clear {
   text-decoration: none;
-  color: white;
+  color: #EEED3F !important;
   transition: 0.3s;
 }
- .filter .form-main .clear a:hover {
+ .filter .form-main .clear:hover {
   border-bottom: 2px solid white;
   padding-bottom: 8px;
 }

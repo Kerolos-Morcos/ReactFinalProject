@@ -166,7 +166,7 @@ export default function Sidebar() {
                 className={sidebarStyle.clear}
                 onClick={() => dispatch(getAllNurses())}
               >
-                <a href="">مسح البحث</a>
+                مسح البحث
               </button>
               <button className={sidebarStyle.apply} type="submit">
                 تطبيق
