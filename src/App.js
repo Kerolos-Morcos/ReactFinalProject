@@ -39,31 +39,18 @@ import DarkMode from './Components/DarkMode/DarkBTN';
 // Socket IO
 import { io } from "socket.io-client";
 import Chat from './Components/ChatComponent/Chat';
+import LoadingSpinner from './Components/Spinner/Spinner';
 
 function App() {
-  // Socket IO
-  // const [username, setUsername] = useState('');
-  // const [user, setUser] = useState('');
 const [Socket, setSocket] = useState(null)
-
+const [isLoading, setLoading] = useState(true)
 
   useEffect(()=>{
      setSocket(io('http://localhost:3500'));
-    //  console.log("nufftfgywfgyfw");
+     setTimeout(()=>{
+       setLoading(false);
+     },2000)
   },[]);
-
-  // useEffect(()=>{
-  //   Socket?.emit("newUser", user)
-  //       // console.log(user)
-  // },[Socket, user]);
-  // Socket IO
-
-
-
-
-
-
-
 
 
 
@@ -76,26 +63,19 @@ const [Socket, setSocket] = useState(null)
       setFlag(true);
     } else {
       setFlag(false);
-      
     }
   }, [location]);
 
-  //////CHAT 
-  
-// const username = JSON.parse(localStorage.getItem("user")).name;
-// const room = 1;
-// // const [showChat, setShowChat] = useState(false);
 
-// const joinRoom = () => {
-//   if (username !== "" && room !== "") {
-//     Socket.emit("join_room", room);
-//     // setShowChat(true);
-//   }
-// };
 
 
   return (
-    <div className="App">
+      isLoading ?  (
+        <LoadingSpinner/>
+      ) : (
+
+        <div className="App">
+      
       {flag && <Navbar Socket={Socket} />}
       {flag && <DarkMode/>}  
       <Scroll/> 
@@ -128,7 +108,7 @@ const [Socket, setSocket] = useState(null)
       {flag && <Footer />}
     </AnimatePresence>
     </div>
-
+      )
   );
 }
 

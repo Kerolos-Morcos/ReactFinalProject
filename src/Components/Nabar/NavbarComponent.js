@@ -8,7 +8,7 @@ import CartComponent from "../Cart/Cart";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import axios from "axios";
-
+ 
 // SOCKET IO
 function Navbar({ Socket }) {
   let token;
@@ -367,7 +367,7 @@ function Navbar({ Socket }) {
                                               >
                                               <i class="fa-solid fa-circle-xmark fa-fade fa-xl" style={{ color: '#eb3b0f'}}></i>
                                               </a>
-                                            :  {notification.times} بطلبك في ميعاد  {notification.patientName} قام 
+                                            :  {notification.times}  قام   {notification.patientName} بطلبك في ميعاد     
                                             </div>
                                           </p>
                                     </a>                        

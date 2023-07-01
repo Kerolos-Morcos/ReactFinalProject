@@ -5,11 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 // import { getNurse } from "../../Redux/Slices/NurseProfileR";
 import ShowRating from "./ShowRates";
 import ShowNurseResume from "./ShowNurseResume";
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { getNurseById } from "../../Redux/Slices/PatientSlice";
 import { motion } from 'framer-motion'
 // New For Chat
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import Chat from "../ChatComponent/Chat";
 import Rating from "../nurseProfile/Rates";
@@ -18,6 +18,9 @@ import Fade from 'react-reveal/Fade'
 // New For Chat
 
 function ShowNurseProfile({ data, Socket }) {
+  const location = useLocation();
+  const page = location.pathname.split('/')[2];
+  console.log(page);
   // console.log(data);
   // Chat
   const username = JSON.parse(localStorage.getItem("user")).name;
@@ -25,10 +28,10 @@ function ShowNurseProfile({ data, Socket }) {
   const room = 2;
 
   const { id } = useParams();
-  // console.log(id);
+  console.log(id);
   // console.log(Socket);
   const nurseprofileid = useSelector((state) => state.PatientSlice.device);
-  // console.log(nurseprofileid);
+  console.log(nurseprofileid);
 
   const url = "http://localhost:3500/";
   const dispatch = useDispatch();
@@ -91,6 +94,10 @@ function ShowNurseProfile({ data, Socket }) {
     setShowModal(false);
   };
 
+  const nav = useNavigate()
+  function goTo() {
+    nav(`/FormNurse/${id}`, { state: nurseprofileid })
+  }
   return (
     <motion.div id="MainShowProfileBackground"
       initial={{ opacity: 0 }}
@@ -163,10 +170,12 @@ function ShowNurseProfile({ data, Socket }) {
                         {/* <NavLink to="Chat" className={`${"btn"} ${nurseProfilee['btn_outline_primary']}`} onClick={() => {joinRoom();  }}>
                             تواصل  <i className="fa-solid fa-comment-dots "></i> 
                           </NavLink> */}
+ 
+  <Button onClick={goTo} className={`${"btn me-2"} ${nurseProfilee['btn_outline_secondary']}`}>
+    ارسل طلب <i className="fa-solid fa-hand fa-bounce"></i>
+  </Button>
+ 
 
-                        <NavLink to={`/FormNurse/${nurseprofileid}`} className={`${"btn me-2"} ${nurseProfilee['btn_outline_secondary']}`}>
-                          ارسل طلب <i className="fa-solid fa-hand fa-bounce"></i>
-                        </NavLink>
 
                         {/* Modal */}
                         <Modal show={showModal}>

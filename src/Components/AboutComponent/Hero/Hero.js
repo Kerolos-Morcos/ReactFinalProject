@@ -8,7 +8,6 @@ import DarkStyle from '../../DarkMode/darkBtn.module.css'
 import { useEffect } from 'react'
 
 
-
 function Hero() {
   useEffect(()=>{
     // Dark Mode
@@ -20,6 +19,7 @@ function Hero() {
   return (
     <>
     <body dir="rtl">
+
     <div id='AboutHero' className={herostyle.hero_area}>  
        
         <section className={herostyle.hero_section}>
@@ -51,6 +51,7 @@ function Hero() {
                 </div>
             </section>
               </div>
+
               </body>
               </>
   )

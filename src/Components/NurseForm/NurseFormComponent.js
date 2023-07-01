@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import nurseformstyle from './NurseFormComponent.module.css'
@@ -11,6 +11,9 @@ import Swal from 'sweetalert2'
 
 function OnService({Socket}) {
 
+    useEffect(()=>{
+        window.scrollTo(0,0)
+    },[])
     // console.log("socket.....",Socket);
     const loc = useLocation()
     // console.log(loc.state);

@@ -91,20 +91,20 @@ const sideFormik = useFormik({
 
   // ...
 
-  useEffect(() => {
-    Socket?.on("getNotification", (data) => {
-      // Handle received notifications
-    });
+  // useEffect(() => {
+  //   Socket?.on("getNotification", (data) => {
+  //     // Handle received notifications
+  //   });
 
-    Socket?.on("disconnect", () => {
-      // Handle Socket disconnect
-    });
+  //   Socket?.on("disconnect", () => {
+  //     // Handle Socket disconnect
+  //   });
 
-    return () => {
-      Socket?.off("getNotification");
-      Socket?.off("disconnect");
-    };
-  }, [Socket]);
+  //   return () => {
+  //     Socket?.off("getNotification");
+  //     Socket?.off("disconnect");
+  //   };
+  // }, [Socket]);
 
   //////////////////////////////////
 
@@ -114,11 +114,6 @@ const sideFormik = useFormik({
   const nameOfNurse = JSON.parse(localStorage.getItem("user"));
   let [send, setSend] = useState(false);
   const [currentTime, setCurrentTime] = useState(moment.utc());
-
-
-
-
-
 
 
 
@@ -166,14 +161,7 @@ const sideFormik = useFormik({
             commentId: lastComment._id,
           });
 
-          Socket.emit("sendNotificationComment", {
-            postNameSender: res.data.patientName,
-            patientId: res.data.patientId,
-            postNurseName: lastComment.nurseName,
-            nurseComment: lastComment.comment,
-            postTitle: res.data.title,
-            nurseImg: lastComment.nurseImg,
-          });
+          
 
           getPost([...posts]);
           // console.log(res.data.comments[6].nurseName);

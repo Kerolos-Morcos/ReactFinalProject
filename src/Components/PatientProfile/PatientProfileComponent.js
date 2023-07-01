@@ -59,31 +59,32 @@ function PatientProfile() {
     return <RadioGroupRating size="large" onRatingSelected={onRatingSelected} />;
   };
 
-  const handleRating = (id) => {
-  //  console.log(id);
-    MySwal.fire({
-      title: <p>ما تقييمك؟</p>,
-      customClass: {
-        confirmButton: 'my_ok_button_class',
-      },
-      didOpen: () => {
-        const confirmButton = Swal.getConfirmButton();
-        confirmButton.style.display = 'none';
-      },
-      html: <RatingModal id={id} onRatingSelected={(rating) => {
-        if (rating) {
-          // setRateNum=rating
-          // const ratenumbering=rating
-          dispatch(addRateToNurse({ NurseProfileId: id, ratenumbering: rating })).then(()=>dispatch(getBookindNurse()))
-
-          // dispatch(addRateToNurse({ NurseProfileId: id, rate: rating }))
-          // console.log(id);
-          // console.log(`Rating selected: ${rating}`);
-          // Process the rating, e.g. send it to a server
-        }
-      }} />,
-    });
-  };
+  const handleRating = (item) => {
+    //  console.log(id);
+      MySwal.fire({
+        title: <p>ما تقييمك؟</p>,
+        customClass: {
+          confirmButton: 'my_ok_button_class',
+        },
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.display = 'none';
+        },
+        html: <RatingModal id={item._id} onRatingSelected={(rating) => {
+          if (rating) {
+            dispatch(addRateToNurse({ NurseProfileId: item._id, ratenumbering: rating })).then(()=>dispatch(getBookindNurse()))
+            Swal.fire({
+              position: 'top',
+              icon: 'success',
+              // title: ` تم تقييم ${item.name} ب نجوم بنجاح `,
+              title: `تم تقييم ${item.name} ب ${rating} نجوم بنجاح`,
+              showConfirmButton: false,
+              timer: 2000
+          })
+          }
+        }} />,
+      });
+    };
 
   ////////////////////////
   return (
@@ -375,7 +376,7 @@ function PatientProfile() {
                                 <h1 style={{color: '#041858', fontSize: '1.3rem', padding: '0px', margin: '8px auto'}}>
                                   {item.name}
                                 </h1>
-                                <button onClick={()=>handleRating(item._id)} className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
+                                <button onClick={()=>handleRating(item)} className="p-2 ps-3 pe-3 mb-3" style={{backgroundColor: "#00A02B", color: "white", borderColor: '#00A02B', border:'1px solid', borderRadius: '8px' }}>
                                   قيّمه الآن
                                 </button>
                               </div>

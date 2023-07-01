@@ -87,10 +87,11 @@
     border: 1px #041858 solid;
     transition: all 0.4s ease 0s;
     border-radius: 0.25rem;
+    cursor: pointer;
   }
   .doctor_social_icons a:hover {
     background: #00A02B !important;
-    color: #fff;
+    color: #fff !important;
     border: 1px #00A02B solid;
   }
   .doctor_social_icons a>i {

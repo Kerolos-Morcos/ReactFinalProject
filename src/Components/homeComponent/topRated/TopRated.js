@@ -22,6 +22,7 @@ import {
 } from "swiper";
 import Rating from "../../nurseProfile/Rates";
 import DarkStyle from '../../DarkMode/darkBtn.module.css'
+import { NavLink,useNavigate } from "react-router-dom";
 
 // END SWIPER
 
@@ -46,6 +47,12 @@ function TopRated() {
       document.querySelector("#TopRated")?.classList.toggle(DarkStyle["TopRated"], isDarkMode);
     }
   }, []);
+
+  const nav = useNavigate()
+  function goTo(user) {
+    nav(`/FormNurse/${user._id}`, { state: user })
+    console.log("user....",user);
+  }
 
   return (
     <div id="TopRated">
@@ -149,10 +156,9 @@ function TopRated() {
                       </span>
                     </div>
                     <div className={`${TopStyle.doctor_social_icons}`}>
-                      <a href="#">
+                      <a onClick={()=> goTo(user)}>
                         <i className={"fa fa-user-nurse fa-bounce"}></i> بادر
                         بالحجز
-                        {/* <i className="fab fa-facebook-f" /> */}
                       </a>
                       {/* <a href="#">
                 <i className="fab fa-twitter" />

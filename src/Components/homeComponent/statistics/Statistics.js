@@ -30,6 +30,7 @@ function Statistics() {
       try {
         const response = await axios.get('http://localhost:3500/patient/homeroute');
         setStatics(response.data.data);
+        // console.log(response.data);
       } catch (error) {
         console.log(error);
       }
