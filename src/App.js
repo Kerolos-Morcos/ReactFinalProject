@@ -49,7 +49,7 @@ const [isLoading, setLoading] = useState(true)
      setSocket(io('http://localhost:3500'));
      setTimeout(()=>{
        setLoading(false);
-     },2000)
+     },1000)
   },[]);
 
 

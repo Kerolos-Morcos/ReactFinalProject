@@ -34,9 +34,7 @@
   }
 
   body,
-  nav,
-  section,
-  footer{
+  nav{
     transition: all 0.3s ease-in-out;
   }
 
@@ -281,4 +279,7 @@ color: white !important;
 }
 .AboutOurServicesCard img{
   box-shadow: none !important;
+}
+.Footer{
+  background-color: #000000 !important;
 }
