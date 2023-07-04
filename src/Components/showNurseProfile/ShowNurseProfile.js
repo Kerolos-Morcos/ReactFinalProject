@@ -23,7 +23,7 @@ function ShowNurseProfile({ data, Socket }) {
   console.log(page);
   // console.log(data);
   // Chat
-  const username = JSON.parse(localStorage.getItem("user")).name;
+  const username = JSON.parse(localStorage.getItem("user"))?.name;
   const userChat = JSON.parse(localStorage.getItem("user"));
   const room = 2;
 
