@@ -68,7 +68,7 @@ a .material-icons {
 }
 
 .main {
-    background: #FFF;
+    background-color: #ffffff;
     position: relative;
     z-index: 3;
 }

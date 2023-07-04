@@ -33,10 +33,10 @@
     transition: opacity 0.5s ease-out;
   }
 
-  body,
+  /* body,
   nav{
     transition: all 0.3s ease-in-out;
-  }
+  } */
 
 
   body.dark-mode, nav.dark-mode, footer.dark-mode

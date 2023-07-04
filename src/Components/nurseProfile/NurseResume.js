@@ -124,7 +124,7 @@ function NurseResume() {
                 {/* <li><i class="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>email@example.com</span> */}
                 <li>
                   <i className={"bx bx-chevron-left"} />
-                  <strong>الحالة : </strong> <span>متوفر</span>
+                  <strong>سنوات الخبرة : </strong> <span>{info.experienceYear}</span>
                 </li>
               </ul>
             </div>

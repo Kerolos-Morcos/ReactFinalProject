@@ -33,9 +33,8 @@ function Card({ data }) {
               <Rating rate={data.rates} />
             </div>
             <br />
-            {/* <span className={cardNurseStyle["preview-card__code"]}>
-           <img src={imgex} alt=""/>{data.numOfExperience
-}</span> */}
+            <span className={cardNurseStyle["preview-card__code"]}>
+           <img src={imgex} alt=""/>: {data.experienceYear} سنوات خبرة</span>
             <div className={cardNurseStyle["preview-card__text"]}>
               <p className='pb-3'>
                 <img src={imgc} alt="" /> : {data.phoneNumber}

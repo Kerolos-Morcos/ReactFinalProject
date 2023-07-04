@@ -23,6 +23,7 @@ const DarkMode = () => {
   }, []);
 
   useEffect(() => {
+ 
     document.body.classList.toggle(ScrollStyle["dark-mode"], isDarkMode);
     document.querySelector("nav")?.classList.toggle(ScrollStyle["dark-mode"], isDarkMode);
     // document.querySelector("section")?.classList.toggle(ScrollStyle["dark-mode"], isDarkMode);
@@ -105,8 +106,11 @@ const DarkMode = () => {
     document.querySelector("#AboutOurServicesCardFive")?.classList.toggle(ScrollStyle["AboutOurServicesCard"], isDarkMode);
     document.querySelector("#AboutOurServicesCardSix")?.classList.toggle(ScrollStyle["AboutOurServicesCard"], isDarkMode);
     // About
+ 
+ 
 
 }, [isDarkMode]);
+
 
   return (
     <div

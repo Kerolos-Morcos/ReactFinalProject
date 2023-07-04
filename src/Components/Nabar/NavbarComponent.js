@@ -8,7 +8,7 @@ import CartComponent from "../Cart/Cart";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import axios from "axios";
- 
+
 // SOCKET IO
 function Navbar({ Socket }) {
   let token;
@@ -53,42 +53,46 @@ function Navbar({ Socket }) {
         setNotifications((prevNotifications) => [...prevNotifications, data]);
       }
     });
-  
+
     Socket?.on("getNotificationBookNurse", (data) => {
       if (data.NurseId == token._id) {
         setNotificationBook((prevNotifications) => {
           const updatedNotifications = [...prevNotifications, data];
-          localStorage.setItem("notificationBook", JSON.stringify(updatedNotifications));
+          localStorage.setItem(
+            "notificationBook",
+            JSON.stringify(updatedNotifications)
+          );
           return updatedNotifications;
         });
       }
     });
-  
+
     return () => {
       Socket?.off("getNotification");
       Socket?.off("getNotificationBookNurse");
     };
   }, [Socket]);
 
-  ///to save in the notification in localstorage 
+  ///to save in the notification in localstorage
   useEffect(() => {
-    const storedNotificationBook = JSON.parse(localStorage.getItem("notificationBook"));
+    const storedNotificationBook = JSON.parse(
+      localStorage.getItem("notificationBook")
+    );
     if (storedNotificationBook) {
       setNotificationBook(storedNotificationBook);
     }
   }, []);
 
-    // Chat
-    // Socket?.on("getNotificationChat", (data) => {
-    //   // console.log("before",data);
-    //   // console.log();
-    //   if(data.userId == token._id)
-    //   {
-    //     // console.log("after",data);
-    //     setNotificationChat((prevNotificationsChat) => [...prevNotificationsChat, data]);
-    //   }
-    // });
-
+  // Chat
+  // Socket?.on("getNotificationChat", (data) => {
+  //   // console.log("before",data);
+  //   // console.log();
+  //   if(data.userId == token._id)
+  //   {
+  //     // console.log("after",data);
+  //     setNotificationChat((prevNotificationsChat) => [...prevNotificationsChat, data]);
+  //   }
+  // });
 
   //   return () => {
   //     Socket?.off("getNotification");
@@ -96,25 +100,34 @@ function Navbar({ Socket }) {
   //   };
   // }, [Socket]);
 
-
-// Edited By Hany
+  // Edited By Hany
   const acceptBooking = async (notification) => {
-    console.log("acceptBooking..",notification.bookId);
-    await axios.put(`http://localhost:3500/book/bookings/${notification.bookId}`,{
-      status: "accepted"
-    }).then((res)=>{
-      console.log(res.data);
-      const updatedNotifications = notificationBook.filter((item) => item._id !== notification._id);
-      setNotificationBook(updatedNotifications);
-      const storedNotificationBook = JSON.parse(localStorage.getItem("notificationBook"));
-      if (storedNotificationBook) {
-        const updatedLocalStorage = storedNotificationBook.filter((item) => item._id !== notification._id);
-        localStorage.setItem("notificationBook", JSON.stringify(updatedLocalStorage));
-      }
-    })
-  }
-// End Edited By Hany
-
+    console.log("acceptBooking..", notification.bookId);
+    await axios
+      .put(`http://localhost:3500/book/bookings/${notification.bookId}`, {
+        status: "accepted",
+      })
+      .then((res) => {
+        console.log(res.data);
+        const updatedNotifications = notificationBook.filter(
+          (item) => item._id !== notification._id
+        );
+        setNotificationBook(updatedNotifications);
+        const storedNotificationBook = JSON.parse(
+          localStorage.getItem("notificationBook")
+        );
+        if (storedNotificationBook) {
+          const updatedLocalStorage = storedNotificationBook.filter(
+            (item) => item._id !== notification._id
+          );
+          localStorage.setItem(
+            "notificationBook",
+            JSON.stringify(updatedLocalStorage)
+          );
+        }
+      });
+  };
+  // End Edited By Hany
 
   // const acceptBooking= async (id) => {
   //   console.log("acceptBooking..",id);
@@ -125,19 +138,52 @@ function Navbar({ Socket }) {
   //   })
   // }
   const refuseBooking = (notification) => {
-    const updatedNotifications = notificationBook.filter((item) => item._id !== notification._id);
+    const updatedNotifications = notificationBook.filter(
+      (item) => item._id !== notification._id
+    );
     setNotificationBook(updatedNotifications);
-    const storedNotificationBook = JSON.parse(localStorage.getItem("notificationBook"));
+    const storedNotificationBook = JSON.parse(
+      localStorage.getItem("notificationBook")
+    );
     if (storedNotificationBook) {
-      const updatedLocalStorage = storedNotificationBook.filter((item) => item._id !== notification._id);
-      localStorage.setItem("notificationBook", JSON.stringify(updatedLocalStorage));
+      const updatedLocalStorage = storedNotificationBook.filter(
+        (item) => item._id !== notification._id
+      );
+      localStorage.setItem(
+        "notificationBook",
+        JSON.stringify(updatedLocalStorage)
+      );
     }
   };
 
   // CART BADGE
   const [cartCount, setCartCount] = useState(5);
   const { cart } = useSelector((state) => state.CartSlice);
-  const api = 'http://localhost:3500/'
+  const api = "http://localhost:3500/";
+
+  // New From Hany (PostID)
+  function handleNotificationClick(notification, index) {
+    const postId = notification.postId;
+    const commentId = notification.commentId;
+    const url = `/Posts/${postId}/${commentId}?scrollTo=${commentId}`;
+    window.history.pushState(null, null, url);
+    setTimeout(() => {
+      const commentEl = document.getElementById(`comment-${commentId}`);
+      if (commentEl) {
+        commentEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 1000);
+    setNotifications((prevNotifications) => {
+      const updatedNotificationComment = prevNotifications.filter(
+        (_, i) => i !== index
+      );
+      localStorage.setItem(
+        "notificationComment",
+        JSON.stringify(updatedNotificationComment)
+      );
+      return updatedNotificationComment;
+    });
+  }
 
   return (
     <>
@@ -299,7 +345,6 @@ function Navbar({ Socket }) {
                             className={`${NavStyle.Notify} dropdown ${NavStyle.dropdown}`}
                           >
                             <button
-                              
                               className={`${"btn dropdown-toggle"} ${
                                 NavStyle["dropdown-toggle"]
                               } ${NavStyle["btn"]}`}
@@ -313,17 +358,22 @@ function Navbar({ Socket }) {
                                 </button> */}
                               <i className="fa fa-bell text-white fa-lg "></i>
                               {notifications.length > 0 && (
-                                <div className={NavStyle.counter}>{notifications.length}</div>
+                                <div className={NavStyle.counter}>
+                                  {notifications.length}
+                                </div>
                               )}
-                              
+
                               {notificationChat.length > 0 && (
-                                <div className={NavStyle.counter}>{notificationChat.length}</div>
+                                <div className={NavStyle.counter}>
+                                  {notificationChat.length}
+                                </div>
                               )}
-                              
+
                               {notificationBook.length > 0 && (
-                                <div className={NavStyle.counter}>{notificationBook.length}</div>
+                                <div className={NavStyle.counter}>
+                                  {notificationBook.length}
+                                </div>
                               )}
-                              
                             </button>
                             <ul
                               className={`${"dropdown-menu"} ${
@@ -333,45 +383,83 @@ function Navbar({ Socket }) {
                             >
                               {notifications.map((notification, index) => (
                                 <div key={index}>
-                                  <li className={`${NavStyle.NotificationLISTS}`}>
-                                    <a href="" className={NavStyle.NotificationIMG}> 
-                                          <p className={NavStyle.NotifyText}>
-                                              
-                                             : قام {notification.postNurseName}  بالتعليق علي منشورك بعنوان <img src={`${api}${notification.nurseImg}`} /> <br/>   {" "}
-                                            <span> {notification.postTitle} </span> 
-                                          </p>
-                                    </a>                        
-                                  <span className={NavStyle.BordersBottoms}></span>
+                                  <li
+                                    className={`${NavStyle.NotificationLISTS}`}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      handleNotificationClick(
+                                        notification,
+                                        index
+                                      );
+                                    }}
+                                  >
+                                    <Link
+                                      to={`/Posts/${notification.postId}/${notification.commentId}?scrollTo=${notification.commentId}`}
+                                      className={NavStyle.NotificationIMG}
+                                    >
+                                      <p className={NavStyle.NotifyText}>
+                                        بالتعليق على منشورك بعنوان{" "}
+                                        {notification.postNurseName} : قام{" "}
+                                        <img
+                                          src={`${api}${notification.nurseImg}`}
+                                        />
+                                        <br />
+                                        <span>{notification.postTitle}</span>
+                                      </p>
+                                    </Link>
+                                    <span
+                                      className={NavStyle.BordersBottoms}
+                                    ></span>
                                   </li>
                                 </div>
                               ))}
                               {/* nurse Booking */}
                               {notificationBook.map((notification, index) => (
                                 <div key={index}>
-                                  <li className={`${NavStyle.NotificationLISTS}`}>
-                                    <a href="" className={NavStyle.NotificationIMG}> 
-                                          <p className={NavStyle.NotifyText}>
-                                              
-                                            <div className="d-flex">
-                                            <a onClick={(e) => {
-                                              console.log("notificationBook.bookId in the button",notification.bookId);
+                                  <li
+                                    className={`${NavStyle.NotificationLISTS}`}
+                                  >
+                                    <a
+                                      href=""
+                                      className={NavStyle.NotificationIMG}
+                                    >
+                                      <p className={NavStyle.NotifyText}>
+                                        <div className="d-flex">
+                                          <a
+                                            onClick={(e) => {
+                                              console.log(
+                                                "notificationBook.bookId in the button",
+                                                notification.bookId
+                                              );
                                               e.preventDefault();
                                               acceptBooking(notification);
-                                            }}>
-                                              <i className="fa-solid fa-circle-check fa-fade fa-xl" style={{ color: "#00a02b" }}></i>
-                                            </a>
-                                              <a onClick={(e)=>{
-                                                e.preventDefault();
-                                               refuseBooking(notification)} 
-                                              }
-                                              >
-                                              <i class="fa-solid fa-circle-xmark fa-fade fa-xl" style={{ color: '#eb3b0f'}}></i>
-                                              </a>
-                                            :  {notification.times}  قام   {notification.patientName} بطلبك في ميعاد     
-                                            </div>
-                                          </p>
-                                    </a>                        
-                                  <span className={NavStyle.BordersBottoms}></span>
+                                            }}
+                                          >
+                                            <i
+                                              className="fa-solid fa-circle-check fa-fade fa-xl"
+                                              style={{ color: "#00a02b" }}
+                                            ></i>
+                                          </a>
+                                          <a
+                                            onClick={(e) => {
+                                              e.preventDefault();
+                                              refuseBooking(notification);
+                                            }}
+                                          >
+                                            <i
+                                              class="fa-solid fa-circle-xmark fa-fade fa-xl"
+                                              style={{ color: "#eb3b0f" }}
+                                            ></i>
+                                          </a>
+                                          : {notification.times} قام{" "}
+                                          {notification.patientName} بطلبك في
+                                          ميعاد
+                                        </div>
+                                      </p>
+                                    </a>
+                                    <span
+                                      className={NavStyle.BordersBottoms}
+                                    ></span>
                                   </li>
                                 </div>
                               ))}

@@ -75,7 +75,7 @@ function CartComponent() {
 
   const handleEmptyCart = () => {
     MySwal.fire({
-      title: <h4>هل انت واثق من حذف كل منتجاتك من السلة ؟</h4>,
+      title: <h4>هل انت واثق من حذف كل منتجاتك بالسلة ؟</h4>,
       confirmButtonText: 'حذف الكل',
       cancelButtonText: 'تراجع',
       customClass: {

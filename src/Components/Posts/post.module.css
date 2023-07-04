@@ -424,10 +424,10 @@
     margin-top: 30px;
     margin-bottom: 25px;
   }
-   .filter .form-main .clear {
+   .filter .clear {
     color: #EEED3F !important;
   }
-  .filter .form-main .clear:hover{
+  .filter .clear:hover{
     color: rgb(255, 60, 60) !important;
   }
   @media screen and (max-width: 767px) {
@@ -461,17 +461,17 @@
     text-decoration: none;
     color: white;
   }
-   .filter .form-main .clear {
+   .filter .clear {
     background-color: transparent;
     border-color: transparent;
     font-weight: 500;
   }
-   .filter .form-main .clear  {
+   .filter .clear  {
     text-decoration: none;
     color: white;
     transition: 0.3s;
   }
-   .filter .form-main .clear:hover {
+   .filter .clear:hover {
     border-bottom: 2px solid white;
     padding-bottom: 8px;
   }

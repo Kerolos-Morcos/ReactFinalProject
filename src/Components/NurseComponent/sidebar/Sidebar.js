@@ -28,12 +28,12 @@ export default function Sidebar() {
   let schema = Yup.object().shape({
     rates: Yup.number().required("Rate is required"),
     gender: Yup.string().required("gender is required"),
-    address: Yup.string().required("Region is required"),
+    region: Yup.string().required("Region is required"),
   });
   const formik = useFormik({
     initialValues: {
       rates: "",
-      address: "",
+      region: "",
       gender: "",
     },
     validationSchema: schema,
@@ -43,11 +43,11 @@ export default function Sidebar() {
       axios.post("http://localhost:3500/nurse/filter", values).then((res) => {
         filtering(res.data.data);
         console.log(res.data.data);
-        if (res.data.success === true) {
-          alert(res.data.message);
-        } else {
-          alert(res.data.message);
-        }
+        // if (res.data.success === true) {
+        //   alert(res.data.message);
+        // } else {
+        //   alert(res.data.message);
+        // }
       });
     },
   });
@@ -95,7 +95,7 @@ export default function Sidebar() {
                 <option value={3}>3.0+</option>
                 <option value={2}>2.0+</option>
                 <option value={1}>1.0+</option>
-                <option value={0}>0</option>
+                {/* <option value={0}>0</option> */}
               </select>
             </div>
             <hr />
@@ -108,14 +108,14 @@ export default function Sidebar() {
               <select
                 className={`${sidebarStyle.options}`}
                 selected
-                name="address"
+                name="region"
                 onChange={formik.handleChange}
               >
                 <option>اختر الموقع</option>
-                <option value="أطلس">أطلس</option>
+                <option value="السيل">السيل</option>
                 <option value="التأمين">التأمين</option>
                 <option value="كيما">كيما</option>
-                <option value="أسوان">اسوان</option>
+                <option value="المحطة">المحطة</option>
               </select>
             </div>
             <hr />
@@ -162,12 +162,6 @@ export default function Sidebar() {
             </div>
             <hr />
             <div className={sidebarStyle["bt-cnt"]}>
-              <button
-                className={sidebarStyle.clear}
-                onClick={() => dispatch(getAllNurses())}
-              >
-                مسح البحث
-              </button>
               <button className={sidebarStyle.apply} type="submit">
                 تطبيق
                 {/* <a href="" >تطبيق</a> */}
@@ -175,6 +169,13 @@ export default function Sidebar() {
             </div>
           </div>
         </form>
+              <button
+                className={sidebarStyle.clear}
+                onClick={() => dispatch(getAllNurses())}
+              >
+                مسح البحث
+                 {/* <a href="" >مسح البحث</a> */}
+              </button>
       </div>
     </aside>
   );

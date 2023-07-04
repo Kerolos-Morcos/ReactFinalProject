@@ -190,6 +190,7 @@
 .preview-card__code {
   color: #7b7992;
   margin-bottom: 15px;
+  margin-top: -25px;
   display: block;
   font-weight: 500;
 }
@@ -291,8 +292,9 @@
 }
 .rate {
   display: block;
-  height: 40px;
-  padding: 0px 50px;
+  height: 35px;
+  margin: 0px auto;
+  margin-top: -15px;
   text-align: center;
   color: #EEED3F;
 }

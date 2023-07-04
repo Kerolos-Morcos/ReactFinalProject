@@ -1,7 +1,8 @@
 import io from "socket.io-client";
-
+import { useLocation,useParams  } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import React, { useEffect, useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import PostStyle from "./post.module.css";
 import NoData from "../../assets/images/No data-rafiki.svg";
 // import ModalPost from "../Modal/Modal";
@@ -12,8 +13,7 @@ import * as Yup from "yup";
 import { json } from "react-router-dom";
 import { motion } from "framer-motion";
 import DarkStyle from "../DarkMode/darkBtn.module.css";
-import { search, filter, setFilteredPosts } from "../../Redux/Slices/PostSlice";
-import Fade from "react-reveal/Fade";
+ import Fade from "react-reveal/Fade";
 
 function Posts({ Socket }) {
   const dispatch = useDispatch();
@@ -28,15 +28,10 @@ function Posts({ Socket }) {
   let [posts, getPost] = useState([]);
   let [FilteredPosts, getFilteredPosts] = useState([]);
 
-  //From Post Slice
-  // let FilteredPosts = [];
-
   function searching(e) {
-    // TEST CASE: Check if posts is an empty string
     if (e.target.value === "") {
       getFilteredPosts(posts);
-      // console.log(FilteredPosts);
-      // FilteredPosts = [];
+
     } else {
       let x = posts.filter(
         (post) =>
@@ -47,14 +42,9 @@ function Posts({ Socket }) {
         );
         getFilteredPosts(x)
         console.log(FilteredPosts);
-      // dispatch(filter(filteredPosts)); // Dispatch the action with filteredPosts as the payload
-      // console.log(FilteredPosts);
+
     }
-    // console.log(e.target.value);
   }
-
-
-
 
   // Filter
   let sideSchema = Yup.object().shape({
@@ -66,37 +56,21 @@ function Posts({ Socket }) {
     },
     validationSchema: sideSchema,
     onSubmit: (values) => {
-    // function filtering() {   
-      
       axios.post("http://localhost:3500/post/postsFilter", values)
         .then((res) => {
           console.log(res);
           getFilteredPosts(res.data.data)
-          // if (res.data.success === true) {
-          //   // alert(res.data.message);
-          // } else {
-          //   // alert(res.data.message);
-          // }
         });
-      // }
     },
   });
-  //From Post Slice
-
-
 
   useEffect(() => {
     let x = axios
       .get("http://localhost:3500/post/posts")
       .then((res) => {
-        // let P = getPost(res.data.data);
-        // console.log(res.data.data[1]._id);
-        // FilteredPosts = getFilteredPosts(res.data.data);
         if (x) {
           posts = getPost(res.data.data);
           FilteredPosts = getFilteredPosts(res.data.data);
-          // console.log(res.data);
-          // console.log(res.data.data[0].patientImg);
         } else {
           posts = [];
           FilteredPosts = [];
@@ -116,54 +90,15 @@ function Posts({ Socket }) {
         ?.classList.toggle(DarkStyle["NurseSidebar"], isDarkMode);
       }
     }, []);
-    // console.log(FilteredPosts);
-
-
 
   const handleClick = (post) => {
     setTemp(post._id);
   };
-
-  // ...
-
  
   //////////////////////////////////
-
-  // console.log(temp);
-
-
-  // console.log(nameOfNurse._id);
-  //  console.log(nameOfNurse.profile);
-  //  Img= nameOfNurse.profile
-
-  // const ids = post._id;
- 
-  // console.log(posts);
-
-// Empty Posts
 function Empty(){
   getFilteredPosts(posts)
 }
-
-
-
-
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:3500/post/posts").then((res) => {
-  //     let P = getPost(res.data.data);
-  //     // console.log(P);
-  //     // console.log(res.data.data[1]._id);
-  //     if (posts) {
-  //       posts = getPost(res.data);
-
-  //       // console.log(res.data.data);
-  //     } else {
-  //       posts = [];
-  //     }
-  //   });
-  // }, [send]);
-  // const currentTime = moment.utc();
 
   useEffect(() => {
     const IntervalId = setInterval(() => {
@@ -171,31 +106,50 @@ function Empty(){
     }, 1000);
     return () => clearInterval(IntervalId);
   }, []);
+
   const getElapsedTime = (postTime) => {
-    
     const elapsedTimeInSeconds = currentTime.diff(
       moment.utc(postTime),
       "seconds"
     );
-    // console.log(postTime);
-    // const elapsedTimeInSeconds = currentTime.diff(
-    //   moment.utc(postTime),
-    //   "seconds"
-    // );
 
     let elapsedTime;
+    const secondWord = "ثانية";
+    const minuteWord = "دقيقة";
+    const hourWord = "ساعة";
+    const DayWord = "يوم";
+ 
+    const timeStyle = {
+       paddingLeft: '3px'
+    };
 
     if (elapsedTimeInSeconds < 60) {
-      elapsedTime = `${elapsedTimeInSeconds} ثانية`;
+      elapsedTime = (
+        <div style={{flexDirection: 'row'}} className="d-flex">
+        <span>{secondWord}</span> <span style={timeStyle}>{`${elapsedTimeInSeconds}`}</span>
+        </div>
+      );
     } else if (elapsedTimeInSeconds < 3600) {
       const elapsedMinutes = Math.floor(elapsedTimeInSeconds / 60);
-      elapsedTime = `دقيقة ${elapsedMinutes} `;
+      elapsedTime = (
+        <div style={{flexDirection: 'row'}} className="d-flex">
+        <span>{minuteWord}</span> <span style={timeStyle}>{`${elapsedMinutes}`}</span>
+        </div>
+      );
     } else if (elapsedTimeInSeconds < 86400) {
       const elapsedHours = Math.floor(elapsedTimeInSeconds / 3600);
-      elapsedTime = ` ${elapsedHours} ساعة`;
+      elapsedTime = (
+        <div style={{flexDirection: 'row'}} className="d-flex">
+        <span>{hourWord}</span> <span style={timeStyle}>{`${elapsedHours}`}</span>
+        </div>
+      );
     } else {
       const elapsedDays = Math.floor(elapsedTimeInSeconds / 86400);
-      elapsedTime = `${elapsedDays} يوم`;
+      elapsedTime = (
+        <div style={{flexDirection: 'row'}} className="d-flex">
+         <span>{DayWord}</span> <span style={timeStyle}>{`${elapsedDays}`}</span>
+        </div>
+      );
     }
 
     return elapsedTime;
@@ -214,10 +168,6 @@ function Empty(){
     }),
 
     onSubmit: (values, { resetForm }) => {
-      // console.log("values");
-      // console.log(values.id);
-      // let tests = values.id
-      // console.log(Socket);
       axios
         .post(
           `http://localhost:3500/post/comments/${temp}/${nameOfNurse._id}`,
@@ -226,10 +176,7 @@ function Empty(){
         .then((res) => {
           let index = posts.findIndex((item) => item._id == res.data._id);
           posts[index].comments = res.data.comments;
-          // console.log();
           const lastComment = res.data.comments[res.data.comments.length - 1];
-          // console.log(res.data);
-
           axios.post(`http://localhost:3500/NotifPost`, {
             postNameSender: res.data.patientName,
             patientId: res.data.patientId,
@@ -239,16 +186,25 @@ function Empty(){
             nurseImg: lastComment.nurseImg,
             commentId: lastComment._id,
           });
-
           getPost([...posts]);
-          // console.log(res.data.comments[6].nurseName);
           resetForm();
-          // setShowModal(false);
         });
     },
   });
 
+const commentsRef = useRef(null);
+  const location = useLocation();
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const scrollTo = params.get('scrollTo');
+    if (scrollTo) {
+      const commentEl = document.getElementById(`comment-${scrollTo}`);
+      if (commentEl) {
+        commentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [location]);
 
 
   const api = "http://localhost:3500/";
@@ -364,49 +320,44 @@ function Empty(){
                                   }`}
                                 >
                                   {Array.isArray(post.comments) &&
-                                    post.comments.length > 0 &&
-                                    post.comments.map((comment) => (
-                                      <li>
-                                        <a
-                                          href="#"
-                                          className={`${"cmt-thumb"} ${
-                                            PostStyle["cmt-thumb"]
-                                          }`}
-                                        >
-                                          <img
-                                            src={`http://localhost:3500/${comment.nurseImg}`}
-                                            // src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                            alt=""
-                                          />
-                                        </a>
+                                  post.comments.length > 0 &&
+                                  post.comments.map((comment,index) => (
+                                    <li id={`comment-${comment._id}`} ref={commentsRef}>
+                                      <a
+                                        href="#"
+                                        className={`${"cmt-thumb"} ${
+                                          PostStyle["cmt-thumb"]
+                                        }`}
+                                      >
+                                        <img
+                                          src={`http://localhost:3500/${comment.nurseImg}`}
+                                          // src="https://bootdey.com/img/Content/avatar/avatar5.png"
+                                          alt=""
+                                        />
+                                      </a>
+                                      <div
+                                        className={`${"cmt-details d-flex justify-content-between"} ${
+                                          PostStyle["cmt-details"]
+                                        }`}
+                                      >
                                         <div
-                                          className={`${"cmt-details d-flex justify-content-between"} ${
-                                            PostStyle["cmt-details"]
-                                          }`}
+                                          className={PostStyle.ProposalTimer}
                                         >
-                                          <div
-                                            className={PostStyle.ProposalTimer}
-                                          >
-                                            <p>
-                                              {" "}
-                                              {getElapsedTime(comment.date)}
-                                            </p>
-                                          </div>
-                                          <div>
-                                            <a href="#">
-                                              {" "}
-                                              {comment.nurseName}{" "}
-                                            </a>
-                                          </div>
+                                          <p style={{fontSize: '12px'}}> {getElapsedTime(comment.date)}</p>
                                         </div>
-                                        <p
-                                          className={`${PostStyle.ProposalBody}`}
-                                        >
-                                          {" "}
-                                          {comment.comment}
-                                        </p>
-                                      </li>
-                                    ))}
+                                        <NavLink to={`/showNurseProfile/${comment.nurseId}`}>
+                                          <a > {comment.nurseName} </a>
+                                        </NavLink>
+                                      </div>
+                                      <p
+                                        className={`${PostStyle.ProposalBody}`}
+                                      >
+                                        {" "}
+                                        {comment.comment}
+                                      </p>
+                                    </li>
+                                  )
+                                )}
                                 </ul>
                                 {/* New */}
                               </div>
@@ -482,17 +433,14 @@ function Empty(){
                           onChange={sideFormik.handleChange}
                         >
                           <option>اختر الموقع</option>
-                          <option value="أطلس">أطلس</option>
+                          <option value="السيل">السيل</option>
                           <option value="التأمين">التأمين</option>
                           <option value="كيما">كيما</option>
-                          <option value="اسوان">اسوان</option>
+                          <option value="المحطة">المحطة</option>
                         </select>
                       </div>
                       <hr />
                       <div className={PostStyle["bt-cnt"]}>
-                        <button onClick={Empty} className={PostStyle.clear}>
-                          مسح البحث
-                        </button>
                         <button  className={PostStyle.apply} type="submit">
                           تطبيق
                           {/* <a href="" >تطبيق</a> */}
@@ -500,6 +448,9 @@ function Empty(){
                       </div>
                     </div>
                   </form>
+                        <button onClick={Empty} className={PostStyle.clear}>
+                          مسح البحث
+                        </button>
                 </div>
               </aside>
             </div>

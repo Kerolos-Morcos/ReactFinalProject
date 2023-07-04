@@ -33,6 +33,7 @@ function EditInfo(props) {
     form.append("phoneNumber", values.phoneNumber); 
     form.append("region", values.region);    
     form.append("shiftPrice", values.shiftPrice);
+    form.append("experienceYear", values.experienceYear);
     form.append("profile", values.profile);
     form.append("about", values.about);
     form.append("skills", values.skills);
@@ -69,6 +70,7 @@ function EditInfo(props) {
               phoneNumber: data.phoneNumber,
               region: data.region,
               shiftPrice: data.shiftPrice,
+              experienceYear: data.experienceYear,
                about:data.about,
                skills:data.skills
             }}
@@ -78,6 +80,7 @@ function EditInfo(props) {
               phoneNumber: Yup.string().required("الرجاء إدخال رقم الهاتف"),
               region: Yup.string().required("الرجاء إدخال المنطقة"),
               shiftPrice: Yup.string().required("الرجاء إدخال سعر الشيفت"),
+              experienceYear: Yup.string().required("الرجاء إدخال سنوات الخبرة"),
               about :Yup.string().required("الرجاء ادخال نبذة عنك "),
               skills :Yup.string().required("الرجاء ادخال المهارات المطلوبة "),
             })}
@@ -186,6 +189,28 @@ function EditInfo(props) {
                     </Form.Group>
                   )}
                 </Field>
+
+
+                <Field type="text" name="experienceYear">
+                  {({
+                    field: { value, onChange },
+                    meta: { touched, error },
+                  }) => (
+                    <Form.Group className={"mb-4"} controlId="experienceYear">
+                      <Form.Label className={"mb-1"}>سنوات الخبرة</Form.Label>
+                      <Form.Control
+                        value={value}
+                        onChange={onChange}
+                        onBlur={handleBlur}
+                        style={{ direction: "rtl", textAlign: "right" }}
+                      />
+                      {touched && error && (
+                        <Form.Text className="text-danger">{error}</Form.Text>
+                      )}
+                    </Form.Group>
+                  )}
+                </Field>
+
 
                 <Field type="text" name="region">
                   {({

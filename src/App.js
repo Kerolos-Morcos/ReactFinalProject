@@ -40,14 +40,41 @@ import DarkMode from './Components/DarkMode/DarkBTN';
 import { io } from "socket.io-client";
 import Chat from './Components/ChatComponent/Chat';
 import LoadingSpinner from './Components/Spinner/Spinner';
+import withLoading from './wrappedComponent';
 
 function App() {
+  const HomeWithLoading = withLoading(Home);
+  const NursesWithLoading = withLoading(Nurses);
+  const CartWithLoading = withLoading(CartComponent);
+  const ContactUsWithLoading = withLoading(ContactUs);
+  const DevicesWithLoading = withLoading(Devices);
+  const AboutWithLoading = withLoading(About);
+  const PostsWithLoading = withLoading(Posts);
+  const NurseProfilePageWithLoading = withLoading(NurseProfilePage);
+  const PatientProfilePageWithLoading = withLoading(PatientProfilePage);
+  const DevicedetailsWithLoading = withLoading(Devicedetails);
+  const ShowNurseProfileWithLoading = withLoading(ShowNurseProfile);
+  const NurseFormWithLoading = withLoading(NurseForm);
+  const AskDevicePageWithLoading = withLoading(AskDevicePage);
+  const MedArticalWithLoading = withLoading(MedArtical);
+  const CheckWithLoading = withLoading(Check);
+  const NurseProfileWithLoading = withLoading(NurseProfile);
+  // const NavbarWithLoading = withLoading(Navbar);
+  // const DarkModeWithLoading = withLoading(DarkMode);
+  // const ScrollWithLoading = withLoading(Scroll);
+  // const FooterWithLoading = withLoading(Footer);
+
+
+
 const [Socket, setSocket] = useState(null)
 const [isLoading, setLoading] = useState(true)
+const [showRoutes, setShowRoutes] = useState(false)
+ 
 
   useEffect(()=>{
      setSocket(io('http://localhost:3500'));
      setTimeout(()=>{
+       setShowRoutes(true)
        setLoading(false);
      },1000)
   },[]);
@@ -70,46 +97,49 @@ const [isLoading, setLoading] = useState(true)
 
 
   return (
-      isLoading ?  (
+    <div className="App">
+      {isLoading ?  (
         <LoadingSpinner/>
       ) : (
 
-        <div className="App">
-      
+      <>
       {flag && <Navbar Socket={Socket} />}
       {flag && <DarkMode/>}  
       <Scroll/> 
       <AnimatePresence mode='wait'>
+        {showRoutes && (
       <Routes location={location} key={location.pathname}>
-        <Route index path='/Home' element={<Home/>} />
+        <Route index path='/Home' element={<HomeWithLoading/>} />
         <Route path='/' element={<Login />} />
-        <Route path='/Nurses' element={<Nurses />} />
-        <Route path='/Cart' element={<CartComponent />} />
+        <Route path='/Nurses' element={<NursesWithLoading />} />
+        <Route path='/Cart' element={<CartWithLoading />} />
         <Route path='Login' element={<Login />} />
         <Route path='Signup' element={<Signup />} />
         <Route path='SignupNurse' element={<SignupNurseFormik />} />
         <Route path='SignupPatient' element={<SignupPatient />} />
-        <Route path='contactUs' element={<ContactUs />} />
-        <Route path='Devices' element={<Devices />} />
-        <Route path='About' element={<About />} />
-        <Route path='Posts' element={<Posts Socket={Socket} />} />
-        <Route path='nurseProfile' element={<NurseProfilePage Socket={Socket} />} />
-        <Route path='patientProfile' element={<PatientProfilePage />} />
-        <Route path="/Devicedetails/:id" element={<Devicedetails />} />
-        <Route path="/ShowNurseProfile/:id" element={<ShowNurseProfile Socket={Socket} />} />
-        <Route path="/FormNurse/:id" element={<NurseForm Socket={Socket}/>}/>
-        <Route path="/AskDevicePage" element={<AskDevicePage />} />
-        <Route path="/MedicalArticles" element={<MedArtical />} />
-        <Route path="/check" element={<Check />} />
+        <Route path='contactUs' element={<ContactUsWithLoading />} />
+        <Route path='Devices' element={<DevicesWithLoading />} />
+        <Route path='About' element={<AboutWithLoading />} />
+        <Route path='/Posts/:postId?/:commentId?' element={<PostsWithLoading Socket={Socket} />} />
+        <Route path='nurseProfile' element={<NurseProfilePageWithLoading Socket={Socket} />} />
+        <Route path='patientProfile' element={<PatientProfilePageWithLoading />} />
+        <Route path="/Devicedetails/:id" element={<DevicedetailsWithLoading />} />
+        <Route path="/ShowNurseProfile/:id" element={<ShowNurseProfileWithLoading Socket={Socket} />} />
+        <Route path="/FormNurse/:id" element={<NurseFormWithLoading Socket={Socket}/>}/>
+        <Route path="/AskDevicePage" element={<AskDevicePageWithLoading />} />
+        <Route path="/MedicalArticles" element={<MedArticalWithLoading />} />
+        <Route path="/check" element={<CheckWithLoading />} />
         {/* <Route path="/Chat" element={<Chat Socket={Socket} username={username} room={room}/>} /> */}
-        <Route path="/NurseProfileComponent" element={<NurseProfile Socket={Socket}/>} />
+        <Route path="/NurseProfileComponent" element={<NurseProfileWithLoading Socket={Socket}/>} />
 
       </Routes>
+        )}
       {flag && <Footer />}
     </AnimatePresence>
+      </>
+      )}
     </div>
-      )
-  );
+      );
 }
 
 export default App;
