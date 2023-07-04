@@ -46,6 +46,7 @@ function ShowNurseProfile({ data, Socket }) {
 
   // }
   useEffect(() => {
+    window.scrollTo(0,0);
     dispatch(getNurseById(id));
     const isDarkMode = localStorage.getItem("isDarkMode")
     if(isDarkMode){

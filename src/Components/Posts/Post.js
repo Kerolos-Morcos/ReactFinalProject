@@ -158,8 +158,8 @@ function Empty(){
 
   const formik = useFormik({
     initialValues: {
-      nurseName: nameOfNurse.name,
-      nurseImg: nameOfNurse.profile,
+      nurseName: nameOfNurse?.name,
+      nurseImg: nameOfNurse?.profile,
       comment: "",
       id: "",
     },
@@ -208,7 +208,7 @@ const commentsRef = useRef(null);
 
 
   const api = "http://localhost:3500/";
-  const isPatient = NurseNameSocket.role === "patient";
+  const isPatient = NurseNameSocket?.role === "patient";
   return (
     <motion.div
       id="post"
@@ -283,7 +283,7 @@ const commentsRef = useRef(null);
                                               className={`${"form-control rounded-corner"} ${
                                                 PostStyle.PoroposalInput
                                               }`}
-                                              name="comment"
+                                              name={"comment" || ""}
                                               onChange={formik.handleChange}
                                               value={
                                                 formik.values.comment[post._id]
@@ -292,7 +292,7 @@ const commentsRef = useRef(null);
                                             />
                                             <input
                                               type="text"
-                                              name="id"
+                                              name={"id" || ""}
                                               value={post._id}
                                               onChange={formik.handleChange}
                                               hidden
@@ -428,7 +428,7 @@ const commentsRef = useRef(null);
                         <label htmlFor="">الموقع</label>
                         <select
                           selected
-                          name="patientLocation"
+                          name={"patientLocation" || ""}
                           className={`${PostStyle.options}`}
                           onChange={sideFormik.handleChange}
                         >
