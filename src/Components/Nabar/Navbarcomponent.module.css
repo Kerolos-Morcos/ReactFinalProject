@@ -1,4 +1,13 @@
 /* New */
+/* .blur-effect{
+  filter: blur(5px);
+} */
+.highlighted-comment {
+  background-color:  hsl(210, 86%, 95%);
+  /* background-color: #ffffcc; */
+  /* transform: scale(1.1); */
+  /* backdrop-filter: blur(0) !important; */
+}
 .ProfilePic span{
   color: #EEED3F;
 }

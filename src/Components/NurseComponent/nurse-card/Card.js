@@ -1,7 +1,7 @@
 import React from 'react'
 import cardNurseStyle from './Card.module.css';
 import imgex from '../img/badge.png'
-import imgc from '../img/phone-call.png'
+import imgc from '../img/price.png'
 import imgl from '../img/location.png'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 // import Rating from '../../devicesComponents/Rating';
@@ -37,7 +37,7 @@ function Card({ data }) {
            <img src={imgex} alt=""/>: {data.experienceYear} سنوات خبرة</span>
             <div className={cardNurseStyle["preview-card__text"]}>
               <p className='pb-3'>
-                <img src={imgc} alt="" /> : {data.phoneNumber}
+                <img src={imgc} alt="" /> : {data.shiftPrice} ج.م بالشيفت
               </p>
               <p>
                 <img src={imgl} alt="" />: {data.region}

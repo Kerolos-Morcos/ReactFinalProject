@@ -162,7 +162,7 @@ function Navbar({ Socket }) {
   const api = "http://localhost:3500/";
 
   // New From Hany (PostID)
-  function handleNotificationClick(notification, index) {
+  function handleNotificationClick(notification,index) {
     const postId = notification.postId;
     const commentId = notification.commentId;
     const url = `/Posts/${postId}/${commentId}?scrollTo=${commentId}`;
@@ -170,20 +170,21 @@ function Navbar({ Socket }) {
     setTimeout(() => {
       const commentEl = document.getElementById(`comment-${commentId}`);
       if (commentEl) {
-        commentEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        document.querySelector("#PostBody").classList.add(NavStyle['blur-effect']);
+        commentEl.classList.add(NavStyle["highlighted-comment"]);
+        setTimeout(() => {
+          document.querySelector('#PostBody').classList.remove(NavStyle['blur-effect']);
+          commentEl.classList.remove(NavStyle["highlighted-comment"]);
+        }, 2400);
+        commentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }, 1000);
-    setNotifications((prevNotifications) => {
-      const updatedNotificationComment = prevNotifications.filter(
-        (_, i) => i !== index
-      );
-      localStorage.setItem(
-        "notificationComment",
-        JSON.stringify(updatedNotificationComment)
-      );
+        setNotifications((prevNotifications) => {
+      const updatedNotificationComment = prevNotifications.filter((_, i) => i !== index);
+      localStorage.setItem("notificationComment", JSON.stringify(updatedNotificationComment));
       return updatedNotificationComment;
-    });
-  }
+    });
+  }
 
   return (
     <>

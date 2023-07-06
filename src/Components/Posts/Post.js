@@ -160,7 +160,7 @@ function Empty(){
     initialValues: {
       nurseName: nameOfNurse?.name,
       nurseImg: nameOfNurse?.profile,
-      comment: "",
+      comment: {},
       id: "",
     },
     validationSchema: Yup.object().shape({
@@ -224,7 +224,7 @@ const commentsRef = useRef(null);
         <div className=" d-flex">
           <Fade bottom distance="10%" duration={1500}>
             <div className="col-md-11">
-              <div className={PostStyle.Post_Body}>
+              <div id="PostBody" className={PostStyle.Post_Body}>
                 <div className={PostStyle.Post_Content}>
                   <div className="p-0">
                     <div className="fade active show">
