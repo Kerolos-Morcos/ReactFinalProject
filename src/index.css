@@ -63,3 +63,42 @@ img {
   border-radius: 8px;
   border: 1px solid #00A02B; /* Rounded corners of the scrollbar thumb */
 }
+
+
+.custom-tour{
+  background-color: #041858 !important;
+  color: white !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+.sc-iGgWBj{
+  z-index: 9999 !important;
+  background-color: #00A02B !important;
+  color: white !important;
+}
+.reactour__dot--is-active{
+  background-color: #00A02B !important;
+}
+.sc-kAyceB{
+  padding-top: 5px !important;
+}
+.sc-aXZVg svg{
+  transition: all 0.3s ease-in-out;
+  color: white !important;
+}
+.sc-aXZVg svg:hover{
+  color: #00A02B !important;
+}
+[aria-label='Close'] svg{
+  width: 15px !important;
+  transition: all 0.3s ease-in-out;
+}
+[aria-label='Close'] svg:hover{
+  color: red !important;
+}
+[role="dialog"]{
+  padding-top: 45px !important;
+}
+[data-tour-elem="navigation"]{
+  direction: rtl !important;
+}

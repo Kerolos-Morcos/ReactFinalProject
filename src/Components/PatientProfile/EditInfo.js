@@ -48,7 +48,7 @@ function EditInfo(props) {
 
   return (
     <>
-      <a variant="primary" onClick={handleShow}>
+      <a id="step2" variant="primary" onClick={handleShow}>
         تعديل  البيانات
       </a>
     

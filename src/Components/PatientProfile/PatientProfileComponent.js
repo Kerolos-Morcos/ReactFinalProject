@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { getPatient } from '../Redux/Slices/PatientSlice';
-import { getPatient,getBookindNurse,getPatientNotifications} from "../../Redux/Slices/PatientSlice";
+import { getPatient,getBookindNurse,getPatientNotifications, getOrderStatusById} from "../../Redux/Slices/PatientSlice";
 import { addRateToNurse } from "../../Redux/Slices/NurseProfileR";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -13,6 +13,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import RadioGroupRating from "../../Pages/AddRating/AddRate";
 import moment from "moment/moment";
+import Tour from 'reactour';
 
 const MySwal = withReactContent(Swal)
 
@@ -39,19 +40,108 @@ const MySwal = withReactContent(Swal)
 
 
 function PatientProfile() {
+  const [isTourOpen, setIsTourOpen] = useState(false);
+
+  const tourSteps = [
+    {
+      selector: '.step1',
+      content: 'مرحبا بك في ملفك الشخصي ، لنتابع معًا رحلتنا لمعرفة تفاصيل ملفك الشخصي',
+    },
+    {
+      selector: '#step2',
+      content: 'من هنا يمكنك تعديل ملفك الشخصي',
+    },
+    {
+      selector: '#step3',
+      content: 'اما من هنا يمكنك طلب خدمة من خلال اضافة منشور جديد و ستجده في صفحة الطلبات',
+    },
+    {
+      selector: '#step4',
+      content: 'عند طلبك لجهاز طبي ، يمكنك متابعة حالة الطلب أولاً بأول',
+    },
+    {
+      selector: '#step5',
+      content: 'هنا تجد كل الاشعارات التي اتتك من قبل',
+    },
+    {
+      selector: '#step6',
+      content: 'يمكنك تقييم الممرض بعد طلبه من صفحة التمريض او من ملفه الشخصي',
+    },
+    {
+      selector: '#step7',
+      content: 'لقد انتهت شروحنا التوضيحية الآن ، نتمني لك رحلة موفقة في موقعنا',
+    },
+  ];
+
+  useEffect(() => {
+    setTimeout(()=>{
+      const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+      if (!hasVisitedBefore) {
+        setIsTourOpen(true);
+         localStorage.setItem('hasVisitedBefore', 'true');
+      }
+    },1000)
+  }, []);
+
+  useEffect(() => {
+    if (isTourOpen) {
+      document.body.style.overflow = 'hidden';  
+    } else {
+      document.body.style.overflow = 'auto';  
+    }
+  }, [isTourOpen]);
+
+  const handleTourClose = () => {
+    setIsTourOpen(false);
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [rateNum,setRateNum]=useState(0)
   const patientes = useSelector((state) => state.PatientSlice.patient);
   const nursesBooking = useSelector((state) => state.PatientSlice.booking);
   const patientNotifications = useSelector((state) => state.PatientSlice.notification);
+  const patientStatus = useSelector((state) => state.PatientSlice.patientStatus);
   // console.log("nursesBooking....",nursesBooking);
-  
+  const patientOrders = useSelector((state) => state.PatientSlice.patient?.order);
+
+
   const dispatch = useDispatch();
   let info = patientes;
   useEffect(() => {
     dispatch(getPatient());
     dispatch(getBookindNurse())
     dispatch(getPatientNotifications())
-  }, []);
+   }, []);
+
+  useEffect(() => {
+    if (patientOrders) {
+      patientOrders.forEach((order) => {
+        dispatch(getOrderStatusById(order._id));
+      });
+    }
+  }, [patientOrders, dispatch]);
+
+
+
+
+
+
+
+
   const api="http://localhost:3500/"
   // console.log(patientes);
 
@@ -94,14 +184,25 @@ function PatientProfile() {
           <div className={"row"}>
             <Fade right distance="10%" duration={1500}>
             <div className={"col-lg-4"}>
+ 
+
+<Tour
+  steps={tourSteps}
+  isOpen={isTourOpen}
+  onRequestClose={handleTourClose}
+  className="custom-tour"
+  
+/>
               <div className={"card mb-4"}>
                 <div className={"card-body text-center"}>
+                  <div style={{width: '150px', height: '150px', margin: '0 auto', marginBottom: '55px' }}>
                   <img
                     src={`http://localhost:3500/${patientes.profile}`}
                     alt="avatar"
                     className={"rounded-circle img-fluid"}
-                    style={{ width: 150 }}
+                    style={{ width: '100%', height: 'auto' ,borderRadius: '50%'}}
                   />
+                  </div>
                   <h5 className={"my-3"}>{patientes.name}</h5>
                   {/* <p className="text-muted mb-1">مريض</p> */}
                   {/* <p className="text-muted mb-4">Bay Area, San Francisco, CA</p> */}
@@ -121,7 +222,7 @@ function PatientProfile() {
                 </div>
               </div>
               <div className={"card mb-4 mb-lg-0"}>
-                <div className={"card-body p-0"}>
+                <div className={"card-body p-0 "}>
                   <ul className={"list-group list-group-flush rounded-3"}>
                     {/* <li className={"list-group-item d-flex justify-content-between align-items-center p-3"}>
                     <i className={"fas fa-globe fa-lg text-warning"} />
@@ -134,7 +235,7 @@ function PatientProfile() {
                     />
                     <p className={"mb-0"}>mdbootstrap</p>
                   </li> */}
-                    <li
+                    <li id="step4"
                       className={
                         "list-group-item d-flex justify-content-between align-items-center p-3"
                       }
@@ -163,7 +264,7 @@ function PatientProfile() {
                         </h2>
                         <div
                           id="flush-collapseOne"
-                          className="accordion-collapse collapse"
+                          className="accordion-collapse collapse step2"
                           aria-labelledby="flush-headingOne"
                           data-bs-parent="#accordionFlushExample"
                         >
@@ -185,7 +286,7 @@ function PatientProfile() {
                                   className={"mb-0"}
                                   style={{ cursor: "pointer", color: "green" }}
                                 >
-                                  لقد قمت بطلب خدمة بتاريخ {moment(item.createdAt).format('DD-MM-YYYY')} حالتة {item.patientStatus}
+                                  لقد قمت بطلب خدمة بتاريخ {moment(item.createdAt).format('DD-MM-YYYY')} حالتة {patientStatus[item._id]}
                                 </a>
                               </li>
                                 )
@@ -208,7 +309,7 @@ function PatientProfile() {
                 <ul className={"list-group list-group-flush rounded-3"}
                  
                 >
-                  <li
+                  <li id="step5"
                       className={
                         "list-group-item d-flex justify-content-between align-items-center p-3"
                       }
@@ -261,8 +362,7 @@ function PatientProfile() {
                                   style={{ cursor: "pointer", color: "green" }}
                                 >
                                   قام {item.postNurseName} بإرسال طلب علي منشورك بعنوان {item.postTitle}
-                                  <i className="fa fa-arrow-left mt-2"></i>
-                                </a>
+                                 </a>
                               </li>
                                 )
                               })}
@@ -345,7 +445,7 @@ function PatientProfile() {
                     <div className={"col-sm-3"}>
                       <p className={"mb-0"}>النوع</p>
                     </div>
-                    <div className={"col-sm-9"}>
+                    <div  className={"col-sm-9"}>
                       <p className={"text-muted mb-0"}>{patientes.gender}</p>
                     </div>
                   </div>
@@ -353,10 +453,10 @@ function PatientProfile() {
               </div>
 
               {/* Rating */}
-              <div className={"row"}>
+              <div className={"row"} >
                 <div className={"col-md-12"}>
                   <div className={"card mb-4 mb-md-0"}>
-                    <h1
+                    <h1 id="step6"
                       style={{
                         color: "#041858",
                         fontSize: "20px",

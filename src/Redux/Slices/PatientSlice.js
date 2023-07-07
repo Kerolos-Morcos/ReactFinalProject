@@ -73,6 +73,25 @@ export const getNurseById=createAsyncThunk('PatientSlice/getNurseById',async (Nu
   }
 })
 
+
+// Kerolos (Order Status)
+export const getOrderStatusById = createAsyncThunk(
+  "PatientSlice/getOrderStatusById",
+  async (orderId, thunkAPI) => {
+    try {
+      const response = await axios.get(`http://localhost:3500/order/orderStatus/${orderId}`);
+      return { orderId, status: response.data.data };
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
+
+
+
+
 // Hany
 export const getBookindNurse=createAsyncThunk('PatientSlice/getBookindNurse',async (NurseProfileId) =>{
   try{
@@ -119,7 +138,8 @@ const PatientSlice = createSlice({
     initialState: {
         patient: [],
         booking:[],
-        notification:[]
+        notification:[],
+        patientStatus:{},
     },
     reducers: {
     //    addnurse:(state,action)=>{
@@ -160,6 +180,19 @@ const PatientSlice = createSlice({
           console.log("rejected");
           
       },
+
+      // OrderStatus
+      [getOrderStatusById.pending]:(state,action)=>{
+        console.log("pending");
+      },
+      [getOrderStatusById.fulfilled]: (state, action) => {
+        const { orderId, status } = action.payload;
+        state.patientStatus[orderId] = status;
+      },
+      [getOrderStatusById.rejected]:(state,action)=>{
+        console.log("rejected");
+      },
+
 
 
       // Hany

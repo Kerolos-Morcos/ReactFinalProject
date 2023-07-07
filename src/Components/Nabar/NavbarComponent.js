@@ -27,6 +27,7 @@ function Navbar({ Socket }) {
     localStorage.removeItem("isDarkMode");
     localStorage.removeItem("CartTotalPrice");
     localStorage.removeItem("CartTotalQuantity");
+    localStorage.removeItem("hasVisitedBefore");
     setIsLoggedOut(true);
   }
   const name = JSON.parse(localStorage.getItem("user"));
