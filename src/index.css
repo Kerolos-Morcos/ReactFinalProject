@@ -89,16 +89,16 @@ img {
 .sc-aXZVg svg:hover{
   color: #00A02B !important;
 }
-[aria-label='Close'] svg{
+.sc-aXZVg[aria-label='Close'] svg{
   width: 15px !important;
   transition: all 0.3s ease-in-out;
 }
-[aria-label='Close'] svg:hover{
+.sc-aXZVg[aria-label='Close'] svg:hover{
   color: red !important;
 }
-[role="dialog"]{
+.sc-dcJsrY[role="dialog"]{
   padding-top: 45px !important;
 }
-[data-tour-elem="navigation"]{
+.sc-kAyceB[data-tour-elem="navigation"]{
   direction: rtl !important;
 }

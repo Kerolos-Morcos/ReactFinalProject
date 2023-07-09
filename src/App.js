@@ -41,6 +41,9 @@ import { io } from "socket.io-client";
 import Chat from './Components/ChatComponent/Chat';
 import LoadingSpinner from './Components/Spinner/Spinner';
 import withLoading from './wrappedComponent';
+import NotFound from './Components/NotFoundComponent/NotFound';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBlockedPatientById } from './Redux/Slices/PatientSlice';
 
 function App() {
   const HomeWithLoading = withLoading(Home);
@@ -86,13 +89,23 @@ const [showRoutes, setShowRoutes] = useState(false)
 
   useEffect(() => {
     const page = location.pathname.split('/')[1];
-    if (page !== 'Signup' && page !== 'SignupNurse' && page !== 'SignupPatient' && page !== 'Login' && page !=="") {
+    if (page !== 'Signup' && page !== 'SignupNurse' && page !== 'SignupPatient' && page !== 'Login' && page !== '/*' && page !=="") {
       setFlag(true);
     } else {
       setFlag(false);
     }
   }, [location]);
 
+
+  // Blocked Patient
+  const dispatch = useDispatch();
+  const token = JSON.parse(localStorage.getItem("user"));
+  const isBlocked = useSelector((state) => state?.patient);
+  console.log(isBlocked); 
+  useEffect(() => {
+    console.log('dispathc block patient');
+    dispatch(getBlockedPatientById(token?.isBlocked));
+  }, []);
 
 
 
@@ -109,29 +122,36 @@ const [showRoutes, setShowRoutes] = useState(false)
       <AnimatePresence mode='wait'>
         {showRoutes && (
       <Routes location={location} key={location.pathname}>
-        <Route index path='/Home' element={<HomeWithLoading/>} />
-        <Route path='/' element={<Login />} />
-        <Route path='/Nurses' element={<NursesWithLoading />} />
-        <Route path='/Cart' element={<CartWithLoading />} />
-        <Route path='Login' element={<Login />} />
-        <Route path='Signup' element={<Signup />} />
-        <Route path='SignupNurse' element={<SignupNurseFormik />} />
-        <Route path='SignupPatient' element={<SignupPatient />} />
-        <Route path='contactUs' element={<ContactUsWithLoading />} />
-        <Route path='Devices' element={<DevicesWithLoading />} />
-        <Route path='About' element={<AboutWithLoading />} />
-        <Route path='/Posts/:postId?/:commentId?' element={<PostsWithLoading Socket={Socket} />} />
-        <Route path='nurseProfile' element={<NurseProfilePageWithLoading Socket={Socket} />} />
-        <Route path='patientProfile' element={<PatientProfilePageWithLoading />} />
-        <Route path="/Devicedetails/:id" element={<DevicedetailsWithLoading />} />
-        <Route path="/ShowNurseProfile/:id" element={<ShowNurseProfileWithLoading Socket={Socket} />} />
-        <Route path="/FormNurse/:id" element={<NurseFormWithLoading Socket={Socket}/>}/>
-        <Route path="/AskDevicePage" element={<AskDevicePageWithLoading />} />
-        <Route path="/MedicalArticles" element={<MedArticalWithLoading />} />
-        <Route path="/check" element={<CheckWithLoading />} />
-        {/* <Route path="/Chat" element={<Chat Socket={Socket} username={username} room={room}/>} /> */}
-        <Route path="/NurseProfileComponent" element={<NurseProfileWithLoading Socket={Socket}/>} />
+        {token?.isBlocked === true ? (
+          <Route path='/*' element={<NotFound />} />
+        ) : (
+          <>
+          <Route index path='/Home' element={<HomeWithLoading/>} />
+          <Route path='/' element={<Login />} />
+          <Route path='/Nurses' element={<NursesWithLoading />} />
+          <Route path='/Cart' element={<CartWithLoading />} />
+          <Route path='Login' element={<Login />} />
+          <Route path='Signup' element={<Signup />} />
+          <Route path='SignupNurse' element={<SignupNurseFormik />} />
+          <Route path='SignupPatient' element={<SignupPatient />} />
+          <Route path='contactUs' element={<ContactUsWithLoading />} />
+          <Route path='Devices' element={<DevicesWithLoading />} />
+          <Route path='About' element={<AboutWithLoading />} />
+          <Route path='/Posts/:postId?/:commentId?' element={<PostsWithLoading Socket={Socket} />} />
+          <Route path='nurseProfile' element={<NurseProfilePageWithLoading Socket={Socket} />} />
+          <Route path='patientProfile' element={<PatientProfilePageWithLoading />} />
+          <Route path="/Devicedetails/:id" element={<DevicedetailsWithLoading />} />
+          <Route path="/ShowNurseProfile/:id" element={<ShowNurseProfileWithLoading Socket={Socket} />} />
+          <Route path="/FormNurse/:id" element={<NurseFormWithLoading Socket={Socket}/>}/>
+          <Route path="/AskDevicePage" element={<AskDevicePageWithLoading />} />
+          <Route path="/MedicalArticles" element={<MedArticalWithLoading />} />
+          <Route path="/check" element={<CheckWithLoading />} />
+          {/* <Route path="/Chat" element={<Chat Socket={Socket} username={username} room={room}/>} /> */}
+          <Route path="/NurseProfileComponent" element={<NurseProfileWithLoading Socket={Socket}/>} />
+          </>
 
+         )}
+ 
       </Routes>
         )}
       {flag && <Footer />}

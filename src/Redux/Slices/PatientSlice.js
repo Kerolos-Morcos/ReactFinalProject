@@ -91,6 +91,25 @@ export const getOrderStatusById = createAsyncThunk(
 
 
 
+// Kerolos (Patient IsBlocked)
+export const getBlockedPatientById = createAsyncThunk(
+  "PatientSlice/getBlockedPatientById",
+  async (patientId, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("user");
+        const response = await axios.get(`http://localhost:3500/patient/blockedPatients/${token._id}`,
+      );
+      return response.data.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
+
+
+
 
 // Hany
 export const getBookindNurse=createAsyncThunk('PatientSlice/getBookindNurse',async (NurseProfileId) =>{
@@ -140,6 +159,7 @@ const PatientSlice = createSlice({
         booking:[],
         notification:[],
         patientStatus:{},
+        isBlocked: false
     },
     reducers: {
     //    addnurse:(state,action)=>{
@@ -193,6 +213,21 @@ const PatientSlice = createSlice({
         console.log("rejected");
       },
 
+
+      // BlockedPatient By ID
+      [getBlockedPatientById.pending]: (state) => {
+        console.log('Getting blocked patient pending');
+      },
+      [getBlockedPatientById.fulfilled]: (state, action) => {
+        console.log('Getting blocked patient fulfilled');
+        console.log(action.payload);
+        state.isBlocked = action.payload;
+        },
+      [getBlockedPatientById.rejected]: (state, action) => {
+        console.log('Getting blocked patient rejected');
+        console.log(action.error); // Log the error
+      },
+  
 
 
       // Hany

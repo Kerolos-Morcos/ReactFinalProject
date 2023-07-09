@@ -75,7 +75,7 @@ function PatientProfile() {
 
   useEffect(() => {
     setTimeout(()=>{
-      const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+      const hasVisitedBefore = localStorage?.getItem('hasVisitedBefore');
       if (!hasVisitedBefore) {
         setIsTourOpen(true);
          localStorage.setItem('hasVisitedBefore', 'true');
@@ -242,7 +242,7 @@ function PatientProfile() {
                     >
                       <p className={"mb-0"}>
                         {" "}
-                        <i class="fa-solid fa-bag-shopping"></i> طلباتي {" "}
+                        <i class="fa-solid fa-bag-shopping"></i> طلباتي {" "} ({patientes.order && patientes.order.length > 0 ? patientes.order.length : 0})
                       </p>
                     </li>
                     <div
@@ -316,7 +316,7 @@ function PatientProfile() {
                     >
                       <p className={"mb-0"}>
                         {" "}
-                        <i class="fa-solid fa-bell"></i> إشعاراتي {" "}
+                        <i class="fa-solid fa-bell"></i> إشعاراتي {" "} ({patientNotifications && patientNotifications.length > 0 ? patientNotifications.length: 0})
                       </p>
                     </li>
                     <div
