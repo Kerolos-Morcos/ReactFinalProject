@@ -23,7 +23,7 @@ function Navbar({ Socket }) {
 
   function handleLogout() {
     localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
     localStorage.removeItem("isDarkMode");
     localStorage.removeItem("CartTotalPrice");
     localStorage.removeItem("CartTotalQuantity");

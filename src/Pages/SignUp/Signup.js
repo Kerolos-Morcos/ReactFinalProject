@@ -40,7 +40,7 @@ function Signup() {
          </Helmet>
     <section className={styleSign.IntroSection}>
   <header className={styleSign.title}>
-    <h1>انضم إلينا كممرض أو مريض  </h1>
+    <h1>انضم إلينا كممرض أو مستخدم  </h1>
   </header>
   <div className={styleSign.grid}>
     <label className={styleSign.card}>
@@ -75,9 +75,9 @@ function Signup() {
       <div className={styleSign.IntroSVG}>
         <img src={two} alt='' />
       </div>
-        <span className={styleSign['plan-cost']}>مريض</span>
+        <span className={styleSign['plan-cost']}>مستخدم</span>
         <div className={styleSign.DescInput}>
-        <h2>أنا مريض/ة وأحتاج إلى شخص يقوم بالرعاية الطبية اللازمة</h2>
+        <h2>أنا مستخدم وأحتاج إلى شخص يقوم بالرعاية الطبية اللازمة</h2>
         </div>
       </span>
     </label>

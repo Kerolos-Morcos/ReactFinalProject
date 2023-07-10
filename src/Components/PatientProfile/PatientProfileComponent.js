@@ -467,7 +467,7 @@ function PatientProfile() {
                     </h1>
                     {/* Card Example */}
                     <div className="container" style={{overflow: 'auto', display: 'flex' , scrollSnapType: 'x', gap: '30px', width:'780px'}}>
-                    {nursesBooking.map((item) => {
+                    {nursesBooking && nursesBooking.map((item) => {
                           if (item.status === "accepted") {
                             return (
                               <div className="item" style={{flexShrink: '0', scrollSnapAlign: 'start', scrollSnapStop: 'always', display: 'flex', flexDirection: 'column', gap: '16px', border:'1px solid #e9e9e9', borderRadius: '8px', boxShadow:'0 3px 16px 2px rgba(0, 0, 0, .1)', padding: '24px', position: 'relative', top: '0px', width: '300px'}}>

@@ -94,11 +94,14 @@ export const getOrderStatusById = createAsyncThunk(
 // Kerolos (Patient IsBlocked)
 export const getBlockedPatientById = createAsyncThunk(
   "PatientSlice/getBlockedPatientById",
-  async (patientId, thunkAPI) => {
+  async (thunkAPI) => {
     try {
-      const token = localStorage.getItem("user");
-        const response = await axios.get(`http://localhost:3500/patient/blockedPatients/${token._id}`,
-      );
+      // const token = localStorage.getItem("user");
+      const token = localStorage.getItem("token");
+      const decoded = jwtDecode(token);
+      const patientId = decoded.userid;
+        const response = await axios.get(`http://localhost:3500/patient/blockedPatients?patientId=${patientId}`);
+      console.log("hany test",response.data);
       return response.data.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
@@ -117,7 +120,7 @@ export const getBookindNurse=createAsyncThunk('PatientSlice/getBookindNurse',asy
     const token = localStorage.getItem("token");
     const decoded = jwtDecode(token);
     const patientId = decoded.userid;
-  const response = await axios.get(`http://localhost:3500/book/Nursebooking?patientId=${patientId}`, {
+  const response = await axios.get(`http://localhost:3500/book/NursebookingNative?patientId=${patientId}`, {
     headers: { authorization: `Bearer ${token}` },
   });
 //  console.log(response.data.data);
@@ -159,7 +162,7 @@ const PatientSlice = createSlice({
         booking:[],
         notification:[],
         patientStatus:{},
-        isBlocked: false
+        Blocked: false
     },
     reducers: {
     //    addnurse:(state,action)=>{
@@ -221,7 +224,7 @@ const PatientSlice = createSlice({
       [getBlockedPatientById.fulfilled]: (state, action) => {
         console.log('Getting blocked patient fulfilled');
         console.log(action.payload);
-        state.isBlocked = action.payload;
+        state.Blocked = action.payload;
         },
       [getBlockedPatientById.rejected]: (state, action) => {
         console.log('Getting blocked patient rejected');

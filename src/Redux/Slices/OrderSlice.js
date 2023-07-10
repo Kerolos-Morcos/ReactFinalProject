@@ -12,7 +12,7 @@ export const checkOutOrder = createAsyncThunk(
             const patientId = decoded.userid;
             const response = await axios.put(
                 `http://localhost:3500/order/${orderId}?patientId=${patientId}`,
-                {patientStatus:"inprogress"},
+                {patientStatus:"قيد التقدم"},
                 {
                     headers: { authorization: `Bearer ${token}` },
                 }

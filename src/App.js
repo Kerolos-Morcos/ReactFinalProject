@@ -89,7 +89,7 @@ const [showRoutes, setShowRoutes] = useState(false)
 
   useEffect(() => {
     const page = location.pathname.split('/')[1];
-    if (page !== 'Signup' && page !== 'SignupNurse' && page !== 'SignupPatient' && page !== 'Login' && page !== '/*' && page !=="") {
+    if (page !== 'Signup' && page !== 'SignupNurse' && page !== 'SignupPatient' && page !== 'Login' && page !=="") {
       setFlag(true);
     } else {
       setFlag(false);
@@ -99,12 +99,11 @@ const [showRoutes, setShowRoutes] = useState(false)
 
   // Blocked Patient
   const dispatch = useDispatch();
-  const token = JSON.parse(localStorage.getItem("user"));
-  const isBlocked = useSelector((state) => state?.patient);
-  console.log(isBlocked); 
+  const blockedPatient = useSelector((state) => state.PatientSlice.Blocked);
+  console.log(blockedPatient);
   useEffect(() => {
     console.log('dispathc block patient');
-    dispatch(getBlockedPatientById(token?.isBlocked));
+      dispatch(getBlockedPatientById())
   }, []);
 
 
@@ -122,15 +121,14 @@ const [showRoutes, setShowRoutes] = useState(false)
       <AnimatePresence mode='wait'>
         {showRoutes && (
       <Routes location={location} key={location.pathname}>
-        {token?.isBlocked === true ? (
-          <Route path='/*' element={<NotFound />} />
+        {blockedPatient === true ? (
+          <Route path='*' element={<NotFound />} />
         ) : (
           <>
           <Route index path='/Home' element={<HomeWithLoading/>} />
           <Route path='/' element={<Login />} />
           <Route path='/Nurses' element={<NursesWithLoading />} />
           <Route path='/Cart' element={<CartWithLoading />} />
-          <Route path='Login' element={<Login />} />
           <Route path='Signup' element={<Signup />} />
           <Route path='SignupNurse' element={<SignupNurseFormik />} />
           <Route path='SignupPatient' element={<SignupPatient />} />
@@ -152,6 +150,7 @@ const [showRoutes, setShowRoutes] = useState(false)
 
          )}
  
+<Route path='Login' element={<Login />} />
       </Routes>
         )}
       {flag && <Footer />}
