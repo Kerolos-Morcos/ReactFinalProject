@@ -4,6 +4,9 @@ import DarkStyle from '../../DarkMode/darkBtn.module.css'
 import { useEffect } from 'react';
 
 function Hero() {
+  const servicesSection= () =>{
+    window.scrollTo(0,750)
+  }
   useEffect(() => {
     const isDarkMode = localStorage.getItem("isDarkMode");
     if (isDarkMode) {
@@ -2219,8 +2222,8 @@ function Hero() {
                   <span>الأجـهزة الطبيـة الحديثـة</span>
                   <span>مـتـواجـدون 24 ســاعــة</span>
                 </div>
-                <div className={"text-center"}>
-                  <a href="#Services" className={`${"btn"} ${HeroStyle.discover_more}`}>
+                <div className={"text-center"}> 
+                  <a onClick={servicesSection} className={`${"btn"} ${HeroStyle.discover_more}`}>
                     {" "}
                     <i
                       className={"fa-solid fa-sm fa-arrow-left fa-fade"}
