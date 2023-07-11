@@ -179,7 +179,7 @@ style={{overflow: 'hidden'}}
               <div className={`${"col-xxl-6 col-xl-6 col-lg-6 col-md-3 col-sm-6 text-left"} ${CartStyle.col}`} style={{ paddingLeft: 0 }}>
                 سعر التوصيل
               </div>
-              <div className={`${"col text-left me-5"} ${CartStyle.col}`}>0 ج.م</div>
+              <div className={`${"col text-left me-5"} ${CartStyle.col}`}>30 ج.م</div>
             </div>
 
             <div id='CartBorder'
@@ -188,7 +188,7 @@ style={{overflow: 'hidden'}}
             >
               <div className={`${"col-xxl-7 col-xl-8 col-lg-8 col-md-7 col-sm-7"} ${CartStyle.col}`}>الإجمـالــــــي </div>
               {cart.length > 0 && 
-              <div className={`${"col text-right"} ${CartStyle.col}`}>{price}ج.م</div>
+              <div className={`${"col text-right"} ${CartStyle.col}`}>{price + 30}ج.م</div>
               }
               </div>
             <NavLink to="/AskDevicePage" className={`${"btn"} ${CartStyle.CartButn}`}>مواصلة التقدم و الدفع</NavLink>
