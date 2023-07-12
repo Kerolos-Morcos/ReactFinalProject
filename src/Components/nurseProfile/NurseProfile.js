@@ -244,7 +244,7 @@ function NurseProfile({ Socket }) {
                     </div>
                     <span className={nurseProfilee.counter_value}>
                       {/* {info.booking.length + info.booking.length} */}
-                      10
+                      40
                     </span>
                   </div>
                 </div>

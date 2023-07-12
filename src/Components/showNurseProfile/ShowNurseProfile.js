@@ -212,7 +212,7 @@ function ShowNurseProfile({ data, Socket }) {
                       </div>
                       <span className={nurseProfilee.counter_value}>
                         {/* {nurseprofileid.booking.length + nurseprofileid.booking.length} */}
-                          10
+                          40
                       </span>
                     </div>
                   </div>

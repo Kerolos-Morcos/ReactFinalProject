@@ -177,7 +177,7 @@ function Check() {
               </div>
               <div>
                 <p>التكلفة الكلية :</p>
-                <h2 className={checkStyle.cost}>{price}ج.م</h2>
+                <h2 className={checkStyle.cost}>{price + 30}ج.م</h2>
               </div>
               <div>
                 <p> إجمالي عدد الأجهزة :</p>

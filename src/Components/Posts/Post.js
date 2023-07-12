@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import { useLocation,useParams  } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import PostStyle from "./post.module.css";
@@ -13,12 +13,20 @@ import * as Yup from "yup";
 import { json } from "react-router-dom";
 import { motion } from "framer-motion";
 import DarkStyle from "../DarkMode/darkBtn.module.css";
- import Fade from "react-reveal/Fade";
+import Fade from "react-reveal/Fade";
+import { getPatient } from "../../Redux/Slices/PatientSlice";
+
 
 function Posts({ Socket }) {
   const dispatch = useDispatch();
   const NurseNameSocket = JSON.parse(localStorage.getItem("user"));
   const [temp, setTemp] = useState(0);
+
+  const patientes = useSelector((state) => state.PatientSlice.patient);
+ useEffect(()=>{
+  dispatch(getPatient());
+},[])
+
 
    const nameOfNurse = JSON.parse(localStorage.getItem("user"));
   let [send, setSend] = useState(false);
@@ -237,7 +245,7 @@ const commentsRef = useRef(null);
                                 <div className={PostStyle.timeline_header}>
                                   <span className={PostStyle.userimage}>
                                     <img
-                                      src={`${api}${post.patientImg}`}
+                                      src={`${api}${patientes && patientes.profile || post.patientImg}`}
                                       // src="https://bootdey.com/img/Content/avatar/avatar3.png"
                                       alt=""
                                     />
@@ -247,7 +255,7 @@ const commentsRef = useRef(null);
                                       PostStyle.username
                                     } ${"me-2"}`}
                                   >
-                                    <span> {post.patientName} </span>
+                                    <span> {patientes && patientes.name || post.patientName} </span>
                                   </span>
                                   <span className={`${PostStyle.PostTime}`}>
                                     {getElapsedTime(post.createdAt)}

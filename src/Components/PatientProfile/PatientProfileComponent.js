@@ -195,12 +195,12 @@ function PatientProfile() {
 />
               <div className={"card mb-4"}>
                 <div className={"card-body text-center"}>
-                  <div style={{width: '150px', height: '150px', margin: '0 auto', marginBottom: '55px' }}>
+                  <div style={{width: '200px', margin: '0 auto', marginBottom: '20px' }}>
                   <img
                     src={`http://localhost:3500/${patientes.profile}`}
                     alt="avatar"
                     className={"rounded-circle img-fluid"}
-                    style={{ width: '100%', height: 'auto' ,borderRadius: '50%'}}
+                    style={{ width: 'auto', height: '30vh' ,borderRadius: '50%'}}
                   />
                   </div>
                   <h5 className={"my-3"}>{patientes.name}</h5>

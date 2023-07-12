@@ -78,8 +78,8 @@ function Navbar({ Socket }) {
   useEffect(() => {
     const storedNotificationBook = JSON.parse(
       localStorage.getItem("notificationBook")
-    );
-    if (storedNotificationBook) {
+      );
+     if (storedNotificationBook) {
       setNotificationBook(storedNotificationBook);
     }
   }, []);
@@ -400,8 +400,8 @@ function Navbar({ Socket }) {
                                       className={NavStyle.NotificationIMG}
                                     >
                                       <p className={NavStyle.NotifyText}>
-                                        بالتعليق على منشورك بعنوان{" "}
-                                        {notification.postNurseName} : قام{" "}
+                                       
+                                         : قام{" "} {notification.postNurseName}  بالتعليق على منشورك بعنوان{" "}
                                         <img
                                           src={`${api}${notification.nurseImg}`}
                                         />
