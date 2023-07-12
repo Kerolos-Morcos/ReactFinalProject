@@ -286,7 +286,7 @@ function PatientProfile() {
                                   className={"mb-0"}
                                   style={{ cursor: "pointer", color: "green" }}
                                 >
-                                  لقد قمت بطلب خدمة بتاريخ {moment(item.createdAt).format('DD-MM-YYYY')} حالتة {patientStatus[item._id]}
+                                  لقد قمت بطلب خدمة بتاريخ {moment(item.createdAt).format('DD-MM-YYYY')} حالته :<span style={{color: 'grey', display: 'block', fontSize: 18, fontWeight: 600}}> {patientStatus[item._id]} </span>
                                 </a>
                               </li>
                                 )
